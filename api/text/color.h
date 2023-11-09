@@ -37,9 +37,9 @@ class text_color_t
           text_color_t, visitor_targets_t<textual_render_normal_bits>> {
 public:
   using painter_brush_emitter_t::painter_brush_emitter_t;
-  void emit(cairo_t *cr) { painter_brush_emitter_t::emit(cr); }
-  void emit(cairo_t *cr, coordinate_t *a) {
-    painter_brush_emitter_t::emit(cr, a);
+  void emit(void) {  }
+  void emit( coordinate_t *a) {
+    painter_brush_emitter_t::emit(a);
   }
 };
 } // namespace uxdevice

@@ -41,7 +41,7 @@ class text_tab_stops_t
 public:
   using class_storage_emitter_t::class_storage_emitter_t;
 
-  void emit(PangoLayout *layout);
+  void emit(void);
 };
 } // namespace uxdevice
 UX_REGISTER_STD_HASH_SPECIALIZATION(uxdevice::text_tab_stops_t)

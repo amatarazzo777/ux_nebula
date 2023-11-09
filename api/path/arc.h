@@ -39,7 +39,7 @@ class arc_t : public class_storage_emitter_t<
 public:
   using class_storage_emitter_t::class_storage_emitter_t;
 
-  void emit();
+  void emit(void);
 };
 
 } // namespace uxdevice

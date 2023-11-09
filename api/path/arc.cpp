@@ -37,6 +37,6 @@
  * @brief
  * @details
  */
-void uxdevice::arc_t::emit() {
+void uxdevice::arc_t::emit(void) {
 
 }

@@ -36,13 +36,6 @@
  * @param PangoLayout *layout
  * @brief sets the alignment mode when wrapping, left, right, center, justified.
  */
-void uxdevice::text_alignment_t::emit(PangoLayout *layout) {
-  PangoAlignment correlated_value = static_cast<PangoAlignment>(value);
-  if (value == text_alignment_options_t::justified &&
-      !pango_layout_get_justify(layout)) {
-    pango_layout_set_justify(layout, true);
-  } else if (pango_layout_get_alignment(layout) != correlated_value) {
-    pango_layout_set_justify(layout, false);
-    pango_layout_set_alignment(layout, correlated_value);
-  }
+void uxdevice::text_alignment_t::emit() {
+
 }

@@ -36,6 +36,6 @@
  * @param display_context_t &context
  * @brief Sets the background brush.
  */
-void uxdevice::surface_area_brush_t::emit(display_context_t *context) {
-  context->window_manager->set(*this);
+void uxdevice::surface_area_brush_t::emit(void) {
+
 }

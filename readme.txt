@@ -6,8 +6,7 @@ T
  @note: on linux, xcb the following dependencies are needed. These require
  administrator privilege and use the 'sudo' on ubuntu style.
  
-  # apt-get install libx11-dev libxcb-keysyms1-dev \
-  		libx11-dev libx11-xcb-dev
+  # apt-get install libx11-dev libxcb-keysyms1-dev libx11-xcb-dev
  
   documentation:
 

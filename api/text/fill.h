@@ -40,8 +40,8 @@ class text_fill_t
 public:
   using painter_brush_emitter_t::painter_brush_emitter_t;
 
-  void emit(cairo_t *cr);
-  void emit(cairo_t *cr, coordinate_t *a);
+  void emit();
+  void emit(coordinate_t *a);
 };
 } // namespace uxdevice
 UX_REGISTER_STD_HASH_SPECIALIZATION(uxdevice::text_fill_t)

@@ -38,7 +38,7 @@
  * outline and fill of text. Slower but more versatile. Text can bend to follow
  * a path if logic is added.
  */
-void uxdevice::text_render_path_t::emit(display_context_t *context) {
+void uxdevice::text_render_path_t::emit(void) {
   context->pipeline_memory_reset<text_render_normal_t>();
 }
 
@@ -49,6 +49,6 @@ void uxdevice::text_render_path_t::emit(display_context_t *context) {
  * @param PangoLayout *layout
  * @brief invokes the pango api to render font text as a path from the layout
  */
-void uxdevice::text_render_path_t::emit(cairo_t *cr, PangoLayout *layout) {
-  pango_cairo_layout_path(cr, layout);
+void uxdevice::text_render_path_t::emit(void) {
+
 }

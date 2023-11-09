@@ -45,8 +45,7 @@ public:
   ~text_shadow_t();
 
   // interface for visitors
-  void emit(cairo_t *cr);
-  void emit(cairo_t *cr, coordinate_t *a);
+  void emit(void);
 
   // private functions
   void pipeline_acquire(void);

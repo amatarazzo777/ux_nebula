@@ -37,7 +37,7 @@
  *
  * @param context
  */
-void uxdevice::curve_t::emit(display_context_t *context) {
+void uxdevice::curve_t::emit(void) {
   if (context->pipeline_memory_access<relative_coordinate_t>())
     emit_relative();
   else
@@ -51,7 +51,7 @@ void uxdevice::curve_t::emit(display_context_t *context) {
  * @brief
  * @details
  */
-void uxdevice::curve_t::emit_absolute() {
+void uxdevice::curve_t::emit_absolute(void) {
 
 }
 
@@ -62,6 +62,6 @@ void uxdevice::curve_t::emit_absolute() {
  * @brief
  * @details
  */
-void uxdevice::curve_t::emit_relative() {
+void uxdevice::curve_t::emit_relative(void) {
 
 }

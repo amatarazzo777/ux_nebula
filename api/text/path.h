@@ -40,8 +40,8 @@ class text_render_path_t
 public:
   using marker_emitter_t::marker_emitter_t;
 
-  void emit(display_context_t *context);
-  void emit(cairo_t *cr, PangoLayout *layout);
+  void emit(void);
+
 };
 } // namespace uxdevice
 UX_REGISTER_STD_HASH_SPECIALIZATION(uxdevice::text_render_path_t)

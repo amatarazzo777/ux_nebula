@@ -37,4 +37,4 @@
  * @brief
  * @details
  */
-void uxdevice::close_path_t::emit() {  }
+void uxdevice::close_path_t::emit(void) {  }

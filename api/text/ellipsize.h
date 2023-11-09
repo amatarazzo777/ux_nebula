@@ -42,7 +42,7 @@ class text_ellipsize_t
 public:
   using storage_emitter_t::storage_emitter_t;
 
-  void emit(PangoLayout *layout);
+  void emit();
 };
 } // namespace uxdevice
 UX_REGISTER_STD_HASH_SPECIALIZATION(uxdevice::text_ellipsize_t)

@@ -38,36 +38,8 @@
  * object. The text_data_t object contains a text_data_storage_t which is a
  * std::variant holding the information within a string, string_view or
  */
-void uxdevice::text_data_t::emit(PangoLayout *layout) {
-  std::string_view sinternal = std::string_view(pango_layout_get_text(layout));
-  auto text_data_visitor =
-      overload_visitors_t{[&](std::string &s) {
-                            if (s.compare(sinternal) != 0)
-                              pango_layout_set_text(layout, s.data(), -1);
-                          },
+void uxdevice::text_data_t::emit() {
 
-                          [&](std::string_view &s) {
-                            if (s.compare(sinternal) != 0)
-                              pango_layout_set_text(layout, s.data(), -1);
-                          },
-
-                          [&](std::shared_ptr<std::string> ps) {
-                            if (ps->compare(sinternal) != 0)
-                              pango_layout_set_text(layout, ps->data(), -1);
-                          },
-
-                          [&](std::shared_ptr<std::string_view> ps) {
-                            if (ps->compare(sinternal) != 0)
-                              pango_layout_set_text(layout, ps->data(), -1);
-                          },
-
-                          [&](std::shared_ptr<std::stringstream> ps) {
-                            std::string stmp = ps->str();
-                            if (stmp.compare(sinternal) != 0)
-                              pango_layout_set_text(layout, stmp.data(), -1);
-                          }};
-
-  std::visit(text_data_visitor, value);
 }
 
 /**

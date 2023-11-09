@@ -38,7 +38,7 @@ class close_path_t
 public:
   using marker_emitter_t::marker_emitter_t;
 
-  void emit();
+  void emit(void);
 };
 
 } // namespace uxdevice

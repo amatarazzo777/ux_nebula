@@ -39,9 +39,9 @@ class curve_t
                                 abstract_emit_cr_absolute_t<order_render>>> {
 public:
   using class_storage_emitter_t::class_storage_emitter_t;
-  void emit(display_context_t *context);
-  void emit_relative();
-  void emit_absolute();
+  void emit(void);
+  void emit_relative(void);
+  void emit_absolute(void);
 };
 } // namespace uxdevice
 UX_REGISTER_STD_HASH_SPECIALIZATION(uxdevice::curve_t)

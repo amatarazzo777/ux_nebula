@@ -31,12 +31,10 @@
 
 // clang-format on
 
-void uxdevice::text_fill_t::emit(cairo_t *cr) {
-  painter_brush_t::emit(cr);
-  cairo_fill_preserve(cr);
+void uxdevice::text_fill_t::emit(void) {
+
 }
 
-void uxdevice::text_fill_t::emit(cairo_t *cr, coordinate_t *a) {
-  painter_brush_t::emit(cr, a);
-  cairo_fill_preserve(cr);
+void uxdevice::text_fill_t::emit(coordinate_t *a) {
+
 }

@@ -39,6 +39,6 @@
  * @brief
  * @details
  */
-void uxdevice::rectangle_t::emit(cairo_t *cr) {
-  cairo_rectangle(cr, x, y, width, height);
+void uxdevice::rectangle_t::emit(void) {
+
 }

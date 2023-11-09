@@ -43,7 +43,7 @@ uxdevice::text_shadow_t::~text_shadow_t() {
  * @brief   s shows the text shadow
  *
  */
-void uxdevice::text_shadow_t::emit(cairo_t *cr) { internal_buffer.emit(cr); }
+void uxdevice::text_shadow_t::emit();
 
 /**
  * @internal

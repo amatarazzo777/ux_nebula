@@ -278,8 +278,6 @@ public:
 
   bool processing(void) { return bProcessing; };
 
-  surface_area_t &device_offset(double x, double y);
-  surface_area_t &device_scale(double x, double y);
   void clear(void);
   void notify_complete(void);
 
@@ -295,10 +293,7 @@ public:
   surface_area_t &transform(const matrix_t &mat);
   surface_area_t &matrix(const matrix_t &mat);
   surface_area_t &identity(void);
-  surface_area_t &device(double &x, double &y);
-  surface_area_t &device_distance(double &x, double &y);
-  surface_area_t &user(double &x, double &y);
-  surface_area_t &user_distance(double &x, double &y);
+
   point location(void);
 
   bounds stroke(void);

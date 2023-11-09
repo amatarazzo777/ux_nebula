@@ -38,7 +38,7 @@ class rectangle_t
 public:
   using class_storage_emitter_t::class_storage_emitter_t;
 
-  void emit(cairo_t *cr);
+  void emit(void);
 };
 } // namespace uxdevice
 UX_REGISTER_STD_HASH_SPECIALIZATION(uxdevice::rectangle_t)

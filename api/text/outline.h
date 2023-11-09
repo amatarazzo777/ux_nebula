@@ -45,8 +45,7 @@ public:
   // call the base constructor, that supply the painter_brush_emitter interface
   // that is inherited. The emitter functions should call the
   // base class members.
-  void emit(cairo_t *cr);
-  void emit(cairo_t *cr, coordinate_t *a);
+  void emit(void);
 
   // local property that returns the same object. Continuation syntax for
   // in-line options.

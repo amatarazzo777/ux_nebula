@@ -38,14 +38,6 @@
  * @param PangoLayout *layout
  * @brief when tabs occur, this defines the tab stops.
  */
-void uxdevice::text_tab_stops_t::emit(PangoLayout *layout) {
-  PangoTabArray *tabs = pango_tab_array_new(value.size(), true);
+void uxdevice::text_tab_stops_t::emit(void) {
 
-  int idx = 0;
-  for (auto &tabdef : value) {
-    int loc = static_cast<int>(tabdef);
-    pango_tab_array_set_tab(tabs, idx, PANGO_TAB_LEFT, loc);
-  }
-  pango_layout_set_tabs(layout, tabs);
-  pango_tab_array_free(tabs);
 }
