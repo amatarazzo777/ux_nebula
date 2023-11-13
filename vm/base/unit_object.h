@@ -53,8 +53,6 @@
 
 #include <base/utility/variant_visitor.h>
 
-#include <base/utility/cairo_function.h>
-
 #include <api/enums.h>
 #include <api/listeners.h>
 #include <api/matrix.h>

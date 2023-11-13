@@ -15,34 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+
+/**
+ * @author Anthony Matarazzo
+ * @file display_list.h
+ * @date 10/22/20
+ * @version 1.0
+ * @brief display list using mutex for storage
+ */
+
 #pragma once
 
-/**
-@author Anthony Matarazzo
-@file negative_arc.h
-@date 10/23/20
-@version 1.0
-@brief
-*/
-
-namespace uxdevice {
-class hash_members_t;
-class display_context_t;
-class painter_brush_t;
-
-/**
- @class
- @brief
- */
-class negative_arc_t
-    : public class_storage_emitter_t<
-          negative_arc_t, negative_arc_storage_t,
-          accepted_interfaces_t<abstract_emit_cr_relative_t<order_render>,
-                                abstract_emit_cr_absolute_t<order_render>>> {
-public:
-  using class_storage_emitter_t::class_storage_emitter_t;
-
-  void emit(cairo_t *cr);
-};
-} // namespace uxdevice
-UX_REGISTER_STD_HASH_SPECIALIZATION(uxdevice::negative_arc_t)
+#include "base/ViewManager.hpp"

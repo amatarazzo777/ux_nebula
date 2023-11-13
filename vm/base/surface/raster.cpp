@@ -21,6 +21,7 @@
 *                    Curve Rasterizing Algorithm                    *
 *                                                                   *
 ********************************************************************/
+#include "raster.hpp"
 
 /**
  * @author Zingl Alois

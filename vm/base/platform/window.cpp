@@ -114,6 +114,66 @@ void set(const painter_brush_t _brush) {
   painter_brush_t background_brush = _brush;
 }
 
+
+/**
+\internal
+\class platform
+\brief The platform contains logic to connect the document object model to the
+local operating system.
+*/
+class platform {
+public:
+  platform(const eventHandler &evtDispatcher, const unsigned short width,
+           const unsigned short height);
+  ~platform();
+  void openWindow(const std::string &sWindowTitle);
+  void closeWindow(void);
+  void messageLoop(void);
+
+  void flip(void);
+  void resize(const int w, const int h);
+  void clear(void);
+  bool filled(void);
+
+
+
+public:
+#if defined(__linux__)
+  Display *m_xdisplay;
+  xcb_connection_t *m_connection;
+  xcb_screen_t *m_screen;
+  xcb_drawable_t m_window;
+  xcb_gcontext_t m_graphics;
+  xcb_pixmap_t m_pix;
+  xcb_shm_segment_info_t m_info;
+
+  // xcb -- keyboard
+  xcb_key_symbols_t *m_syms;
+  uint32_t m_foreground;
+  u_int8_t *m_screenMemoryBuffer;
+
+#elif defined(_WIN64)
+  HWND m_hwnd;
+
+  ID2D1Factory *m_pD2DFactory;
+  ID2D1HwndRenderTarget *m_pRenderTarget;
+  ID2D1Bitmap *m_pBitmap;
+
+#endif
+
+  std::vector<u_int8_t> m_offscreenBuffer;
+
+private:
+  eventHandler dispatchEvent;
+
+  unsigned short _w;
+  unsigned short _h;
+
+
+
+}; // class platform
+}; // namespace Visualizer
+
 /**
  * @fn void draw_fn(std::function<void (cairo_t*)>)
  * @brief

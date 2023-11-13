@@ -128,6 +128,8 @@ void uxdevice::os_xcb_linux_t::open_connection(void) {
   /// @brief set the base window manager's settings.
   screen_width = screen->width_in_pixels;
   screen_height = screen->height_in_pixels;
+
+
 }
 
 /**
@@ -136,6 +138,11 @@ void uxdevice::os_xcb_linux_t::open_connection(void) {
  * @brief
  */
 void uxdevice::os_xcb_linux_t::close_connection(void) {
+
+  xcb_shm_detach(m_connection, m_info.shmseg);
+  shmdt(m_info.shmaddr);
+
+  xcb_free_pixmap(m_connection, m_pix);
 
   if (graphics) {
     xcb_free_gc(connection, graphics);
@@ -151,6 +158,11 @@ void uxdevice::os_xcb_linux_t::close_connection(void) {
     XCloseDisplay(xdisplay);
     xdisplay = nullptr;
   }
+
+
+  xcb_disconnect(m_connection);
+
+
 }
 
 /**
@@ -354,3 +366,147 @@ void uxdevice::os_xcb_linux_t::fn_set_window_title(void) {
                       XCB_ATOM_WM_NAME, XCB_ATOM_STRING, 8, title.size(),
                       title.data());
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+\internal
+\brief the function clears the dirty rectangles of the off screen buffer.
+*/
+void viewManager::Visualizer::platform::clear(void) {
+  fill(m_offscreenBuffer.begin(), m_offscreenBuffer.end(), 0xFF);
+  m_xpos = 0;
+  m_ypos = 0;
+}
+
+/**
+\brief The function places a color into the offscreen pixel buffer.
+    Coordinate start at 0,0, upper left.
+\param x - the left point of the pixel
+\param y - the top point of the pixel
+\param unsigned int color - the bgra color value
+
+*/
+void viewManager::Visualizer::platform::putPixel(const int x, const int y,
+                                                 const unsigned int color) {
+  if (x < 0 || y < 0)
+    return;
+
+  // clip coordinates
+  if (x >= _w || y >= _h)
+    return;
+
+  // calculate offset
+  unsigned int offset = x * 4 + y * 4 * _w;
+
+  // put rgba color
+  unsigned int *p =
+      reinterpret_cast<unsigned int *>(&m_offscreenBuffer[offset]);
+  *p = color;
+}
+
+/**
+\brief The function returns the color at the pixel space. Coordinate start
+at 0,0, upper left. \param x - the left point of the pixel \param y - the
+top point of the pixel \param unsigned int color - the bgra color value
+
+*/
+unsigned int viewManager::Visualizer::platform::getPixel(const int x,
+                                                         const int y) {
+  // clip coordinates
+  if (x < 0 || y < 0)
+    return 0;
+
+  if (x >= _w || y >= _h)
+    return 0;
+
+  // calculate offset
+  unsigned int offset = x * 4 + y * 4 * _w;
+
+  // put rgba color
+  unsigned int *p =
+      reinterpret_cast<unsigned int *>(&m_offscreenBuffer[offset]);
+  return *p;
+}
+
+/**
+\brief The function provides the reallocation of the offscreen buffer
+
+*/
+void viewManager::Visualizer::platform::resize(const int w, const int h) {
+
+  _w = w;
+  _h = h;
+
+
+  // free old one if it exists
+  if (m_pix) {
+    xcb_shm_detach(m_connection, m_info.shmseg);
+    shmdt(m_info.shmaddr);
+
+    xcb_free_pixmap(m_connection, m_pix);
+  }
+
+  // Shared memory test.
+  // https://stackoverflow.com/questions/27745131/how-to-use-shm-pixmap-with-xcb?noredirect=1&lq=1
+  xcb_shm_query_version_reply_t *reply;
+
+  reply = xcb_shm_query_version_reply(
+      m_connection, xcb_shm_query_version(m_connection), NULL);
+
+  if (!reply || !reply->shared_pixmaps) {
+    cout << "Could not get a shared memory image." << endl;
+    exit(0);
+  }
+
+  m_info.shmid = shmget(IPC_PRIVATE, _w * _h * 4, IPC_CREAT | 0777);
+  m_info.shmaddr = (uint8_t *)shmat(m_info.shmid, 0, 0);
+
+  m_info.shmseg = xcb_generate_id(m_connection);
+  xcb_shm_attach(m_connection, m_info.shmseg, m_info.shmid, 0);
+  shmctl(m_info.shmid, IPC_RMID, 0);
+
+  m_screenMemoryBuffer = static_cast<uint8_t *>(m_info.shmaddr);
+
+  m_pix = xcb_generate_id(m_connection);
+  xcb_shm_create_pixmap(m_connection, m_pix, m_window, _w, _h,
+                        m_screen->root_depth, m_info.shmseg, 0);
+
+  int _bufferSize = _w * _h * 4;
+
+  if (m_offscreenBuffer.size() < _bufferSize)
+    m_offscreenBuffer.resize(_bufferSize);
+
+  // clear to white
+  clear();
+
+}
+
+bool viewManager::Visualizer::platform::filled() { return m_ypos > _h; }
+
+/**
+\brief The function copies the pixel buffer to the screen
+
+*/
+void viewManager::Visualizer::platform::flip() {
+  // copy offscreen data to the shared memory video buffer
+  memcpy(m_screenMemoryBuffer, m_offscreenBuffer.data(),
+         m_offscreenBuffer.size());
+
+  // blit the shared memory buffer
+  xcb_copy_area(m_connection, m_pix, m_window, m_graphics, 0, 0, 0, 0, _w, _h);
+
+  xcb_flush(m_connection);
+
+
+}
+

@@ -26,76 +26,8 @@ options when compiling the source.
 #define DEFAULT_TEXTSIZE 12
 #define DEFAULT_TEXTCOLOR 0
 
-/**
-\def USE_INLINE_RENDERER
-\brief The system will be configured to use an inline version of the rendered
-*/
-#define USE_INLINE_RENDERER
 
-/**
-\def USE_GREYSCALE_ANTIALIAS
-\brief Use the freetype greyscale rendering. The Option is only for use with the
-inline render. Use this option or the USE_LCD_FILTER. One one should be defined.
-*/
-#define USE_GREYSCALE_ANTIALIAS
-
-/**
-\def USE_LCD_FILTER
-\brief The system must be configured to use the inline renderer. This uses the
-lcd filtering mode of the freetype glyph library. The option is exclusive
-against the USE_GREYSCALE_ANTIALIAS option. One one should be defined.
-*/
-//#define USE_LCD_FILTER
-
-/**
-\def USE_CHROMIUM_EMBEDDED_FRAMEWORK
-\brief The system will be configured to use the CEF system.
-*/
-//#define USE_CHROMIUM_EMBEDDED_FRAMEWORK
-
-/**
-\def INCLUDE_UX
-\brief The system will be configured to include the base set of user interface
-controls.
-*/
-#define INCLUDE_UX
-
-/** @} */
-
-#include <algorithm>
-#include <any>
-#include <array>
-#include <cstdint>
-
-#include <cctype>
-#include <climits>
-#include <cmath>
-#include <cstdarg>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <fstream>
-#include <functional>
-#include <future>
-#include <iomanip>
-#include <iostream>
-#include <iterator>
-#include <map>
-#include <memory>
-#include <optional>
-#include <regex>
-#include <sstream>
-#include <stdexcept>
-#include <string>
-#include <string_view>
-#include <tuple>
-#include <type_traits>
-#include <typeindex>
-#include <typeinfo>
-#include <unordered_map>
-#include <utility>
-#include <variant>
-#include <vector>
+#include "std_base.h"
 
 /*************************************
 OS SPECIFIC HEADERS
@@ -108,7 +40,6 @@ OS SPECIFIC HEADERS
 #include <X11/Xutil.h>
 #include <X11/keysym.h>
 #include <X11/keysymdef.h>
-#include <fontconfig/fontconfig.h>
 #include <xcb/shm.h>
 #include <xcb/xcb_image.h>
 #include <xcb/xcb_keysyms.h>
@@ -192,7 +123,7 @@ enum class eventType : uint8_t {
   mousedown,
   mouseup,
   click,
-  dblclick,
+  doubleclick,
   contextmenu,
   wheel,
   mouseleave
@@ -622,84 +553,6 @@ typedef struct {
 extern std::vector<rectangle> items;
 std::size_t allocate(Element &e);
 void deallocate(const std::size_t &token);
-
-/**
-\internal
-\class platform
-\brief The platform contains logic to connect the document object model to the
-local operating system.
-*/
-class platform {
-public:
-  platform(const eventHandler &evtDispatcher, const unsigned short width,
-           const unsigned short height);
-  ~platform();
-  void openWindow(const std::string &sWindowTitle);
-  void closeWindow(void);
-  void messageLoop(void);
-
-  void drawText(const std::string &sTextFace, const int pointSize,
-                const std::string &s, const unsigned int foreground, int x1,
-                int y1, int x2, int y2, textAlignment tAlign);
-  inline int drawChar(const int xPos, const int yPos, const int xPos2,
-                      const int yPos2, const char c,
-                      const unsigned int foreground, const unsigned int glyph_index,
-                      const float sizeFace);
-  double measureTextWidth(const std::string &sTextFace, const int pointSize,
-                          const std::string &s);
-  double measureFaceHeight(const std::string &sTextFace, const int pointSize);
-
-  void drawCaret(const int x, const int y, const int h);
-  inline void putPixel(const int x, const int y, const unsigned int color);
-  inline unsigned int getPixel(const int x, const int y);
-
-  void flip(void);
-  void resize(const int w, const int h);
-  void clear(void);
-  bool filled(void);
-  std::string getFontFilename(const std::string &sTextFace);
-
-
-
-public:
-#if defined(__linux__)
-  Display *m_xdisplay;
-  xcb_connection_t *m_connection;
-  xcb_screen_t *m_screen;
-  xcb_drawable_t m_window;
-  xcb_gcontext_t m_graphics;
-  xcb_pixmap_t m_pix;
-  xcb_shm_segment_info_t m_info;
-
-  // xcb -- keyboard
-  xcb_key_symbols_t *m_syms;
-  uint32_t m_foreground;
-  u_int8_t *m_screenMemoryBuffer;
-
-#elif defined(_WIN64)
-  HWND m_hwnd;
-
-  ID2D1Factory *m_pD2DFactory;
-  ID2D1HwndRenderTarget *m_pRenderTarget;
-  ID2D1Bitmap *m_pBitmap;
-
-#endif
-
-  int m_xpos;
-  int m_ypos;
-  int fontScale;
-  std::vector<u_int8_t> m_offscreenBuffer;
-
-private:
-  eventHandler dispatchEvent;
-
-  unsigned short _w;
-  unsigned short _h;
-
-
-
-}; // class platform
-}; // namespace Visualizer
 
 /**
   \internal
