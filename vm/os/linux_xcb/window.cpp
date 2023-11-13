@@ -129,6 +129,44 @@ void uxdevice::os_xcb_linux_t::open_connection(void) {
   screen_width = screen->width_in_pixels;
   screen_height = screen->height_in_pixels;
 
+  /* Create a window */
+  window = xcb_generate_id(connection);
+  mask = XCB_CW_BACK_PIXEL | XCB_CW_EVENT_MASK;
+  mask = XCB_CW_OVERRIDE_REDIRECT | XCB_CW_EVENT_MASK;
+  mask = XCB_CW_BORDER_PIXEL | XCB_CW_BIT_GRAVITY | XCB_CW_OVERRIDE_REDIRECT |
+         XCB_CW_SAVE_UNDER | XCB_CW_EVENT_MASK;
+
+  uint32_t vals[] = {
+      screen->black_pixel, XCB_GRAVITY_NORTH_WEST, 0, 1,
+      XCB_EVENT_MASK_EXPOSURE | XCB_EVENT_MASK_KEY_PRESS |
+          XCB_EVENT_MASK_KEY_RELEASE | XCB_EVENT_MASK_POINTER_MOTION |
+          XCB_EVENT_MASK_BUTTON_MOTION | XCB_EVENT_MASK_BUTTON_PRESS |
+          XCB_EVENT_MASK_BUTTON_RELEASE | XCB_EVENT_MASK_STRUCTURE_NOTIFY};
+
+  xcb_create_window(connection, XCB_COPY_FROM_PARENT, window, screen->root,
+                    static_cast<unsigned short>(window_x),
+                    static_cast<unsigned short>(window_y), ,
+                    static_cast<unsigned short>(window_width),
+                    static_cast<unsigned short>(window_height), 0,
+                    XCB_WINDOW_CLASS_INPUT_OUTPUT, screen->root_visual, mask,
+                    vals);
+
+  if (!window)
+    throw_error_report(__FILE__, const std::size_t ln, __func__,
+                       "XOpenDisplay returned null.");
+
+  /* Map the window on the screen.*/
+  xcb_map_window(connection, window);
+
+  // setup close window event
+  cookie = xcb_intern_atom(connection, 1, 12, "WM_PROTOCOLS");
+  reply = xcb_intern_atom_reply(connection, cookie, 0);
+
+  cookie2 = xcb_intern_atom(connection, 0, 16, "WM_DELETE_WINDOW");
+  reply2 = xcb_intern_atom_reply(connection, cookie2, 0);
+
+  xcb_change_property(connection, XCB_PROP_MODE_REPLACE, window, (*reply).atom,
+                      4, 32, 1, &(*reply2).atom);
 
 }
 
@@ -173,44 +211,7 @@ void uxdevice::os_xcb_linux_t::close_connection(void) {
  */
 void uxdevice::os_xcb_linux_t::fn_open_window(void) {
 
-  /* Create a window */
-  window = xcb_generate_id(connection);
-  mask = XCB_CW_BACK_PIXEL | XCB_CW_EVENT_MASK;
-  mask = XCB_CW_OVERRIDE_REDIRECT | XCB_CW_EVENT_MASK;
-  mask = XCB_CW_BORDER_PIXEL | XCB_CW_BIT_GRAVITY | XCB_CW_OVERRIDE_REDIRECT |
-         XCB_CW_SAVE_UNDER | XCB_CW_EVENT_MASK;
 
-  uint32_t vals[] = {
-      screen->black_pixel, XCB_GRAVITY_NORTH_WEST, 0, 1,
-      XCB_EVENT_MASK_EXPOSURE | XCB_EVENT_MASK_KEY_PRESS |
-          XCB_EVENT_MASK_KEY_RELEASE | XCB_EVENT_MASK_POINTER_MOTION |
-          XCB_EVENT_MASK_BUTTON_MOTION | XCB_EVENT_MASK_BUTTON_PRESS |
-          XCB_EVENT_MASK_BUTTON_RELEASE | XCB_EVENT_MASK_STRUCTURE_NOTIFY};
-
-  xcb_create_window(connection, XCB_COPY_FROM_PARENT, window, screen->root,
-                    static_cast<unsigned short>(window_x),
-                    static_cast<unsigned short>(window_y), ,
-                    static_cast<unsigned short>(window_width),
-                    static_cast<unsigned short>(window_height), 0,
-                    XCB_WINDOW_CLASS_INPUT_OUTPUT, screen->root_visual, mask,
-                    vals);
-
-  if (!window)
-    throw_error_report(__FILE__, const std::size_t ln, __func__,
-                       "XOpenDisplay returned null.");
-
-  /* Map the window on the screen.*/
-  xcb_map_window(connection, window);
-
-  // setup close window event
-  cookie = xcb_intern_atom(connection, 1, 12, "WM_PROTOCOLS");
-  reply = xcb_intern_atom_reply(connection, cookie, 0);
-
-  cookie2 = xcb_intern_atom(connection, 0, 16, "WM_DELETE_WINDOW");
-  reply2 = xcb_intern_atom_reply(connection, cookie2, 0);
-
-  xcb_change_property(connection, XCB_PROP_MODE_REPLACE, window, (*reply).atom,
-                      4, 32, 1, &(*reply2).atom);
 }
 
 /**
@@ -225,7 +226,7 @@ void uxdevice::os_xcb_linux_t::fn_open_window(void) {
  * Here the cairo_xcb_surface_create specific function is used.
  *
  */
-cairo_surface_t *uxdevice::os_xcb_linux_t::fn_allocate_surface(void) {
+surface_t *uxdevice::os_xcb_linux_t::fn_allocate_surface(void) {
 
   /* find the visual_type. */
   xcb_depth_iterator_t depth_iter;
@@ -243,7 +244,7 @@ cairo_surface_t *uxdevice::os_xcb_linux_t::fn_allocate_surface(void) {
     }
   }
 
-  return cairo_xcb_surface_create(connection, window, visual_type,
+  return xcb_surface_create(connection, window, visual_type,
                                        window_width, window_height));
 }
 

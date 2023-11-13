@@ -1,3 +1,4 @@
+#include "vm/api/path/arc.h"
 #include "vm/vm.h"
 
 using namespace std;
@@ -43,6 +44,8 @@ void test0(Viewer &vm) {
         "creative than usual.</p>";
   vm << "<p color=green>green</p><p color=lime>lime</p><p "
         "color=crimson>crimson</p>";
+
+  vm << 
 }
 
 /*
