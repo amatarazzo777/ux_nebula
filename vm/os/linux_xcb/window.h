@@ -54,9 +54,9 @@ typedef xcb_generic_event_t *os_message_t;
  * function attach_surface().
  */
 
-class os_xcb_linux_t : public window_manager_base_t<os_message_t> {
+class os_xcb_linux_t : generic_os_interface_t {
 public:
-  using window_manager_base_t::window_manager_base_t;
+  using generic_os_interface_t::generic_os_interface_t;
 
   os_xcb_linux_t();
   virtual ~os_xcb_linux_t();
@@ -101,14 +101,9 @@ private:
   xcb_intern_atom_cookie_t cookie2 = {};
   xcb_intern_atom_reply_t *reply2 = {};
 
-  /// @brief these classes are friend because they use the private connection
-  /// and xcb information to allocate or query resources.
-  friend class keyboard_device_xcb_t;
-  friend class mouse_device_xcb_t;
-  friend class window_service_xcb_t;
 };
 
 /// @brief type alias to generalize other parts of the code if necessary.
-using os_window_manager = os_xcb_linux_t;
+using os_window_manager_t = os_xcb_linux_t;
 
 } // namespace uxdevice

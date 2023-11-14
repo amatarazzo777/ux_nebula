@@ -27,15 +27,12 @@
 
 namespace uxdevice {
 
-/**
- * @brief forward declarations
- */
-struct cairo_surface_t;
+
 
 /**
  *
  */
-class window_manager_interface_t {
+class generic_os_interface_t {
 
   ///@brief this is where the interface for several types of windows classes
   /// might go. Such as a pop-up window which obscures the window partially
@@ -63,23 +60,6 @@ class window_manager_interface_t {
    *
    */
   virtual void fn_flush_window(void) = 0;
-
-  /**
-   * @fn typename T allocate_surface(void)=0
-   * @brief provides the inheritance model with a way to be specifi about
-   * the type of window and surface tie from the cairo system. That is it
-   * does support multiple types of back end rendering.
-   *
-   */
-  virtual cairo_surface_t *fn_allocate_surface(void) = 0;
-
-  /**
-   * @fn fn_resize_surface
-   * @brief os implementation of cairo surface resize. xcb version provides a
-   * specific function.
-   */
-  virtual void fn_resize_surface(cairo_surface_t *surface, const int w,
-                                 const int h) = 0;
 
   /**
    * @internal

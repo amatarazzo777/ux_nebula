@@ -36,16 +36,25 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
 ************************************************************************/
 void test0(Viewer &vm) {
   vm.ingestStream = true;
-  vm << "<h1 textFace=arial textsize=30pt color=hotpink>Hello World, high "
+  vm << "<h1 textFace=arial textsize=30pt color=hotpink>Hello Earth, high "
         "yags</h1>";
   vm << "<h2 textFace=britannic color=darkgrey >Subearth low jumps</h2>";
   vm << "<p textcolor=orange>Got to be a pretty day upside and underneath.</p>";
-  vm << "<p textcolor=blue>Yet sometimes when evil lerks, days may be more "
-        "creative than usual.</p>";
-  vm << "<p color=green>green</p><p color=lime>lime</p><p "
+  vm << "<p textcolor=red>Yet sometimes when evil lerks, days may be more "
+        "creative than usual. Angels must strive. Whales slap against the light house.</p>";
+  vm << "<p color=green>green</p><p color=lime,20,purple,>lime</p><p "
         "color=crimson>crimson</p>";
 
-  vm << 
+  /* forms of gradient definition within the color tag. Color should also support 
+   image, etc. Perhaps the system buildup will include an object that simply encapsolates
+   the entire engine as a stream context with a discrete focus on types of functionality
+   that are plug in based. The ability to set up a rendering chain that is complex with
+   multiple types of compositie graphics, and animation layers is a easily adopted figure.
+
+   Especially within the color tag, gradient producer, or effects. As a friend class of the 
+   nodes, inspecting the analyzed output from 2d vector queries, quadrant area signifigance, blending,
+   and unification within the animation aestitcs provides effective display capabilities. 
+*/
 }
 
 /*

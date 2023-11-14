@@ -26,4 +26,27 @@
 
 #pragma once
 
-#include "base/ViewManager.hpp"
+// using the object form with templates made more complexity than necessary
+// to simply make adding platforms easier, one must make it easy to fill in the template
+// Providing the os files within the os directory, even for system, is easy using the form below.
+// a one object layer.
+// the main ingredient is that in the header file, the names are aliased to the name of the os specific
+// this is accomplished with the using c++ keyword.
+// os_keyboard_device_t, os_window_manager, 
+#if defined(__linux__)
+#include <os/linux/os.h>
+#include <os/linux/client_interface.h>
+#include <os/linux/keyboard.h>
+#include <os/linux/mouse.h>
+#include <os/linux/service.h>
+#include <os/linux/window.h>
+
+
+
+
+#elif defined(_WIN64)
+
+#endif
+
+
+#include <base/ViewManager.h>

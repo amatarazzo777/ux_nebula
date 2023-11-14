@@ -99,6 +99,8 @@
  * 	  	some points are textual and others schematic computer code.
  *
  *
+ *		So, the new format will do away with loading new font files. Simply this base font
+ *	will be modified to note where components of fonts should be turned on or off. 
  *
  *
  */

@@ -1808,7 +1808,7 @@ are added on top of the viewManager base library.
 the top node of the tree. All subsequent operations are added or appended to
 this object.
 */
-class Viewer : public Element {
+class Viewer : public Element, surface_area_t {
 public:
   Viewer(const std::vector<std::any> &attribs);
   ~Viewer();

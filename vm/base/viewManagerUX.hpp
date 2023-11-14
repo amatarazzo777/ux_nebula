@@ -442,46 +442,7 @@ public:
     setAttribute(attribs);
   }
 };
-/**
-\class resizerVertical
-\extends viewManager::Element
-\brief  provides a resizing control for the vertical position.
-\details The resizerVertical allows a user to extend or shrink an area
-which it is attached to. The modification and repainting of the contents
-are automatically updated as the user drags the handle bars.
 
-Example
--------
-\snippet examples.cpp ux_resizerVertical
-*/
-using resizerVertical = class resizerVertical : public viewManager::Element {
-public:
-  resizerVertical(const std::vector<std::any> &attribs)
-      : Element("ux::resizerVertical") {
-    setAttribute(attribs);
-  }
-};
-/**
-\class resizerHorizontal
-\extends viewManager::Element
-\brief
-\brief  Provides a resizing control for the horizontal position.
-\details The resizerHorizontal allows a user to extend or shrink an area
-which it is attached to. The modification and repainting of the contents
-are automatically updated as the user drags the handle bars.
-
-Example
--------
-\snippet examples.cpp ux_resizerHorizontal
-*/
-using resizerHorizontal =
-    class resizerHorizontal : public viewManager::Element {
-public:
-  resizerHorizontal(const std::vector<std::any> &attribs)
-      : Element("ux::resizerHorizontal") {
-    setAttribute(attribs);
-  }
-};
 /**
 \class listSelector
 \extends viewManager::Element

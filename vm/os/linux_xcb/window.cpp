@@ -39,8 +39,8 @@
 using namespace std;
 using namespace uxdevice;
 
-uxdevice::os_xcb_linux_t::os_xcb_linux_t() { open_connection(); }
-uxdevice::os_xcb_linux_t::~os_xcb_linux_t() { close_connection(); }
+uxdevice::os_xcb_linux_t::os_xcb_linux_t() {  }
+uxdevice::os_xcb_linux_t::~os_xcb_linux_t() { }
 
 /// @brief copy constructor
 uxdevice::os_xcb_linux_t::os_xcb_linux_t(const os_xcb_linux_t &other) : {}
@@ -88,12 +88,39 @@ uxdevice::os_xcb_linux_t::operator=(os_xcb_linux_t &&other) noexcept {
   return *this;
 }
 
+
+
+void uxdevice::os_xcb_linux_t::fn_close_window(void) {
+    xcb_shm_detach(m_connection, m_info.shmseg);
+  shmdt(m_info.shmaddr);
+
+  xcb_free_pixmap(m_connection, m_pix);
+
+  if (graphics) {
+    xcb_free_gc(connection, graphics);
+    graphics = 0;
+  }
+
+  if (window) {
+    xcb_destroy_window(connection, window);
+    window = 0;
+  }
+
+  if (xdisplay) {
+    XCloseDisplay(xdisplay);
+    xdisplay = nullptr;
+  }
+
+
+  xcb_disconnect(m_connection);
+}
 /**
+ *
  * @internal
- * @fn
- * @brief
+ * @fn fn_open_window
+
  */
-void uxdevice::os_xcb_linux_t::open_connection(void) {
+void uxdevice::os_xcb_linux_t::fn_open_window(void) {
   /// @brief if the items have already been initialized by another logic path,
   /// use the ones provided.
   if (xdisplay && connection && graphics)
@@ -170,103 +197,6 @@ void uxdevice::os_xcb_linux_t::open_connection(void) {
 
 }
 
-/**
- * @internal
- * @fn
- * @brief
- */
-void uxdevice::os_xcb_linux_t::close_connection(void) {
-
-  xcb_shm_detach(m_connection, m_info.shmseg);
-  shmdt(m_info.shmaddr);
-
-  xcb_free_pixmap(m_connection, m_pix);
-
-  if (graphics) {
-    xcb_free_gc(connection, graphics);
-    graphics = 0;
-  }
-
-  if (window) {
-    xcb_destroy_window(connection, window);
-    window = 0;
-  }
-
-  if (xdisplay) {
-    XCloseDisplay(xdisplay);
-    xdisplay = nullptr;
-  }
-
-
-  xcb_disconnect(m_connection);
-
-
-}
-
-/**
- *
- * @internal
- * @fn fn_open_window
-
- */
-void uxdevice::os_xcb_linux_t::fn_open_window(void) {
-
-
-}
-
-/**
- * @internal
- * @fn allocate_surface
- * @brief implementation of the allocation for surface for the specific os.
- * The other parts of the system are allocated by the base. The pointer here is
- * also managed by the base. That is, the "resource free" is within the base.
- * hence the name of the function "allocate".
- *
- * Create xcb surface,
- * Here the cairo_xcb_surface_create specific function is used.
- *
- */
-surface_t *uxdevice::os_xcb_linux_t::fn_allocate_surface(void) {
-
-  /* find the visual_type. */
-  xcb_depth_iterator_t depth_iter;
-
-  depth_iter = xcb_screen_allowed_depths_iterator(screen);
-  for (; depth_iter.rem; xcb_depth_next(&depth_iter)) {
-    xcb_visualtype_iterator_t visual_iter;
-
-    visual_iter = xcb_depth_visuals_iterator(depth_iter.data);
-    for (; visual_iter.rem; xcb_visualtype_next(&visual_iter)) {
-      if (screen->root_visual == visual_iter.data->visual_id) {
-        visual_type = visual_iter.data;
-        break;
-      }
-    }
-  }
-
-  return xcb_surface_create(connection, window, visual_type,
-                                       window_width, window_height));
-}
-
-/**
- * @internal
- * @fn fn_resize_surface
- * @brief the function provides the size change of the surface which is an os
- * dependent function. This function is called from a multitasking point which
- * the base class manages the locking on the read and write of this object
- * specifically.
- */
-uxdevice::os_xcb_linux_t::fn_resize_surface(cairo_surface_t *_s, const int w,
-                                            const int h) {
-  cairo_xcb_surface_set_size(_s, w, h);
-}
-
-/**
- * @internal
- * @fn close_window
- * @brief closes a window on the target OS
- */
-void uxdevice::os_xcb_linux_t::close_window(void) { close_connection(); }
 
 /**
  * @fn void flush(void)
@@ -369,9 +299,223 @@ void uxdevice::os_xcb_linux_t::fn_set_window_title(void) {
 }
 
 
+// clang-format on
+
+/**
+ * @internal
+ * @fn mouse_device_xcb_t
+ * @details handles the mouse device visits. The lambda functions below are
+ * called based upon the visit for the variant. The variant is defined in
+ * the class definition on the event_base_t template parameters. There must
+ * be one entry here for each type mention within the parameters as well as
+ * handling std::monostate which the base class inserts by default.
+ * @returns mouse_device_xcb_t *
+ */
+uxdevice::mouse_device_xcb_t *uxdevice::mouse_device_xcb_get(void) {
+
+  static const overload_visitors_t visit_map = overload_visitors_t{
+
+      /**
+       * @internal
+       * @brief handles mouse move events.
+       * @param motion_notify_xcb_t xcb
+       */
+       switch(xcb) {}
+      case motion_notify_xcb_t xcb) {
+        x = xcb->event_x;
+        y = xcb->event_y;
+        alias = std::type_index{typeid(listen_mousemove_t)};
+      },
+
+      /**
+       * @internal
+       * @brief handles mouse button press. this also includes wheel for linux
+       * which is 4 & 5 index.
+       * @param button_press_xcb_t xcb
+       */
+      [&](button_press_xcb_t xcb) {
+        // pluck relative items from the xcb event and place into
+        // interface.
+        x = xcb->event_x;
+        y = xcb->event_y;
+
+        /** @brief interpret these values as up and down wheel.*/
+        if (xcb->detail == XCB_BUTTON_INDEX_4 ||
+            xcb->detail == XCB_BUTTON_INDEX_5) {
+          d = xcb->detail == XCB_BUTTON_INDEX_4 ? 1 : -1;
+          alias = std::type_index{typeid(listen_wheel_t)};
+        } else {
+          d = xcb->detail;
+          alias = std::type_index{typeid(listen_mousedown_t)};
+        }
+      },
+
+      /**
+       * @internal
+       * @brief handles mouse button release
+       * @param button_release_xcb_t xcb
+       */
+      [&](button_release_xcb_t xcb) {
+        // ignore button 4 and 5 which are wheel events.
+        if (xcb->detail != XCB_BUTTON_INDEX_4 &&
+            xcb->detail != XCB_BUTTON_INDEX_5)
+          alias = std::type_index{typeid(listen_mouseup_t)};
+        else
+          alias = std::type_index{typeid(mouse_device_xcb_t)};
+      },
+      [&](std::monostate) { alias = std::type_index{typeid(std::monostate)}; }};
+
+  std::visit(visit_map, data);
+  return this;
+}
 
 
 
+/**
+ * @var window_service_event_t::visit_map
+ * @brief window services such as resize, move, and expose.
+ */
+uxdevice::window_service_xcb_t *uxdevice::window_service_xcb_t::get(void) {
+  static const overload_visitors_t visit_map = overload_visitors_t{
+
+      /**
+       * @internal
+       * @brief handles expose events which are translated into paint
+       * @param surface_expose_xcb_t xcb
+       */
+      [&](surface_expose_xcb_t xcb) {
+        x = xcb->x;
+        y = xcb->y;
+        w = xcb->width;
+        h = xcb->height;
+        alias = std::type_index{typeid(listen_paint_t)};
+      },
+
+      /**
+       * @internal
+       * @brief handles resize event
+       * @param configure_notify_xcb_t xcb
+       */
+      [&](configure_notify_xcb_t xcb) {
+        if (xcb->window == window_manager->window &&
+            ((short)xcb->width != window_manager->window_width ||
+             (short)xcb->height != window_manager->window_height)) {
+          w = xcb->width;
+          h = xcb->height;
+
+          bvideo_output = true;
+          alias = std::type_index{typeid(listen_resize_t)};
+        }
+      },
+
+      /**
+       * @internal
+       * @brief handles client message such as close window.
+       * @param client_message_xcb_t xcb
+       */
+      [&](client_message_xcb_t xcb) {
+        // filter subset for this... original from stack over flow
+        if (xcb->data.data32[0] == window_manager->reply2->atom) {
+          alias = std::type_index{typeid(listen_close_window_t)};
+        }
+      },
+      [&](std::monostate) { alias = std::type_index{typeid(std::monostate)}; }};
+
+  std::visit(visit_map, data);
+
+  return this;
+}
+
+
+/**
+ * @fn  keyboard_device_event_t()
+ * @brief constructor implementation
+ *
+ */
+uxdevice::keyboard_device_xcb_t::keyboard_device_xcb_t()
+    : keyboard_device_base_t() 
+  syms = xcb_key_symbols_alloc(window_manager->connection);
+  if (!syms) {
+    std::stringstream sError;
+    sError << "xcb_key_symbols_alloc "
+           << "  " << __FILE__ << " " << __func__;
+    throw std::runtime_error(sError.str());
+  }
+}
+
+/**
+ * @fn  ~keyboard_device_event_t()
+ * @brief
+ *
+ */
+uxdevice::keyboard_device_xcb_t::~keyboard_device_xcb_t() {
+  if (syms) {
+    xcb_key_symbols_free(syms);
+    syms = nullptr;
+  }
+}
+
+/**
+ * @fn uxdevice::event_t get(void)
+ * @brief
+ *
+ * @return
+ */
+uxdevice::keyboard_device_xcb_t *uxdevice::keyboard_device_xcb_t::get(void) {
+
+      /**
+       * @internal
+       * @brief handles keypress event
+       * @param xcb_configure_notify_event_t *xcb
+       */
+      switch(xcb) {
+        case key_press_xcb_t: {
+        // get key symbol
+        sym = xcb_key_press_lookup_keysym(syms, xcb.get(), 0);
+
+        // in range of keys?
+        if (sym < 0x99) {
+
+          // use xwindows to lookup the string
+          XKeyEvent keyEvent;
+          keyEvent.display = window_manager->xdisplay;
+          keyEvent.keycode = xcb->detail;
+          keyEvent.state = xcb->state;
+          keyEvent.root = xcb->root;
+          keyEvent.time = xcb->time;
+          keyEvent.window = xcb->event;
+          keyEvent.serial = xcb->sequence;
+
+          // filter as a keypress event
+          if (XLookupString(&keyEvent, c.data(), c.size(), nullptr, nullptr)) {
+            alias = std::type_index{typeid(listen_keypress_t)};
+          } else {
+            // send a keydown event
+            alias = std::type_index{typeid(listen_keydown_t)};
+          }
+        }
+      }
+      break;
+
+      /**
+       * @internal
+       * @brief handles key release event
+       * @param xcb_configure_notify_event_t *xcb
+       */
+      case key_release_xcb_t: {
+        sym = xcb_key_press_lookup_keysym(syms, xcb.get(), 0);
+        alias = std::type_index{typeid(listen_keyup_t)};
+      }
+      break;
+
+      default:
+        sym = {};
+        alias = std::type_index{typeid(std::monostate)};
+      break;
+
+      }
+  return this;
+}
 
 
 

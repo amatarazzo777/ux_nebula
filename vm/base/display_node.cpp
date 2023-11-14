@@ -1,5 +1,5 @@
 
-class display_node {
+class display_node_t {
 public:
 
 };
@@ -69,15 +69,14 @@ public:
 };
 
 class fill_path_t: public display_node_t {
-    : public display_node_t {
 };
 
 class stroke_path_t: public display_node_t {
-    : public display_node_t {
 };
 
-// font and text: public display_node_t {
-class text_alignment_t
+// font and text
+class text_alignment_t    : public display_node_t {
+
 
 };
 

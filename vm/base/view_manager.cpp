@@ -14,13 +14,11 @@
 */
 
 /**
-  \def INCLUDE_UX
+  \def
   \brief
   this definition provides the ability to utilize the UX namespace
 */
 #include <vm/vm.h>
-
-#include <sys/types.h>
 
 using namespace std;
 using namespace viewManager;
