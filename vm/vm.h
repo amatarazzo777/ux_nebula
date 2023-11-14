@@ -35,14 +35,7 @@
 // os_keyboard_device_t, os_window_manager, 
 #if defined(__linux__)
 #include <os/linux/os.h>
-#include <os/linux/client_interface.h>
-#include <os/linux/keyboard.h>
-#include <os/linux/mouse.h>
-#include <os/linux/service.h>
-#include <os/linux/window.h>
-
-
-
+#include <os/linux/os_interface.h>
 
 #elif defined(_WIN64)
 

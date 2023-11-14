@@ -8,7 +8,9 @@
  * tends to lend itself in dual fashion here. The modular math used here
  * for stepping, and other advanced uses are very keen. One has to learn these
  * concepts. The book that Zingl Alois published introduces the subject and building
- * block material nicely.
+ * block material nicely. Tilde, ~ is a computer comedy character that relates to 
+ * the GUI field, and Bezier curve. Remarking upon performance and possible computer 
+ * output. 
  *
  * These routines are adopted to the ready platform use. I choose two types of buffer output
  * in form, a font glymph blending instruction bitmap or the all time platform favorite RGBA platform.
