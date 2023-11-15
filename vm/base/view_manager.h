@@ -21,28 +21,36 @@ within the viewManager namespace.
 options when compiling the source.
 @{
 */
+/**
+\def DEFAULT_WINDOW_TITLE
+\brief when a window title is not provided, this is used.
 
-#define DEFAULT_TEXTFACE "arial"
-#define DEFAULT_TEXTSIZE 12
-#define DEFAULT_TEXTCOLOR 0
-
-
+*/
 #include "std_base.h"
 
-/*************************************
-OS SPECIFIC HEADERS
-*************************************/
+#define DEFAULT_WINDOW_TITLE                                                   \
+  std::string(__FILE__) + std::string("  ") + std::string(__DATE__)
 
-#include <sys/ipc.h>
-#include <sys/shm.h>
+/**
+\def SYSTEM_DEFAULTS
+\brief sets the defaults for each window created.
 
-#include <X11/Xlib-xcb.h>
-#include <X11/Xutil.h>
-#include <X11/keysym.h>
-#include <X11/keysymdef.h>
-#include <xcb/shm.h>
-#include <xcb/xcb_image.h>
-#include <xcb/xcb_keysyms.h>
+*/
+#define SYSTEM_DEFAULTS                                                        \
+  in(absolute_coordinate_t(), text_render_normal_t{},                          \
+     text_font_t{"Arial 20px"}, text_color_t{"black"},                         \
+     surface_area_brush_t{"white"}, text_indent_t{100.0},                      \
+     text_alignment_t{text_alignment_options_t::left},                         \
+     text_ellipsize_t{text_ellipsize_options_t::off}, text_line_space_t{1.0},  \
+     text_tab_stops_t{                                                         \
+         std::vector<double>{250, 250, 250, 250, 250, 250, 250, 250}},         \
+     surface_area_title_t{DEFAULT_WINDOW_TITLE});
+
+
+
+#if defined(__linux__) 
+#include <os/linux_xcb/os_interface.h>
+#endif
 
 
 
@@ -635,83 +643,80 @@ public:
   }
 #endif
 
-private:
+
+public:
   /**
-  \internal
-  \typedef usageAdaptorState
-  \brief the usageAdaptorState contains the state information used by the
-  hinted rendered for finding dirty one screen information.
-  */
-  typedef struct _usageAdaptorState {
-    std::size_t _size;
-    std::size_t _visibleBegin;
-    std::size_t _visibleEnd;
-    std::size_t _lastWorkLoad;
-  } usageAdaptorState;
+   * @fn operator<<
+   * @tparam T
+   * @brief This overload accepts const data and not shared pointers. If the
+   * object is of a type such as listener or a display unit, a shared pointer
+   * is created and is owned by the system. Using the operator<< member
+   * function within this context allows for one function to handle the object
+   * layers. Adding new layers to the object will not affect two routines in
+   * the update.
+   *
+   * Otherwise the information is shipped to a ostreamstream for stream
+   * insertion formatting. This is a good place to provide functions
+   * formatting c standard library and raw formats such as int, float.
+   *
+   */
+  template <typename T> surface_area_t &operator<<(const T &data) {
+
+    // display units and event listeners are intercepted here.
+    if constexpr (std::is_base_of<display_node_t, T>::value ||
+                  std::is_base_of<listener_t<T>, T>::value) {
+      T obj = display_list<T>(data);
+      operator<<(obj);
+
+      // otherwise the input is another type. Try
+      // the default string stream.
+    } else {
+      std::ostringstream s;
+      s << data;
+      std::string sData = s.str();
+      stream_input(sData);
+    }
+
+    return *this;
+  }
+
 
   /**
-  \internal
-  \brief usageAdaptor<> - a templated class used only internally,
-  holds the data of a templated type within a vector.
-  Noted that vectors have sequential memory for all of their elements.
-  This property is used by the hinting system to deduce set inclusion.
-  They can be established just by the type leaving
-  data and fnTransform empty.
+   * Declare interface only.  uxdevice.cpp contains implementation. These are
+   * the stream interface with a function prototype for the invoke(). The
+   * uxdevice.cpp file contains the implementation.  surface_area_t
+   * &uxdevice::surface_area_t::stream_input( const CLASS_NAME _val) is the
+   * prototype developed.
+   */
 
-  When just the data is passed, and a default transform function
-  does not exist, the data is saved leaving the fnTransform as a default
-  formatter according to the type.
-  */
-private:
-  template <typename T> class usageAdaptor {
-  public:
-    usageAdaptor(void) {}
-    usageAdaptor(std::vector<T> &_d) : _data(_d) { saveState(); }
-    usageAdaptor(std::function<Element &(T &)> &_fn) : fnTransform(_fn) {
-      saveState();
-    }
-    usageAdaptor(std::vector<T> _d, std::function<Element &(T &)> _fn)
-        : _data(_d), fnTransform(_fn) {
-      saveState();
-    }
-    auto &data(void) {
-      saveState();
-      return (_data);
-    }
-    auto &data(std::vector<T> &_input) {
-      _data = std::move(_input);
-      saveState();
-      return (_data);
-    }
+  UX_DECLARE_STREAM_INTERFACE(std::string)
+  UX_DECLARE_STREAM_INTERFACE(std::stringstream)
+  UX_DECLARE_STREAM_INTERFACE(std::string_view)
 
-    std::string get(std::size_t i) {
-      std::stringstream ss;
-      ss << _data[i];
-      return ss.str();
-    }
+  /** declares the interface and implementation for these objects when these
+   * are invoked, the pipeline_memory class is also updated. When rendering
+   * objects are created, text, image or other, these these shared pointers
+   * are used as a reference local member initialized at invoke() public
+   * member. The parameters and options are validated as well. */
 
-    std::size_t textDataSize(void) { return _data.size(); }
+  /**
+   * @fn in
+   * @tparam T - object to insert using the stream operator.
+   * @tparam Args - list of them, param pack expansion calls recursively to
+   * operator.
+   * @brief An alternative input function to stream syntax.
+   *  e.g. vis.in(text_font_t{"Arial 20px"}, coordindate_t{0,0}, "Hello");
+   */
+public:
+  // template <typename T> void in(const T &&obj) { operator<<(obj); }
+  template <typename T> void in(const T &obj) { operator<<(obj); }
 
-    std::string textData(int index) {
-      std::stringstream ss;
-      T n = _data[index];
-      ss << n;
-      return ss.str();
-    }
+  template <typename T, typename... Args>
+  void in(const T &obj, const Args &... args) {
+    operator<<(obj);
+    in(args...);
+  }
 
-    std::function<Element &(T &)> &transform(void) { return fnTransform; }
-
-    // analyze hint data and deduce states
-    void hint(void *hint1, std::size_t hint2, std::size_t hint3) {}
-
-  private:
-    std::vector<T> _data;
-    std::function<Element &(T &)> fnTransform;
-    usageAdaptorState state;
-
-  private:
-    void saveState(void) { state._size = _data.size(); }
-  };
 
 public:
   /**
@@ -896,38 +901,6 @@ public:
   */
   bool ingestStream; // change form documentation
 
-  /**
-  \brief overload of the stream insertion operator.
-
-  \details
-  Simply puts the data into the stream. It should be
-  noted that flush should be called. By default the contents
-  of the stream are directly inserted into the data<std::string>() vector.
-  When the ingestStream flag is set to true, the stream is parsed for markup
-  and appended to the named element.
-
-
-  Example
-  -------
-  \snippet examples.cpp stream_operator
-
-  \ref markupInputFormat
-  */
-  template <typename T> Element &operator<<(const T &data) {
-    std::ostringstream s;
-    s << data;
-    std::string sData = s.str();
-
-    if (this->ingestStream) {
-      ingestMarkup(*this, sData);
-    } else {
-      // append the information to the end of the data vector.
-      this->data().push_back(sData);
-    }
-
-    return *this;
-  }
-
   auto query(const std::string &queryString) -> ElementList{};
   auto query(const ElementQuery &queryFunction) -> ElementList{};
 
@@ -1089,30 +1062,8 @@ public:
 
 private:
   std::unordered_map<std::type_index, std::any> attributes;
-  std::unordered_map<std::type_index, std::any> m_usageAdaptorMap;
-  std::size_t surface;
 
 public:
-  /**
-  \internal
-  \brief The member contains a pointer to its display record.
-  Display records are stored within the main Viewer class or _root
-  element.
-  */
-  void wordMetrics(Visualizer::platform &device);
-  double computeWrappedTextDataHeight(Visualizer::platform &device,
-                                      double dWrappingWidth);
-  double computeWidestTextData(Visualizer::platform &device);
-  typedef struct {
-    double totalWidth;
-    double wordWidth;
-    size_t spacePosition;
-  } wordMetricType;
-
-  std::map<std::pair<std::size_t, std::size_t>, std::vector<wordMetricType>>
-      indexedWordMetrics;
-  typedef std::map<std::size_t, std::vector<wordMetricType>>::iterator
-      wordMetricsIterator;
   displayListItem displayList;
 
 public:
@@ -1805,12 +1756,39 @@ are added on top of the viewManager base library.
   }
 
 /**
+ * @internal
+ * @def UX_DECLARE_STREAM_INTERFACE
+ * @brief the macro creates the stream interface for both constant references
+ * and shared pointers as well as establishes the prototype for the insertion
+ * function. The implementation is not standard and will need definition. This
+ * is the route for formatting objects that accept numerical data and process to
+ * human readable values. Modern implementations include the processing of size
+ * information. Yet within the c++ implementation, the data structures that
+ * report and hold information is elaborate.
+ */
+
+#define UX_DECLARE_STREAM_INTERFACE(CLASS_NAME)                                \
+public:                                                                        \
+  template <typename T> surface_area_t &operator<<(const CLASS_NAME &data) {   \
+    stream_input(data);                                                        \
+    return *this;                                                              \
+  }                                                                            \
+  template <typename T>                                                        \
+  surface_area_t &operator<<(const std::shared_ptr<CLASS_NAME> data) {         \
+    stream_input(data);                                                        \
+    return *this;                                                              \
+  }                                                                            \
+
+
+/**
 \brief The class is the main document viewer. Applications must create this as
 the top node of the tree. All subsequent operations are added or appended to
 this object.
 */
-class Viewer : public Element, surface_area_t {
+
+class Viewer : public Element {
 public:
+
   Viewer(const std::vector<std::any> &attribs);
   ~Viewer();
   Viewer(const Viewer &) : Element("Viewer") {}
@@ -1820,14 +1798,13 @@ public:
   void processEvents(void);
   void dispatchEvent(const event &e);
 
-private:
-
-
 
 private:
-  std::unique_ptr<Visualizer::platform> m_device;
+  std::unique_ptr<uxdevice::os_xcb_linux_t> m_os;
 
-  std::vector<displayListItem *> m_displayList;
+  
+friend stream_device_t;
+
 };
 }; // namespace viewManager
 
