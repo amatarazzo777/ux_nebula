@@ -1305,6 +1305,7 @@ private:
 
   } parserContext;
 
+
   void processParseContext(parserContext &pc);
   auto ingestMarkup(Element &node, const std::string &markup) -> Element &;
   void updateIndexBy(const indexBy &setting);

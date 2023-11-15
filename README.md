@@ -1,4 +1,4 @@
-# guidom
+# vm
 
 This project is a research API for the C++ 17 and above language to provide a document object model. 
 The product is designed to be cross platform. 
@@ -7,8 +7,15 @@ precisely with the standard library without adding new data types. It supports r
 incorporates a small set of memorable names within its model. It is a templated oriented 
 implementation for higher performance and integrated syntax. It offers the document 
 object model integrated with C++ language as a natural syntax that appears like HTML because of the use of <>.
-The following development platforms and rendering
-technologies are capable of use for development and distribution.
+The following development platforms and rendering technologies are capable of use for development and distribution.
+
+Research into method of invocation of newer font systems that do not utilize external sources. Better projection,
+and art amazement with coloring vector fonts. Development of kernel loading and handoff to graphic image. Natural and logical soft font sizes and rendering. Automated image mixing with transparency in layout. Polygon flowing areas of text.
+Graceful character glyphs with built in styles. 
+
+Working on a method whereby the entire device chain can be rebuilt on the linux kernel for GUI management, application model, object model, and system API. Languages and also desktop OS for software games working on newer embedded processors. 
+
+Research into a stream format for information and data entry fields. The SGML definitions change according to scope. 
 
 <ul>
 <li>Microsoft Windows
@@ -74,3 +81,5 @@ Optionally linking can be static or runtime dynamic.
               vm << "Hello World\n";  
               vm.render();
         }
+
+
