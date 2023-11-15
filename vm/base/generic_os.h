@@ -40,6 +40,21 @@ class generic_os_interface_t {
   /// the window.
 
   /**
+   * @fn void fn_initialize(void)
+   * @brief
+   *
+   */
+  virtual void fn_initialize(void) = 0;
+
+
+  /**
+   * @fn void fn_terminate(void)
+   * @brief
+   *
+   */
+  virtual void fn_terminate(void) = 0;
+  
+  /**
    * @fn void open_window(const coordinate_list_t&, const std::string&,
    * const painter_brush_t&, const event_handler_t&)=0
    * @brief

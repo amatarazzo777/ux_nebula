@@ -33,6 +33,7 @@
 
 #include <os/linux_xcb/os.h>
 #include <os/linux_xcb/window.h>
+#include <xcb/xproto.h>
 
 // clang-format on
 
@@ -89,31 +90,35 @@ uxdevice::os_xcb_linux_t::operator=(os_xcb_linux_t &&other) noexcept {
 }
 
 
-
-void uxdevice::os_xcb_linux_t::fn_close_window(void) {
-    xcb_shm_detach(m_connection, m_info.shmseg);
-  shmdt(m_info.shmaddr);
-
-  xcb_free_pixmap(m_connection, m_pix);
-
-  if (graphics) {
-    xcb_free_gc(connection, graphics);
-    graphics = 0;
+/**
+ * @fn  keyboard_device_event_t()
+ * @brief constructor implementation
+ *
+ */
+uxdevice::fn_initialize(void)
+    : keyboard_device_base_t() 
+  syms = xcb_key_symbols_alloc(window_manager->connection);
+  if (!syms) {
+    std::stringstream sError;
+    sError << "xcb_key_symbols_alloc "
+           << "  " << __FILE__ << " " << __func__;
+    throw std::runtime_error(sError.str());
   }
-
-  if (window) {
-    xcb_destroy_window(connection, window);
-    window = 0;
-  }
-
-  if (xdisplay) {
-    XCloseDisplay(xdisplay);
-    xdisplay = nullptr;
-  }
-
-
-  xcb_disconnect(m_connection);
 }
+
+/**
+ * @fn  ~keyboard_device_event_t()
+ * @brief
+ *
+ */
+uxdevice::terminate(void) {
+  if (syms) {
+    xcb_key_symbols_free(syms);
+    syms = nullptr;
+  }
+}
+
+
 /**
  *
  * @internal
@@ -197,6 +202,31 @@ void uxdevice::os_xcb_linux_t::fn_open_window(void) {
 
 }
 
+void uxdevice::os_xcb_linux_t::fn_close_window(void) {
+    xcb_shm_detach(m_connection, m_info.shmseg);
+  shmdt(m_info.shmaddr);
+
+  xcb_free_pixmap(m_connection, m_pix);
+
+  if (graphics) {
+    xcb_free_gc(connection, graphics);
+    graphics = 0;
+  }
+
+  if (window) {
+    xcb_destroy_window(connection, window);
+    window = 0;
+  }
+
+  if (xdisplay) {
+    XCloseDisplay(xdisplay);
+    xdisplay = nullptr;
+  }
+
+
+  xcb_disconnect(m_connection);
+}
+
 
 /**
  * @fn void flush(void)
@@ -252,224 +282,14 @@ voiduxdevice::os_xcb_linux_t::fn_complete_message(xcb_generic_event_t *xcb) {
  * exists in all versions of the window object.
  */
 void uxdevice::os_xcb_linux_t::fn_visit_dispatch(xcb_generic_event_t *xcb) {
-  static const message_dispatch_t message_dispatch = {
-      {XCB_KEY_PRESS,
-       [&]() { dispatch<keyboard_device_xcb_t, key_press_xcb_t>(xcb); }},
-
-      {XCB_KEY_RELEASE,
-       [&]() { dispatch<keyboard_device_xcb_t, key_release_xcb_t>(xcb); }},
-
-      {XCB_BUTTON_PRESS,
-       [&]() { dispatch<mouse_device_xcb_t, button_press_xcb_t>(xcb); }},
-
-      {XCB_BUTTON_RELEASE,
-       [&]() { dispatch<mouse_device_xcb_t, button_release_xcb_t>(xcb); }},
-
-      {XCB_MOTION_NOTIFY,
-       [&]() { dispatch<mouse_device_xcb_t, motion_notify_xcb_t>(xcb); }},
-
-      {XCB_EXPOSE,
-       [&]() { dispatch<window_service_xcb_t, surface_expose_xcb_t>(xcb); }},
-
-      {XCB_CONFIGURE_NOTIFY,
-       [&]() { dispatch<window_service_xcb_t, configure_notify_xcb_t>(xcb); }},
-
-      {XCB_CLIENT_MESSAGE,
-       [&]() { dispatch<window_service_xcb_t, client_message_xcb_t>(xcb); }}
-
-  };
-
-  /** @brief process, depending upon filter, non handled messages may be
-   * faster with a bit range check. this can be enhanced with specific
-   * numerical representation. xcb internals possibly. The it->second()
-   * invocation performs a dispatch using the std::visit function. */
-  auto it = message_dispatch.find(xcb->response_type & ~0x80);
-  if (it != message_dispatch.end())
-    it->second();
-}
-
-/**
- *
- */
-void uxdevice::os_xcb_linux_t::fn_set_window_title(void) {
-  // set window title
-  xcb_change_property(connection, XCB_PROP_MODE_REPLACE, window,
-                      XCB_ATOM_WM_NAME, XCB_ATOM_STRING, 8, title.size(),
-                      title.data());
-}
-
-
-// clang-format on
-
-/**
- * @internal
- * @fn mouse_device_xcb_t
- * @details handles the mouse device visits. The lambda functions below are
- * called based upon the visit for the variant. The variant is defined in
- * the class definition on the event_base_t template parameters. There must
- * be one entry here for each type mention within the parameters as well as
- * handling std::monostate which the base class inserts by default.
- * @returns mouse_device_xcb_t *
- */
-uxdevice::mouse_device_xcb_t *uxdevice::mouse_device_xcb_get(void) {
-
-  static const overload_visitors_t visit_map = overload_visitors_t{
 
       /**
        * @internal
        * @brief handles mouse move events.
        * @param motion_notify_xcb_t xcb
        */
-       switch(xcb) {}
-      case motion_notify_xcb_t xcb) {
-        x = xcb->event_x;
-        y = xcb->event_y;
-        alias = std::type_index{typeid(listen_mousemove_t)};
-      },
-
-      /**
-       * @internal
-       * @brief handles mouse button press. this also includes wheel for linux
-       * which is 4 & 5 index.
-       * @param button_press_xcb_t xcb
-       */
-      [&](button_press_xcb_t xcb) {
-        // pluck relative items from the xcb event and place into
-        // interface.
-        x = xcb->event_x;
-        y = xcb->event_y;
-
-        /** @brief interpret these values as up and down wheel.*/
-        if (xcb->detail == XCB_BUTTON_INDEX_4 ||
-            xcb->detail == XCB_BUTTON_INDEX_5) {
-          d = xcb->detail == XCB_BUTTON_INDEX_4 ? 1 : -1;
-          alias = std::type_index{typeid(listen_wheel_t)};
-        } else {
-          d = xcb->detail;
-          alias = std::type_index{typeid(listen_mousedown_t)};
-        }
-      },
-
-      /**
-       * @internal
-       * @brief handles mouse button release
-       * @param button_release_xcb_t xcb
-       */
-      [&](button_release_xcb_t xcb) {
-        // ignore button 4 and 5 which are wheel events.
-        if (xcb->detail != XCB_BUTTON_INDEX_4 &&
-            xcb->detail != XCB_BUTTON_INDEX_5)
-          alias = std::type_index{typeid(listen_mouseup_t)};
-        else
-          alias = std::type_index{typeid(mouse_device_xcb_t)};
-      },
-      [&](std::monostate) { alias = std::type_index{typeid(std::monostate)}; }};
-
-  std::visit(visit_map, data);
-  return this;
-}
-
-
-
-/**
- * @var window_service_event_t::visit_map
- * @brief window services such as resize, move, and expose.
- */
-uxdevice::window_service_xcb_t *uxdevice::window_service_xcb_t::get(void) {
-  static const overload_visitors_t visit_map = overload_visitors_t{
-
-      /**
-       * @internal
-       * @brief handles expose events which are translated into paint
-       * @param surface_expose_xcb_t xcb
-       */
-      [&](surface_expose_xcb_t xcb) {
-        x = xcb->x;
-        y = xcb->y;
-        w = xcb->width;
-        h = xcb->height;
-        alias = std::type_index{typeid(listen_paint_t)};
-      },
-
-      /**
-       * @internal
-       * @brief handles resize event
-       * @param configure_notify_xcb_t xcb
-       */
-      [&](configure_notify_xcb_t xcb) {
-        if (xcb->window == window_manager->window &&
-            ((short)xcb->width != window_manager->window_width ||
-             (short)xcb->height != window_manager->window_height)) {
-          w = xcb->width;
-          h = xcb->height;
-
-          bvideo_output = true;
-          alias = std::type_index{typeid(listen_resize_t)};
-        }
-      },
-
-      /**
-       * @internal
-       * @brief handles client message such as close window.
-       * @param client_message_xcb_t xcb
-       */
-      [&](client_message_xcb_t xcb) {
-        // filter subset for this... original from stack over flow
-        if (xcb->data.data32[0] == window_manager->reply2->atom) {
-          alias = std::type_index{typeid(listen_close_window_t)};
-        }
-      },
-      [&](std::monostate) { alias = std::type_index{typeid(std::monostate)}; }};
-
-  std::visit(visit_map, data);
-
-  return this;
-}
-
-
-/**
- * @fn  keyboard_device_event_t()
- * @brief constructor implementation
- *
- */
-uxdevice::keyboard_device_xcb_t::keyboard_device_xcb_t()
-    : keyboard_device_base_t() 
-  syms = xcb_key_symbols_alloc(window_manager->connection);
-  if (!syms) {
-    std::stringstream sError;
-    sError << "xcb_key_symbols_alloc "
-           << "  " << __FILE__ << " " << __func__;
-    throw std::runtime_error(sError.str());
-  }
-}
-
-/**
- * @fn  ~keyboard_device_event_t()
- * @brief
- *
- */
-uxdevice::keyboard_device_xcb_t::~keyboard_device_xcb_t() {
-  if (syms) {
-    xcb_key_symbols_free(syms);
-    syms = nullptr;
-  }
-}
-
-/**
- * @fn uxdevice::event_t get(void)
- * @brief
- *
- * @return
- */
-uxdevice::keyboard_device_xcb_t *uxdevice::keyboard_device_xcb_t::get(void) {
-
-      /**
-       * @internal
-       * @brief handles keypress event
-       * @param xcb_configure_notify_event_t *xcb
-       */
       switch(xcb) {
-        case key_press_xcb_t: {
+        case XCB_KEY_PRESS: {
         // get key symbol
         sym = xcb_key_press_lookup_keysym(syms, xcb.get(), 0);
 
@@ -502,20 +322,120 @@ uxdevice::keyboard_device_xcb_t *uxdevice::keyboard_device_xcb_t::get(void) {
        * @brief handles key release event
        * @param xcb_configure_notify_event_t *xcb
        */
-      case key_release_xcb_t: {
+      case XCB_KEY_RELEASE: {
         sym = xcb_key_press_lookup_keysym(syms, xcb.get(), 0);
         alias = std::type_index{typeid(listen_keyup_t)};
       }
       break;
 
-      default:
-        sym = {};
-        alias = std::type_index{typeid(std::monostate)};
+      case XCB_MOTION_NOTIFY: {
+        x = xcb->event_x;
+        y = xcb->event_y;
+        alias = std::type_index{typeid(listen_mousemove_t)};
+      }
+      break;
+
+      /**
+       * @internal
+       * @brief handles mouse button press. this also includes wheel for linux
+       * which is 4 & 5 index.
+       * @param button_press_xcb_t xcb
+       */
+      case XCB_BUTTON_PRESS:
+        // pluck relative items from the xcb event and place into
+        // interface.
+        x = xcb->event_x;
+        y = xcb->event_y;
+
+        /** @brief interpret these values as up and down wheel.*/
+        if (xcb->detail == XCB_BUTTON_INDEX_4 ||
+            xcb->detail == XCB_BUTTON_INDEX_5) {
+          d = xcb->detail == XCB_BUTTON_INDEX_4 ? 1 : -1;
+          alias = std::type_index{typeid(listen_wheel_t)};
+        } else {
+          d = xcb->detail;
+          alias = std::type_index{typeid(listen_mousedown_t)};
+        }
+      }
+      break;
+
+      /**
+       * @internal
+       * @brief handles mouse button release
+       * @param button_release_xcb_t xcb
+       */
+      case XCB_BUTTON_RELEASE: {
+        // ignore button 4 and 5 which are wheel events.
+        if (xcb->detail != XCB_BUTTON_INDEX_4 &&
+            xcb->detail != XCB_BUTTON_INDEX_5)
+          alias = std::type_index{typeid(listen_mouseup_t)};
+        else
+          alias = std::type_index{typeid(mouse_device_xcb_t)};
+      }
+      break;
+
+      /**
+       * @internal
+       * @brief handles expose events which are translated into paint
+       * @param surface_expose_xcb_t xcb
+       */
+      case XCB_EXPOSE: {
+        x = xcb->x;
+        y = xcb->y;
+        w = xcb->width;
+        h = xcb->height;
+        alias = std::type_index{typeid(listen_paint_t)};
+      }
+      break;
+
+      /**
+       * @internal
+       * @brief handles resize event
+       * @param configure_notify_xcb_t xcb
+       */
+      case XCB_CONFIGURE_NOTIFY: {
+        if (xcb->window == window_manager->window &&
+            ((short)xcb->width != window_manager->window_width ||
+             (short)xcb->height != window_manager->window_height)) {
+          w = xcb->width;
+          h = xcb->height;
+
+          bvideo_output = true;
+          alias = std::type_index{typeid(listen_resize_t)};
+        }
+      }
+      break;
+
+      /**
+       * @internal
+       * @brief handles client message such as close window.
+       * @param client_message_xcb_t xcb
+       */
+      case XCB_CLIENT_MESSAGE: {
+        // filter subset for this... original from stack over flow
+        if (xcb->data.data32[0] == window_manager->reply2->atom) {
+          alias = std::type_index{typeid(listen_close_window_t)};
+        }
+      }
       break;
 
       }
-  return this;
+
+
 }
+
+/**
+ *
+ */
+void uxdevice::os_xcb_linux_t::fn_set_window_title(void) {
+  // set window title
+  xcb_change_property(connection, XCB_PROP_MODE_REPLACE, window,
+                      XCB_ATOM_WM_NAME, XCB_ATOM_STRING, 8, title.size(),
+                      title.data());
+}
+
+
+// clang-format on
 
 
 
@@ -527,7 +447,7 @@ uxdevice::keyboard_device_xcb_t *uxdevice::keyboard_device_xcb_t::get(void) {
 \internal
 \brief the function clears the dirty rectangles of the off screen buffer.
 */
-void viewManager::Visualizer::platform::clear(void) {
+void uxdevice::os_xcb_linux_t::clear(void) {
   fill(m_offscreenBuffer.begin(), m_offscreenBuffer.end(), 0xFF);
   m_xpos = 0;
   m_ypos = 0;
@@ -541,7 +461,7 @@ void viewManager::Visualizer::platform::clear(void) {
 \param unsigned int color - the bgra color value
 
 */
-void viewManager::Visualizer::platform::putPixel(const int x, const int y,
+void uxdevice::os_xcb_linux_t::putPixel(const int x, const int y,
                                                  const unsigned int color) {
   if (x < 0 || y < 0)
     return;
@@ -565,7 +485,7 @@ at 0,0, upper left. \param x - the left point of the pixel \param y - the
 top point of the pixel \param unsigned int color - the bgra color value
 
 */
-unsigned int viewManager::Visualizer::platform::getPixel(const int x,
+unsigned int uxdevice::os_xcb_linux_t::getPixel(const int x,
                                                          const int y) {
   // clip coordinates
   if (x < 0 || y < 0)
@@ -587,7 +507,7 @@ unsigned int viewManager::Visualizer::platform::getPixel(const int x,
 \brief The function provides the reallocation of the offscreen buffer
 
 */
-void viewManager::Visualizer::platform::resize(const int w, const int h) {
+void uzdevice::os_xcb_linux_t::resize(const int w, const int h) {
 
   _w = w;
   _h = h;
@@ -636,13 +556,12 @@ void viewManager::Visualizer::platform::resize(const int w, const int h) {
 
 }
 
-bool viewManager::Visualizer::platform::filled() { return m_ypos > _h; }
 
 /**
 \brief The function copies the pixel buffer to the screen
 
 */
-void viewManager::Visualizer::platform::flip() {
+void uxdevice::os_xcb_linux_t::fn_flip() {
   // copy offscreen data to the shared memory video buffer
   memcpy(m_screenMemoryBuffer, m_offscreenBuffer.data(),
          m_offscreenBuffer.size());
@@ -653,5 +572,69 @@ void viewManager::Visualizer::platform::flip() {
   xcb_flush(m_connection);
 
 
+}
+
+uxdevice::os_xcb_linux_t::fn_library_open(
+    std::string &_library_name) {
+
+  // build correct path from os indenpendant name. (.so vs .dl). This would also
+  // be a place to add current path and a software search path.
+  library_name = _library_name;
+  library_filename = "./" + sym + ".so";
+  dl_handle = dlopen(library_filename.data(), RTLD_LAZY);
+
+  if (!dl_handle) {
+    std::stringstream serror;
+    serror << "Cannot load library: " << dlerror() << "  " << library_name
+           << " given, searched for  " << library_filename;
+    error_message = serror.str();
+    return;
+  }
+}
+
+/**
+ * @internal
+ * @fn library_close
+ * @brief The function issues the dlopen and stores the handle in dl_ptr.
+ *
+ */
+uxdevice::os_xcb_linux_t::fn_library_close(
+    std::string &_library_name) {
+
+  if (dl_handle)
+    if (dlclose(dl_handle)) {
+      std::stringstream serror;
+      serror << "Error close library: " << dlerror() << "  " << library_name
+             << " given, searched for  " << library_filename;
+      error_message = serror.str();
+    }
+
+  // clear it.
+  dl_handle = nullptr;
+}
+
+/**
+ * @internal
+ * @fn library_symbol
+ * @brief loads a symbol, low level pointer void * used with bind.
+ *
+ */
+void *
+uxdevice::os_xcb_linux_t::library_symbol(std::string &symbol) {
+  void *ptr_sym = {};
+
+  if (dl_handle) {
+    ptr_sym = dlsym(dl_handle, symbol.data());
+
+    const char *dlsym_error = dlerror();
+    if (dlsym_error) {
+      std::stringstream serror;
+      serror << "Cannot load library: " << dlsym_error << "  " << symbol
+             << " given, searched for  " << sfilename;
+      error_message = serror.str();
+    }
+  }
+
+  return ptr_sym;
 }
 

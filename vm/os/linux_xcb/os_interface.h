@@ -29,6 +29,20 @@
 
 #pragma once
 
+#include <sys/ipc.h>
+#include <sys/shm.h>
+
+/// @brief could separpate into categoriy by implement, yet this is simple to
+/// maintain for the xcb or any platform.
+
+#include <X11/Xlib-xcb.h>
+#include <X11/Xutil.h>
+#include <X11/keysym.h>
+#include <X11/keysymdef.h>
+
+#include <sys/types.h>
+#include <xcb/xcb_keysyms.h>
+
 namespace uxdevice {
 /// @brief forward template class allows the os message and platform to be
 /// resolved early within the build process.
@@ -88,7 +102,7 @@ public:
   void fn_set_title(const std::string &s);
 
 
-  /* load library functions. A nery powerful set of functions that can be used to expand, or
+  /* load library functions. A very powerful set of functions that can be used to expand, or
    reduce code compilation complexity. Yet internal knowlegde of the interfaces and componets
    leads to a version magnification. The long description, some formal object notations, boxing types,
    leads to expansion. Creating a compressed logical stream of parameter formatting to these routines
@@ -101,7 +115,7 @@ public:
    and windowing system with enhanced font rendering from the command line without X, XCB but utilizing the 
    linux driver model, system requests, DRM? The system of IPC, currently DBUS.
 
-Connecting the systems together with a easy syntax light language that is designed for an audience. Business
+Connecting the systems together with an easy syntax light language that is designed for an audience. Business
 audicences may be component oriented, documentation and plain text labels the desktop experience. Modern computer 
 language concepts are very easy to read. minimizing the code definition and complexity and tailoring runtime
 output with JIT magnifies reduction in development time. Cobol was a language defined that gave new insite to
@@ -110,9 +124,12 @@ concept. So to effectively design a language that is for the desktop experience,
 A visual layout of interaction of user interaction, designed controls, simplification, window system, etc. As a 
 select language can be tailored for great competition. 
 
-Using the color, brush, vector pattern provides natural definition of great texture capabilities. Simple the 
-outline, or vector system of ploted interface points, with structure annotations in object form, can summarize 
-interface creation. The system of scrolling, buffer manulipation can be managed using c++ algorithms. 
+Using the color, brush, vector programming object pattern provides natural definition of great texture capabilities. 
+Simply the outline, or vector system of ploted interface points, with structure annotations in object form, can summarize 
+interface creation from an engine point of view. The system of scrolling, buffer manulipation can be managed 
+using c++ algorithms. As a build system, the output of this compatible layer structure for desktop and application models
+can be versitile. That is, as a server compilation model, desktops are native compiled for the video card to supply
+the desktop experience.
 
 
   Codec license of various image file formats are often applied in modern day to video, audio, books. To expound upon
@@ -125,7 +142,7 @@ interface creation. The system of scrolling, buffer manulipation can be managed 
   buffer support at the native level. Simply this is a format, size of data, order of data. Older computers designed with 
   16 colors such as the EGA are not needing support. 
 
-  Knowing the sign and DPI of the screen is also necessary. Providing the windowing system to be built in.
+  Knowing the physical size and DPI of the screen is also necessary. Providing the windowing system to be built in.
 
   Supporting multiple monitors for HDMI creates some newer designs where multiple desktops, or video off screen 
   buffers have to exist and be utilized.

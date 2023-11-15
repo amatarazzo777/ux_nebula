@@ -26,16 +26,4 @@
 
 #pragma once
 
-#include <sys/ipc.h>
-#include <sys/shm.h>
 
-/// @brief could separpate into categoriy by implement, yet this is simple to
-/// maintain for the xcb or any platform.
-
-#include <X11/Xlib-xcb.h>
-#include <X11/Xutil.h>
-#include <X11/keysym.h>
-#include <X11/keysymdef.h>
-
-#include <sys/types.h>
-#include <xcb/xcb_keysyms.h>
