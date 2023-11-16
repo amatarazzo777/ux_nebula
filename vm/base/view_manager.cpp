@@ -606,7 +606,6 @@ double viewManager::doubleNF::toPt(void) {
   }
 
   return dRet;
-  return dRet;
 }
 /**
 \internal
@@ -2636,19 +2635,3 @@ void viewManager::Element::processParseContext(
     }
   }
 }
-
-/**
-\internal
-\var nodes contains a list of the elements and their coordinates.
-*/
-std::unordered_map<std::size_t, std::reference_wrapper<Element>> nodes;
-
-std::size_t viewManager::Visualizer::allocate(Element &e) {
-  static std::size_t token = 0;
-  std::size_t ret = token;
-  nodes.emplace(ret, std::ref<Element>(e));
-  token++;
-  return ret;
-}
-void viewManager::Visualizer::deallocate(const std::size_t &token) {}
-

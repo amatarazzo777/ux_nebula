@@ -34,10 +34,31 @@ namespace uxdevice {
  */
 class generic_os_interface_t {
 
-  ///@brief this is where the interface for several types of windows classes
-  /// might go. Such as a pop-up window which obscures the window partially
-  /// as well as the border. Or a child window. Settings the transparency of
-  /// the window.
+  ///@brief abstract class for os interface capabilities.
+  /*
+  The ability to utilize window technology of existing operating systems, using
+  link library is a great definition for layered technology. The capabilities
+  of the standard library are starting to connect with operating systems in 
+  multiple ways. The library is famous for getting things off the ground.
+  As one dives futher, some aspects of the technology can be grouped 
+  functionally differnt. The parrelle process, thread, memory management, and signal
+  functionality are after thoughts in langauage summary. Yet designing a comprehensive 
+  language requires development resources trained. Parsers, parsing technology, lexing,
+  and assembly. The largest functional part of compiler designs is the expression evaluator that
+  utilizes even basic math, accessing variables, memory locations, sign extending, modulus rounds 
+  with magic numbers, float point, double. Translating between native micro processor data types.
+  There are even more enhanced optomizations of instruction output compression than I know. 
+  Cross processor assemby is rare, what an oppurtunty to use direct BC. The types of parrelle
+  process instructions are effective in its assembly, as it has vector types of specific 
+  data types.
+
+  https://releases.llvm.org/2.6/docs/LangRef.html#i_malloc
+
+  llvm assembly, the documentation says system heap. So, what about items
+  such as share dmemory access at the VM layer. There is work it seems on specific types
+  of memory, I am unsure if this is consumer based yet.
+  
+  */
 
   /**
    * @fn void fn_initialize(void)
