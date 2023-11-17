@@ -60,7 +60,11 @@ struct glyph_t {
 	legacy understanding of font placement. Layout and justification with multiple text 
 	flowing capabilities have to be known for the complete field of text layer to be rendered
 	perhaps. For example, after and underneath effects, coloring and flow may depending upon
-	size variations encapsolated in layout computation.
+	size variations encapsolated in layout computation or even a transparent image. Most likely 
+	graphics such as corner publishments, in the center, should have an extra field or data 
+	within the file that names the over shadow under parts. In the digital image, a polygon
+	path nameing word locking positions for justification. Marking this in a graphic asset is 
+	much easier than describing it through tag settings. 
 
 	Working with user space, a trinket of standard font names exist, yet naming beyond the 
 	few known from corporate network writing, courier, arial, roman, bookman, san sherif, 
@@ -109,8 +113,11 @@ struct glyph_t {
 	amount of them as a byte signature, with a byte parameter. Makes font sizes very small, fifty bytes,
 	plus the name. So rather than load vector data as font data, makes the engine very small. As well, effects
 	and mood of characters developed by artists, can now be transfered to other languages through their engine.
-	
 
+	The ability to utilize shapes and a type of library forming image compositing, communication and 
+	parameter based text, or layout configuration from the objects creates polished visual designs. The ideas
+	of a baloon, or pop up window are to be energized with shape librarys that inheirit the text layout 
+	engine, new font capabilities. 
 
 	
 	 */
