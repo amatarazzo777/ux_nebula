@@ -23,9 +23,6 @@ view_manager.o: view_manager.cpp
 display_node.o: display_node.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) -c display_node.cpp -o display_node.o
 
-raster.o: raster.cpp
-	$(CC) $(CFLAGS) $(INCLUDES) -c raster.cpp -o raster.o
-
 vector_font.o: vector_font.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) -c vector_font.cpp -o vector_font.o
 

@@ -116,9 +116,48 @@ struct glyph_t {
 
 	The ability to utilize shapes and a type of library forming image compositing, communication and 
 	parameter based text, or layout configuration from the objects creates polished visual designs. The ideas
-	of a baloon, or pop up window are to be energized with shape librarys that inheirit the text layout 
+	of a baloon, or pop up window are to be energized with shape libraries that inheirit the text layout 
 	engine, new font capabilities. 
 
+	A good design can allow wonderful results, empowering the value of screen resolution to display
+	enhanced text fonts not ever before seen. For example, one type of design feature that works well
+	for versitility is domain shift operators for the instruction set. These instructions do not control
+	color but modification to the base form character. Example,
+
+	engine 1 byte codes
+
+	sans
+	serif
+	curl
+	vine
+	italic
+	edge	
+	enlarge
+	skew
+	wave
+	erode
+	weight
+	slope
+	swash
+	select
+		The select can mean a group of particular letters, effect only puncuation, or finance character.
+		All upper case characters, or just the five characters that have curls below the decender line. Select
+		is most likely the first, parameter that selects the entire list of english ones. Other selection 
+		modes could utilize 	top, bottom, left, or	right size for example. Using select to identify
+		a generalized area followed by a deformation, or strength setting.
+
+	ending
+		ending of all of the parts or joins. To control these areas aestically, size, and parameters.
+		The capital T has about six areas that could be tailored. 
+	part
+		every glyph has a natural selection known from the part, or component. The point on 
+		the capital a, for example, or select all of the letter tops. All letters with points.
+
+There are fifteen, a bitstream after compacting. 
+
+
+
+	
 	
 	 */
 };
