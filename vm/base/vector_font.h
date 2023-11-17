@@ -107,7 +107,8 @@ struct glyph_t {
 	knowledge of the style settings across the board, numerically set once, form their curve path, deformation, 
 	expansion, wire hashes, to mimic the style of font. 
 	
-	for each letter, a large definition will exist that drives the rendering of the character set. Offering
+	for each letter, a large definition will exist that drives the rendering of the character set. 
+	Offering
 	that these settings together names a font, a branded level of font texture and effects thought of 
 	as a base for C++ app central usage. Ultimately the variance on types of settings, with a known
 	amount of them as a byte signature, with a byte parameter. Makes font sizes very small, fifty bytes,
@@ -124,20 +125,45 @@ struct glyph_t {
 	for versitility is domain shift operators for the instruction set. These instructions do not control
 	color but modification to the base form character. Example,
 
-	engine 1 byte codes
+	engine 1 byte codes, a made up example to tie user space into dynamic font creation.
+		most likely another uder the cover according to shading. Pre layout, after layout.
+
+formation - first byte signature domain
 
 	sans
 	serif
+		Form of a letter with hooks and corners, also called perhaps a swash.
 	curl
+		looping and also adding artifacts to selected parts.
 	vine
+		vines forming at strengths with control parameter.
+
 	italic
-	edge	
+
+	edge
+		processing edge data seems natural. the ability to deform edges with types of patterns 
+		that are processed into multiple letters by strength. The multiple point star, with
+		mirrored sides can alter the shape of the letter slightly. perhaps in the positions selected
+		such as lower left and top right of all applicable letters that are capital. 
+
 	enlarge
+		the enlarge command can form multiple meanings.the parameters and effect the outside 
+		of the drawing, or the inside. Parts such as holes in th letter B, or using the select 
+		bytecode command select the bottom hole, and the bottom curve. 
+		
+		The possibility that the enlarge command parameter, in conjection with a context,
+		such as if it is within a "part" selection or the inside whole of "g" and another
+		part, the operation of the command "enlarge" can change.
+	shrink
+
+	square
+		flattens by strength whole, or parts. Meaningful settings can also provide
+		multiple uses for other parameters. Squaring mode
 	skew
 	wave
-	erode
-	weight
-	slope
+		The wave function is powerful in that it creates miniscule patterns of wave, or 
+		curve pattern data with tesselation variance control. Paper torn edges together with erode
+	
 	swash
 	select
 		The select can mean a group of particular letters, effect only puncuation, or finance character.
@@ -153,8 +179,37 @@ struct glyph_t {
 		every glyph has a natural selection known from the part, or component. The point on 
 		the capital a, for example, or select all of the letter tops. All letters with points.
 
-There are fifteen, a bitstream after compacting. 
+pixmap	domain 2 after render to lumenence mixing values, some systems have specialized antialias
+	noise
+		film grain, can vary per render of character
+	
 
+bevel
+	beveling artifacts for lighting around surface of text outline.
+	
+
+shading
+	appearances of text with selective surface shaders. The rendering system
+	provides the ability to place smooth bump stripes, Styling with, wavy, organic patterns,
+	symetrical yet partically instructed patterns,  emblem artifacts known to aid in
+	quality. This occurs without downloading image data, the textures are generated. 
+
+There are fifteen, a bitstream after compacting. Perhaps the pixmap context change will contain
+image processing that adds luminence effects to the pixel. Film grain, noises, edge deterioration,
+inner brightness contrasts. pattern embossing, varying tiny decals inside painting. controlling the 
+bevel also.
+
+
+When this system of byte codes are compressed down to a bit stream, new commands within the domain, 
+occupy the same bit sequence as the previous. But the new context gives those positions
+newer meaning. 
+
+To capture the reading sized text for screend and large HD screen print, television prints, smart
+tv rendering and new rendering technologies as a vector system means that its font system is
+compiled for the video card, and the screen technology. 
+
+Consumer tv with glitter, greatness and readibility in print, menu systems, and animated 
+painting sprites can elevate the mood. 
 
 
 	

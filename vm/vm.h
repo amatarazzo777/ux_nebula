@@ -26,14 +26,18 @@
 
 #pragma once
 
-#include "base/surface-ity.h"
+#define CANVAS_ITY_IMPLEMENTATION
+
+#include "base/canvas-ity.h"
+namespace viewManager {
+using canvas_t = canvas_ity::canvas;
+}
 
 #include "base/std_base.h"
 #include "base/display_nodes.h"
 #include "base/generic_os.h"
 #include "base/listeners.h"
 
-#define CANVAS_ITY_IMPLEMENTATION
 #include "base/vector_font.h"
 #include "base/view_manager.h"
 
