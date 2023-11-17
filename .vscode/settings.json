@@ -1,0 +1,7 @@
+{
+    "makefile.compileCommandsPath": "make",
+    "[makefile]": {
+        "editor.defaultFoldingRangeProvider": "ms-vscode.makefile-tools",
+        "editor.defaultFormatter": "ms-vscode.makefile-tools"
+    }
+}

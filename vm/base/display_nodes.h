@@ -50,6 +50,15 @@ struct arc_t : display_node_t {
 /*
 @brief closes the current path
 */
+struct hit_test_begin_t : display_node_t {
+  unsigned uint_t id;
+  void emit(canvas_t *c) { };
+};
+
+struct hit_test_end_t : display_node_t {
+  void emit(canvas_t *c) {};
+};
+
 struct close_path_t : display_node_t {
   void emit(canvas_t *c) { c->close_path(); };
 };

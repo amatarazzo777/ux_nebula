@@ -32,23 +32,50 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
 }
 
 /************************************************************************
+showing off the object wall paper formats. glyphs rendered for the 
+text have some stars sticking out, trinkets of moons, planets, solar models,
+in lumience bitmap. Depending upon the vbrush contents, multiple areas
+of the font can be colored, layered as a glyph operation. 
+astro,vbrush contains a database of vector trinkets related to astronomy.
+Sets may be combined. when a brush is in the color definition it can effect all
+of the background and rendering surroundng the characters, in color. 
+
+these are subtley integrated into the font. A separate layer fitting the same
+identity coordinates, with the group is spread. the parameters, provide a 
+seed input. Variance is produced according to the seed and strength.
+astro.owallpaper is suited for gylphs.
+
+the mars vbrush provides painting and coverage image blending showing 
+space and planets shaded and faded to white around the text. The brush
+can contain base_line path information and also the drawing of intricate
+graphics within the text pattern.
+
+the vbrush format does not apply to specific characters of a set of words,
+it contains the vector, color bitmap graphics, as a database of visual 
+information. Color bitmaps are not applied to to glyphs but to the color 
+areas.
+
 ************************************************************************/
 void test0(Viewer &vm) {
   vm.ingestStream = true;
-  vm << "<h1 textFace=arial textsize=30pt color=hotpink>Hello Earth, high "
+  vm << "<h1 textFace=arial,astro.vbrush)  textsize=30pt color=brush(mars.vbrush)>Hello Earth, high "
         "yags</h1>";
   vm << "<h2 textFace=britannic color=darkgrey >Subearth low jumps</h2>";
   vm << "<p textcolor=orange>Got to be a pretty day upside and underneath.</p>";
   vm << "<p textcolor=red>Yet sometimes when evil lerks, days may be more "
-        "creative than usual. Angels must strive. Whales slap against the light house.</p>";
-  vm << "<p color=green>green</p><p color=lime,20,purple,>lime</p><p "
-        "color=crimson>crimson</p>";
-
-
+        "creative than usual. Angels must strive. Whales slap against the "
+        "light house.</p>";
+  vm << "<p color=green>green</p><p color=lime,20,purple>lime</p>
+  "<shape star(199).gradient(blue,purple,orange)>
+  "<p color=brush.stripes(2,green,orange,violet,darkpurple)>beautiful zebra style organic stripes, mode 199</p>";
+  "color=brush.spots(1,blue,red,grey, .3)"
+  ".shadows(5_px,.3),gradient(yellow,pink,green)> "
+  "on the text, looking nice by the seed and mode input. "
+  "Patterns inset as a layer atop the glyphs under </p></shape>  ";
 }
 
 /*
-	e.getAttribute<textIndent>().value = randomDouble(0.0, 10.5);
+        e.getAttribute<textIndent>().value = randomDouble(0.0, 10.5);
     e.getAttribute<objectTop>().value = randomDouble(0.0, 300);
     e.setAttribute(objectTop{randomDouble(0.0, 300), numericFormat::percent});
     e.getAttribute<objectLeft>().value = randomDouble(0.0, 300);
