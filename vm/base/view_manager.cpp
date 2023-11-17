@@ -920,10 +920,11 @@ object.
 viewManager::Viewer::Viewer(const vector<any> &attrs)
     : Element("Viewer", attrs) {
   setAttribute(indexBy{"_root"});
-
   documentState st;
   st.focusField = this;
   setAttribute<documentState>(st);
+  m_os = std::make_unqiue<os_interface_manager_t>();
+  m_os->initialize();
 }
 
 /**
@@ -931,7 +932,10 @@ viewManager::Viewer::Viewer(const vector<any> &attrs)
 \internal
 \brief deconstructor for the view manager object.
 */
-viewManager::Viewer::~Viewer() {}
+viewManager::Viewer::~Viewer() {
+  m_os->terminate();
+  m_os.release();
+}
 
 /**
   \internal
@@ -959,14 +963,16 @@ the recursive process.
 void viewManager::Viewer::render(void) {
   computeLayout(*this);
 
+  canvas_ity::canvas raster(this->getAttribute<objectWidth>(),
+            this->getAttribute<objectHeight>());
+
   /* the display list is a sorted entity providing a searchable list
   for the beginning and ending of a viewport clipping region. */
   for (auto n : m_displayList) {
-    n->ptr->render(*m_device.get());
+    n->ptr->render(&raster);
   }
-}
 
-/**
+/*
 \internal
 \brief
 This is the only entry point from the platform for the event
@@ -1271,7 +1277,7 @@ Element::iterator &Element::iterator::operator++() {
   return *this;
 }
 
-// Postfix ++ overload
+// Postfix ++ overload, AFM - is the ++ in front of * a BUG?
 Element::iterator Element::iterator::operator++(int) {
   iterator it = *this;
   ++*this;

@@ -1,23 +1,23 @@
 #CC=clang
 CC=g++
 CFLAGS=-std=c++17 -Os
-INCLUDES=-I/projects/guidom `pkg-config `
+INCLUDES=-Ivm -Ivm/base
 LFLAGS=`pkg-config --libs xcb-image`
 
 debug: CFLAGS += -g
-debug: guidom.out
+debug: test0.out
 
 release: LFLAGS += -s
-release: guidom.out
+release: test0.out
 
 
-guidom.out: main.o view_manager.o vector_font.o display_node.o raster.o os_interface.o
+test0.out: main.o view_manager.o vector_font.o display_node.o raster.o os_interface.o
 	$(CC) -o guidom.out main.o view_manager.o vector_font.o display_node.o raster.o os_interface.o -lstdc++ -lm -lxcb -lxcb-keysyms $(LFLAGS) 
 
-main.o: main.cpp view_manager.h
+main.o: main.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) -c main.cpp -o main.o
 
-view_manager.o: view_manager.cpp view_manager.h
+view_manager.o: view_manager.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) -c view_manager.cpp -o view_manager.o
 
 display_node.o: display_node.cpp

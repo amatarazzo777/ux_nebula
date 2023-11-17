@@ -27,27 +27,21 @@
  * here.
  */
 // clang-format off
-
-#include <base/unit_object.h>
-
-
-#include <os/linux_xcb/os.h>
-#include <os/linux_xcb/window.h>
-#include <xcb/xproto.h>
+#include "os_interface.h"
 
 // clang-format on
 
 using namespace std;
-using namespace uxdevice;
+using namespace viewManager;
 
-uxdevice::os_xcb_linux_t::os_xcb_linux_t() {  }
-uxdevice::os_xcb_linux_t::~os_xcb_linux_t() { }
+viewManager::os_xcb_linux_t::os_xcb_linux_t() {  }
+viewManager::os_xcb_linux_t::~os_xcb_linux_t() { }
 
 /// @brief copy constructor
-uxdevice::os_xcb_linux_t::os_xcb_linux_t(const os_xcb_linux_t &other) : {}
+viewManager::os_xcb_linux_t::os_xcb_linux_t(const os_xcb_linux_t &other) : {}
 
 /// @brief move constructor
-uxdevice::os_xcb_linux_t::os_xcb_linux_t(os_xcb_linux_t &&other) noexcept : {}
+viewManager::os_xcb_linux_t::os_xcb_linux_t(os_xcb_linux_t &&other) noexcept : {}
 
 /**
  * @fn uxdevice::os_xcb_linux_t operator =&(const os_xcb_linux_t&)
@@ -56,8 +50,8 @@ uxdevice::os_xcb_linux_t::os_xcb_linux_t(os_xcb_linux_t &&other) noexcept : {}
  * @param other
  * @return
  */
-uxdevice::os_xcb_linux_t &
-uxdevice::os_xcb_linux_t::operator=(const os_xcb_linux_t &other) {
+viewManager::os_xcb_linux_t &
+viewManager::os_xcb_linux_t::operator=(const os_xcb_linux_t &other) {
   window_manager_base_t::operator=(other);
 
   xdisplay = other.xdisplay;
@@ -76,8 +70,8 @@ uxdevice::os_xcb_linux_t::operator=(const os_xcb_linux_t &other) {
  * @param other
  * @return
  */
-uxdevice::os_xcb_linux_t &
-uxdevice::os_xcb_linux_t::operator=(os_xcb_linux_t &&other) noexcept {
+viewManager::os_xcb_linux_t &
+viewManager::os_xcb_linux_t::operator=(os_xcb_linux_t &&other) noexcept {
   window_manager_base_t::operator=(other);
   xdisplay = other.xdisplay;
   connection = other.connection;
@@ -95,7 +89,7 @@ uxdevice::os_xcb_linux_t::operator=(os_xcb_linux_t &&other) noexcept {
  * @brief constructor implementation
  *
  */
-uxdevice::fn_initialize(void)
+void viewManager::os_xcb_linux_t::fn_initialize(void)
     : keyboard_device_base_t() 
   syms = xcb_key_symbols_alloc(window_manager->connection);
   if (!syms) {
@@ -111,7 +105,7 @@ uxdevice::fn_initialize(void)
  * @brief
  *
  */
-uxdevice::terminate(void) {
+void viewManager::os_xcb_linux_t::terminate(void) {
   if (syms) {
     xcb_key_symbols_free(syms);
     syms = nullptr;
@@ -125,7 +119,7 @@ uxdevice::terminate(void) {
  * @fn fn_open_window
 
  */
-void uxdevice::os_xcb_linux_t::fn_open_window(void) {
+void viewManager::os_xcb_linux_t::fn_open_window(void) {
   /// @brief if the items have already been initialized by another logic path,
   /// use the ones provided.
   if (xdisplay && connection && graphics)
@@ -202,7 +196,7 @@ void uxdevice::os_xcb_linux_t::fn_open_window(void) {
 
 }
 
-void uxdevice::os_xcb_linux_t::fn_close_window(void) {
+void viewManager::os_xcb_linux_t::fn_close_window(void) {
     xcb_shm_detach(m_connection, m_info.shmseg);
   shmdt(m_info.shmaddr);
 
@@ -233,7 +227,7 @@ void uxdevice::os_xcb_linux_t::fn_close_window(void) {
  * @brief completes cairo surface and flushes the xcb connection
  *
  */
-void uxdevice::os_xcb_linux_t::fn_flush_window(void) {
+void viewManager::os_xcb_linux_t::fn_flush_window(void) {
   if (connection)
     xcb_flush(connection);
 }
@@ -246,7 +240,7 @@ void uxdevice::os_xcb_linux_t::fn_flush_window(void) {
  * @return xcb_generic_event_t *
  *
  */
-xcb_generic_event_t *uxdevice::os_xcb_linux_t::fn_wait_message(void) {
+xcb_generic_event_t *viewManager::os_xcb_linux_t::fn_wait_message(void) {
   return xcb_wait_for_event(connection);
 }
 
@@ -259,7 +253,7 @@ xcb_generic_event_t *uxdevice::os_xcb_linux_t::fn_wait_message(void) {
  * @return xcb_generic_event_t *
  *
  */
-xcb_generic_event_t *uxdevice::os_xcb_linux_t::fn_poll_message(void) {
+xcb_generic_event_t *viewManager::os_xcb_linux_t::fn_poll_message(void) {
   return xcb_poll_for_queued_event(connection);
 }
 
@@ -269,7 +263,7 @@ xcb_generic_event_t *uxdevice::os_xcb_linux_t::fn_poll_message(void) {
  * @brief frees the event
  * @return void
  */
-voiduxdevice::os_xcb_linux_t::fn_complete_message(xcb_generic_event_t *xcb) {
+void VM::os_xcb_linux_t::fn_complete_message(xcb_generic_event_t *xcb) {
   free(xcb);
 }
 
@@ -281,7 +275,7 @@ voiduxdevice::os_xcb_linux_t::fn_complete_message(xcb_generic_event_t *xcb) {
  * associated with os compile target. It is defined as a static so only one
  * exists in all versions of the window object.
  */
-void uxdevice::os_xcb_linux_t::fn_visit_dispatch(xcb_generic_event_t *xcb) {
+void viewManager::os_xcb_linux_t::fn_visit_dispatch(xcb_generic_event_t *xcb) {
 
       /**
        * @internal
@@ -427,7 +421,7 @@ void uxdevice::os_xcb_linux_t::fn_visit_dispatch(xcb_generic_event_t *xcb) {
 /**
  *
  */
-void uxdevice::os_xcb_linux_t::fn_set_window_title(void) {
+void viewManager::os_xcb_linux_t::fn_set_window_title(void) {
   // set window title
   xcb_change_property(connection, XCB_PROP_MODE_REPLACE, window,
                       XCB_ATOM_WM_NAME, XCB_ATOM_STRING, 8, title.size(),
@@ -447,7 +441,7 @@ void uxdevice::os_xcb_linux_t::fn_set_window_title(void) {
 \internal
 \brief the function clears the dirty rectangles of the off screen buffer.
 */
-void uxdevice::os_xcb_linux_t::clear(void) {
+void VM::os_xcb_linux_t::clear(void) {
   fill(m_offscreenBuffer.begin(), m_offscreenBuffer.end(), 0xFF);
   m_xpos = 0;
   m_ypos = 0;
@@ -461,7 +455,7 @@ void uxdevice::os_xcb_linux_t::clear(void) {
 \param unsigned int color - the bgra color value
 
 */
-void uxdevice::os_xcb_linux_t::putPixel(const int x, const int y,
+void VM::os_xcb_linux_t::putPixel(const int x, const int y,
                                                  const unsigned int color) {
   if (x < 0 || y < 0)
     return;
@@ -485,7 +479,7 @@ at 0,0, upper left. \param x - the left point of the pixel \param y - the
 top point of the pixel \param unsigned int color - the bgra color value
 
 */
-unsigned int uxdevice::os_xcb_linux_t::getPixel(const int x,
+unsigned int VM::os_xcb_linux_t::getPixel(const int x,
                                                          const int y) {
   // clip coordinates
   if (x < 0 || y < 0)
@@ -507,10 +501,10 @@ unsigned int uxdevice::os_xcb_linux_t::getPixel(const int x,
 \brief The function provides the reallocation of the offscreen buffer
 
 */
-void uzdevice::os_xcb_linux_t::resize(const int w, const int h) {
+void VM::os_xcb_linux_t::resize(const int _w, const int _h) {
 
-  _w = w;
-  _h = h;
+  w = _w;
+  h = _h;
 
 
   // free old one if it exists
@@ -561,7 +555,7 @@ void uzdevice::os_xcb_linux_t::resize(const int w, const int h) {
 \brief The function copies the pixel buffer to the screen
 
 */
-void uxdevice::os_xcb_linux_t::fn_flip() {
+void VM::os_xcb_linux_t::fn_flip() {
   // copy offscreen data to the shared memory video buffer
   memcpy(m_screenMemoryBuffer, m_offscreenBuffer.data(),
          m_offscreenBuffer.size());
@@ -574,7 +568,7 @@ void uxdevice::os_xcb_linux_t::fn_flip() {
 
 }
 
-uxdevice::os_xcb_linux_t::fn_library_open(
+VM::os_xcb_linux_t::fn_library_open(
     std::string &_library_name) {
 
   // build correct path from os indenpendant name. (.so vs .dl). This would also
@@ -598,7 +592,7 @@ uxdevice::os_xcb_linux_t::fn_library_open(
  * @brief The function issues the dlopen and stores the handle in dl_ptr.
  *
  */
-uxdevice::os_xcb_linux_t::fn_library_close(
+VM::os_xcb_linux_t::fn_library_close(
     std::string &_library_name) {
 
   if (dl_handle)
@@ -620,7 +614,7 @@ uxdevice::os_xcb_linux_t::fn_library_close(
  *
  */
 void *
-uxdevice::os_xcb_linux_t::library_symbol(std::string &symbol) {
+VM::os_xcb_linux_t::library_symbol(std::string &symbol) {
   void *ptr_sym = {};
 
   if (dl_handle) {

@@ -25,7 +25,7 @@
 @brief
 */
 
-namespace uxdevice {
+namespace viewManager {
 
 
 
@@ -105,5 +105,7 @@ class generic_os_interface_t {
    *
    */
   virtual void fn_set_window_title(const std::string &stitle) = 0;
+
+
 };
-} // namespace uxdevice
+} // namespace VM

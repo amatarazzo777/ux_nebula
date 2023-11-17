@@ -26,6 +26,17 @@
 
 #pragma once
 
+#include "base/surface-ity.h"
+
+#include "base/std_base.h"
+#include "base/display_nodes.h"
+#include "base/generic_os.h"
+#include "base/listeners.h"
+
+#define CANVAS_ITY_IMPLEMENTATION
+#include "base/vector_font.h"
+#include "base/view_manager.h"
+
 // using the object form with templates made more complexity than necessary
 // to simply make adding platforms easier, one must make it easy to fill in the template
 // Providing the os files within the os directory, even for system, is easy using the form below.
@@ -34,12 +45,9 @@
 // this is accomplished with the using c++ keyword.
 // os_keyboard_device_t, os_window_manager, 
 #if defined(__linux__)
-#include <os/linux/os.h>
-#include <os/linux/os_interface.h>
+#include "os/linux_xcb/os_interface.h"
 
 #elif defined(_WIN64)
 
 #endif
 
-
-#include <base/ViewManager.h>

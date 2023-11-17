@@ -803,14 +803,6 @@ public:
     // if the requested data adapter does not exist,
     // create its position within the adapter member vector
     // return this to the caller.
-    if (it == m_usageAdaptorMap.end()) {
-      // create a default data display for the type here.
-      std::function<Element &(T &)> fnDefault;
-      m_usageAdaptorMap[tIndex] = usageAdaptor<T>(fnDefault);
-    } else {
-      const auto &adaptor =
-          std::any_cast<usageAdaptor<T> &>(m_usageAdaptorMap[tIndex]);
-    }
   }
 
   /**
@@ -859,16 +851,6 @@ public:
     // if the requested data adaptor does not exist,
     // create its position within the adaptor member vector
     // return this to the caller.
-    auto it = m_usageAdaptorMap.find(tIndex);
-    if (it == m_usageAdaptorMap.end()) {
-      // create a default data display for the type here.
-      std::function<Element &(T &)> fnDefault;
-      m_usageAdaptorMap[tIndex] = usageAdaptor<T>(fnDefault);
-      return (
-          std::any_cast<usageAdaptor<T> &>(m_usageAdaptorMap[tIndex]).data());
-    } else {
-      return (std::any_cast<usageAdaptor<T> &>(it->second).data());
-    }
   }
 
   /**
@@ -881,14 +863,6 @@ public:
 
   template <typename T>
   void dataHint(int hint1 = 0, std::size_t hint2 = 0, std::size_t hint3 = 0) {
-    auto it = m_usageAdaptorMap.find(std::type_index(typeid(std::vector<T>)));
-    // save input signal ? valid ?
-    // check saved state from getAdaptor.
-    if (it != m_usageAdaptorMap.end()) {
-      const usageAdaptor<T> &adaptor =
-          std::any_cast<const usageAdaptor<T> &>(it->second);
-      // adaptor.hint(hint1, hint2, hint3);
-    }
   }
 
   /**
@@ -1800,10 +1774,9 @@ public:
 
 
 private:
-  std::unique_ptr<uxdevice::os_xcb_linux_t> m_os;
+  std::unique_ptr<os_Interface_manager_t> m_os;
+  display_list_t  m_displaylist;
 
-  
-friend stream_device_t;
 
 };
 }; // namespace viewManager

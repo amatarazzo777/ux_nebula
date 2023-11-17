@@ -25,7 +25,7 @@
  * @brief
  */
 
-namespace uxdevice {
+namespace viewManager {
 
 /**
 \class event
@@ -90,7 +90,7 @@ typedef std::function<void(const event_t &et)> event_handler_t;
 
 */
 template <typename T>
-class listener_t : public typed_index_t<T>, virtual public hash_members_t {
+class listener_t {
 public:
   listener_t() = delete;
   listener_t(event_handler_t _dispatch)
