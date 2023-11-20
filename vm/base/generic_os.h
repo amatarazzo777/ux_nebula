@@ -32,7 +32,7 @@ namespace viewManager {
 /**
  *
  */
-class generic_os_interface_t {
+struct generic_os_interface_t {
 
   ///@brief abstract class for os interface capabilities.
   /*

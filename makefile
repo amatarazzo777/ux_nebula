@@ -10,6 +10,7 @@ debug: test0.out
 release: LFLAGS += -s
 release: test0.out
 
+all: test0.out
 
 test0.out: main.o view_manager.o vector_font.o display_node.o raster.o os_interface.o
 	$(CC) -o guidom.out main.o view_manager.o vector_font.o display_node.o raster.o os_interface.o -lstdc++ -lm -lxcb -lxcb-keysyms $(LFLAGS) 

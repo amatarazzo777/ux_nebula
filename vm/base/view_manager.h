@@ -46,13 +46,9 @@ options when compiling the source.
          std::vector<double>{250, 250, 250, 250, 250, 250, 250, 250}},         \
      surface_area_title_t{DEFAULT_WINDOW_TITLE});
 
-
-
-#if defined(__linux__) 
-#include <os/linux_xcb/os_interface.h>
+#if defined(__linux__)
+#include "../os/linux_xcb/os_interface.h"
 #endif
-
-
 
 /**
 \namespace viewManager
@@ -527,7 +523,7 @@ public:
   StyleClass *self;
 
 public:
-  template <typename... Args> StyleClass(const Args &... args) : self(this) {
+  template <typename... Args> StyleClass(const Args &...args) : self(this) {
     setValue({args...});
   }
   void setValue(const std::vector<std::any> &attrs) {
@@ -537,30 +533,6 @@ public:
     }
   }
 };
-/**
-\internal
-\namespace Visualizer
-\brief The Visualizer namespace contains the code that draws and calculates
-position of elements upon the viewing device. It is noted that the namespace
-contains the platform object which is compiled and coded for the specific
-operating system being used to render.
-*/
-namespace Visualizer {
-/**
-\internal
-\typedef rectangle
-\brief holds the coordinates of the object within the calculates rendering
-output.
-*/
-typedef struct {
-  double t;
-  double l;
-  double w;
-  double h;
-} rectangle;
-extern std::vector<rectangle> items;
-std::size_t allocate(Element &e);
-void deallocate(const std::size_t &token);
 
 /**
   \internal
@@ -611,6 +583,29 @@ attribute strings, numer of parameters and attribute setting lambda.
 */
 extern const attributeStringMap attributeFactory;
 
+/**
+ * @internal
+ * @def UX_DECLARE_STREAM_INTERFACE
+ * @brief the macro creates the stream interface for both constant references
+ * and shared pointers as well as establishes the prototype for the insertion
+ * function. The implementation is not standard and will need definition. This
+ * is the route for formatting objects that accept numerical data and process to
+ * human readable values. Modern implementations include the processing of size
+ * information. Yet within the c++ implementation, the data structures that
+ * report and hold information is elaborate.
+ */
+
+#define UX_DECLARE_STREAM_INTERFACE(CLASS_NAME)                                \
+public:                                                                        \
+  template <typename T> Element &operator<<(const CLASS_NAME &data) {   \
+    stream_input(data);                                                        \
+    return *this;                                                              \
+  }                                                                            \
+  template <typename T>                                                        \
+  Element &operator<<(const std::shared_ptr<CLASS_NAME> data) {         \
+    stream_input(data);                                                        \
+    return *this;                                                              \
+  }
 
 
 /**
@@ -622,17 +617,16 @@ class Element {
 public:
   std::string_view softName;
 
-
 public:
   Element(const std::string_view &_softName,
           const std::vector<std::any> &attribs = {})
-      : softName(_softName), penX(0), penY(0), maxX(0),maxY(0), m_self(this), m_parent(nullptr),
-        m_firstChild(nullptr), m_lastChild(nullptr), m_nextChild(nullptr),
-        m_previousChild(nullptr), m_nextSibling(nullptr),
+      : softName(_softName), m_self(this),
+        m_parent(nullptr), m_firstChild(nullptr), m_lastChild(nullptr),
+        m_nextChild(nullptr), m_previousChild(nullptr), m_nextSibling(nullptr),
         m_previousSibling(nullptr), m_childCount(0), ingestStream(false) {
     setAttribute(attribs);
   }
-  ~Element() { Visualizer::deallocate(surface); }
+  ~Element() {  }
   Element(const Element &other);
   Element(Element &&other) noexcept;
   Element &operator=(const Element &other);
@@ -642,7 +636,6 @@ public:
     return lhs.m_self == rhs.m_self;
   }
 #endif
-
 
 public:
   /**
@@ -660,14 +653,13 @@ public:
    * formatting c standard library and raw formats such as int, float.
    *
    */
-  template <typename T> surface_area_t &operator<<(const T &data) {
+  template <typename T> Element &operator<<(const T &data) {
 
     // display units and event listeners are intercepted here.
-    if constexpr (std::is_base_of<display_node_t, T>::value ||
-                  std::is_base_of<listener_t<T>, T>::value) {
-      T obj = display_list<T>(data);
-      operator<<(obj);
-
+    if constexpr (std::is_base_of<display_node_t, T>::value) {
+//                  std::is_base_of<listener_t<T>, T>::value) {
+    displayList.push_back(data);
+    
       // otherwise the input is another type. Try
       // the default string stream.
     } else {
@@ -679,7 +671,6 @@ public:
 
     return *this;
   }
-
 
   /**
    * Declare interface only.  uxdevice.cpp contains implementation. These are
@@ -712,11 +703,10 @@ public:
   template <typename T> void in(const T &obj) { operator<<(obj); }
 
   template <typename T, typename... Args>
-  void in(const T &obj, const Args &... args) {
+  void in(const T &obj, const Args &...args) {
     operator<<(obj);
     in(args...);
   }
-
 
 public:
   /**
@@ -799,7 +789,7 @@ public:
   void dataTransform(const std::function<R &(T &)> &_fn) {
     std::function<R &(T &)> fn = _fn;
     std::type_index tIndex = std::type_index(typeid(std::vector<T>));
-    auto it = m_usageAdaptorMap.find(tIndex);
+
     // if the requested data adapter does not exist,
     // create its position within the adapter member vector
     // return this to the caller.
@@ -862,8 +852,7 @@ public:
   void dataHint(const T &hint1, std::size_t hint2 = 0, std::size_t hint3 = 0) {}
 
   template <typename T>
-  void dataHint(int hint1 = 0, std::size_t hint2 = 0, std::size_t hint3 = 0) {
-  }
+  void dataHint(int hint1 = 0, std::size_t hint2 = 0, std::size_t hint3 = 0) {}
 
   /**
   \var ingestStream
@@ -875,9 +864,8 @@ public:
   */
   bool ingestStream; // change form documentation
 
-  auto query(const std::string &queryString) -> ElementList{};
-  auto query(const ElementQuery &queryFunction) -> ElementList{};
-
+  auto query(const std::string &queryString) { return 0;};
+  auto query(const ElementQuery &queryFunction) { return 0;};
 private:
   Element *m_self;
   Element *m_parent;
@@ -1038,7 +1026,7 @@ private:
   std::unordered_map<std::type_index, std::any> attributes;
 
 public:
-  displayListItem displayList;
+  display_list_t displayList;
 
 public:
   auto appendChild(const std::string &sMarkup) -> Element &;
@@ -1057,7 +1045,7 @@ public:
 
   */
   template <typename TYPE, typename... ATTRS>
-  auto appendChild(const ATTRS &... attrs) -> Element & {
+  auto appendChild(const ATTRS &...attrs) -> Element & {
     TYPE &e = _createElement<TYPE>({attrs...});
     appendChild(e);
     return (e);
@@ -1082,7 +1070,7 @@ public:
 
   */
   template <typename TYPE, typename... ATTRS>
-  auto append(const ATTRS &... attrs) -> Element & {
+  auto append(const ATTRS &...attrs) -> Element & {
     TYPE &e = _createElement<TYPE>({attrs...});
     append(e);
     return (e);
@@ -1102,8 +1090,7 @@ public:
   \snippet examples.cpp setAttribute_parampack
 
   */
-  template <typename... TYPES>
-  Element &setAttribute(const TYPES &... settings) {
+  template <typename... TYPES> Element &setAttribute(const TYPES &...settings) {
     setAttribute(std::vector<std::any>{settings...});
     return *this;
   }
@@ -1163,7 +1150,6 @@ public:
   auto addListener(eventType evtType, eventHandler evtHandler) -> Element &;
   auto removeListener(eventType evtType, eventHandler evtHandler) -> Element &;
   void dispatch(const event &e);
-  virtual void render(Visualizer::platform &device);
   auto insertBefore(Element &newChild, Element &existingElement) -> Element &;
   auto insertBefore(Element &newChild, std::string &sID) -> Element &;
   auto insertAfter(Element &newChild, Element &existingElement) -> Element &;
@@ -1229,7 +1215,6 @@ private:
     std::string sText;
 
   } parserContext;
-
 
   void processParseContext(parserContext &pc);
   auto ingestMarkup(Element &node, const std::string &markup) -> Element &;
@@ -1666,7 +1651,7 @@ Example
 
 */
 template <class TYPE, typename... ATTRS>
-auto &createElement(const ATTRS &... attribs) {
+auto &createElement(const ATTRS &...attribs) {
   return _createElement<TYPE>({attribs...});
   ;
 }
@@ -1724,34 +1709,10 @@ are added on top of the viewManager base library.
 */
 #define CREATE_OBJECT(OBJECT_TEXT, OBJECT_TYPE)                                \
   {                                                                            \
-#OBJECT_TEXT,                                                              \
-        [](const std::vector <std::any> &attrs)                                \
-             -> Element & { return _createElement<OBJECT_TYPE>(attrs); }       \
+    #OBJECT_TEXT, [](const std::vector<std::any> &attrs) -> Element & {        \
+      return _createElement<OBJECT_TYPE>(attrs);                               \
+    }                                                                          \
   }
-
-/**
- * @internal
- * @def UX_DECLARE_STREAM_INTERFACE
- * @brief the macro creates the stream interface for both constant references
- * and shared pointers as well as establishes the prototype for the insertion
- * function. The implementation is not standard and will need definition. This
- * is the route for formatting objects that accept numerical data and process to
- * human readable values. Modern implementations include the processing of size
- * information. Yet within the c++ implementation, the data structures that
- * report and hold information is elaborate.
- */
-
-#define UX_DECLARE_STREAM_INTERFACE(CLASS_NAME)                                \
-public:                                                                        \
-  template <typename T> surface_area_t &operator<<(const CLASS_NAME &data) {   \
-    stream_input(data);                                                        \
-    return *this;                                                              \
-  }                                                                            \
-  template <typename T>                                                        \
-  surface_area_t &operator<<(const std::shared_ptr<CLASS_NAME> data) {         \
-    stream_input(data);                                                        \
-    return *this;                                                              \
-  }                                                                            \
 
 
 /**
@@ -1762,24 +1723,20 @@ this object.
 
 class Viewer : public Element {
 public:
-
   Viewer(const std::vector<std::any> &attribs);
   ~Viewer();
   Viewer(const Viewer &) : Element("Viewer") {}
-  Viewer &operator=(const Viewer &) {}
-  Viewer &operator=(Viewer &&other) noexcept {} // move assignment
+  Viewer &operator=(const Viewer &) {return *this;}
+  Viewer &operator=(Viewer &&other) noexcept {return *this;} // move assignment
   void render();
   void processEvents(void);
   void dispatchEvent(const event &e);
 
-
 private:
-  std::unique_ptr<os_Interface_manager_t> m_os;
-  display_list_t  m_displaylist;
-
-
+  std::unique_ptr<os_interface_manager_t> m_os;
+  display_list_t m_displaylist;
 };
-}; // namespace viewManager
+} // namespace viewManager
 
 #ifdef INCLUDE_UX
 #include "viewManagerUX.hpp"

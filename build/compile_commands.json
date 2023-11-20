@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/anthonym/eclipse-workspace/ux_nebula/build",
+  "command": "/usr/bin/g++ -g -o CMakeFiles/test0.dir/main.cpp.o -c /home/anthonym/eclipse-workspace/ux_nebula/main.cpp",
+  "file": "/home/anthonym/eclipse-workspace/ux_nebula/main.cpp"
+}
+]

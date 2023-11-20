@@ -34,15 +34,6 @@
 using namespace std;
 using namespace viewManager;
 
-viewManager::os_xcb_linux_t::os_xcb_linux_t() {  }
-viewManager::os_xcb_linux_t::~os_xcb_linux_t() { }
-
-/// @brief copy constructor
-viewManager::os_xcb_linux_t::os_xcb_linux_t(const os_xcb_linux_t &other) : {}
-
-/// @brief move constructor
-viewManager::os_xcb_linux_t::os_xcb_linux_t(os_xcb_linux_t &&other) noexcept : {}
-
 /**
  * @fn uxdevice::os_xcb_linux_t operator =&(const os_xcb_linux_t&)
  * @brief copy assignment operator
@@ -83,21 +74,19 @@ viewManager::os_xcb_linux_t::operator=(os_xcb_linux_t &&other) noexcept {
   return *this;
 }
 
-
 /**
  * @fn  keyboard_device_event_t()
  * @brief constructor implementation
  *
  */
 void viewManager::os_xcb_linux_t::fn_initialize(void)
-    : keyboard_device_base_t() 
-  syms = xcb_key_symbols_alloc(window_manager->connection);
-  if (!syms) {
-    std::stringstream sError;
-    sError << "xcb_key_symbols_alloc "
-           << "  " << __FILE__ << " " << __func__;
-    throw std::runtime_error(sError.str());
-  }
+    : keyboard_device_base_t() syms =
+          xcb_key_symbols_alloc(window_manager -> connection);
+if (!syms) {
+  std::stringstream sError;
+  sError << "xcb_key_symbols_alloc " << "  " << __FILE__ << " " << __func__;
+  throw std::runtime_error(sError.str());
+}
 }
 
 /**
@@ -111,7 +100,6 @@ void viewManager::os_xcb_linux_t::terminate(void) {
     syms = nullptr;
   }
 }
-
 
 /**
  *
@@ -193,11 +181,10 @@ void viewManager::os_xcb_linux_t::fn_open_window(void) {
 
   xcb_change_property(connection, XCB_PROP_MODE_REPLACE, window, (*reply).atom,
                       4, 32, 1, &(*reply2).atom);
-
 }
 
 void viewManager::os_xcb_linux_t::fn_close_window(void) {
-    xcb_shm_detach(m_connection, m_info.shmseg);
+  xcb_shm_detach(m_connection, m_info.shmseg);
   shmdt(m_info.shmaddr);
 
   xcb_free_pixmap(m_connection, m_pix);
@@ -217,10 +204,8 @@ void viewManager::os_xcb_linux_t::fn_close_window(void) {
     xdisplay = nullptr;
   }
 
-
   xcb_disconnect(m_connection);
 }
-
 
 /**
  * @fn void flush(void)
@@ -277,145 +262,134 @@ void VM::os_xcb_linux_t::fn_complete_message(xcb_generic_event_t *xcb) {
  */
 void viewManager::os_xcb_linux_t::fn_visit_dispatch(xcb_generic_event_t *xcb) {
 
-      /**
-       * @internal
-       * @brief handles mouse move events.
-       * @param motion_notify_xcb_t xcb
-       */
-      switch(xcb) {
-        case XCB_KEY_PRESS: {
-        // get key symbol
-        sym = xcb_key_press_lookup_keysym(syms, xcb.get(), 0);
+  /**
+   * @internal
+   * @brief handles mouse move events.
+   * @param motion_notify_xcb_t xcb
+   */
+  switch (xcb) {
+  case XCB_KEY_PRESS: {
+    // get key symbol
+    sym = xcb_key_press_lookup_keysym(syms, xcb.get(), 0);
 
-        // in range of keys?
-        if (sym < 0x99) {
+    // in range of keys?
+    if (sym < 0x99) {
 
-          // use xwindows to lookup the string
-          XKeyEvent keyEvent;
-          keyEvent.display = window_manager->xdisplay;
-          keyEvent.keycode = xcb->detail;
-          keyEvent.state = xcb->state;
-          keyEvent.root = xcb->root;
-          keyEvent.time = xcb->time;
-          keyEvent.window = xcb->event;
-          keyEvent.serial = xcb->sequence;
+      // use xwindows to lookup the string
+      XKeyEvent keyEvent;
+      keyEvent.display = window_manager->xdisplay;
+      keyEvent.keycode = xcb->detail;
+      keyEvent.state = xcb->state;
+      keyEvent.root = xcb->root;
+      keyEvent.time = xcb->time;
+      keyEvent.window = xcb->event;
+      keyEvent.serial = xcb->sequence;
 
-          // filter as a keypress event
-          if (XLookupString(&keyEvent, c.data(), c.size(), nullptr, nullptr)) {
-            alias = std::type_index{typeid(listen_keypress_t)};
-          } else {
-            // send a keydown event
-            alias = std::type_index{typeid(listen_keydown_t)};
-          }
-        }
+      // filter as a keypress event
+      if (XLookupString(&keyEvent, c.data(), c.size(), nullptr, nullptr)) {
+        alias = std::type_index{typeid(listen_keypress_t)};
+      } else {
+        // send a keydown event
+        alias = std::type_index{typeid(listen_keydown_t)};
       }
-      break;
+    }
+  } break;
 
-      /**
-       * @internal
-       * @brief handles key release event
-       * @param xcb_configure_notify_event_t *xcb
-       */
-      case XCB_KEY_RELEASE: {
-        sym = xcb_key_press_lookup_keysym(syms, xcb.get(), 0);
-        alias = std::type_index{typeid(listen_keyup_t)};
-      }
-      break;
+  /**
+   * @internal
+   * @brief handles key release event
+   * @param xcb_configure_notify_event_t *xcb
+   */
+  case XCB_KEY_RELEASE: {
+    sym = xcb_key_press_lookup_keysym(syms, xcb.get(), 0);
+    alias = std::type_index{typeid(listen_keyup_t)};
+  } break;
 
-      case XCB_MOTION_NOTIFY: {
-        x = xcb->event_x;
-        y = xcb->event_y;
-        alias = std::type_index{typeid(listen_mousemove_t)};
-      }
-      break;
+  case XCB_MOTION_NOTIFY: {
+    x = xcb->event_x;
+    y = xcb->event_y;
+    alias = std::type_index{typeid(listen_mousemove_t)};
+  } break;
 
-      /**
-       * @internal
-       * @brief handles mouse button press. this also includes wheel for linux
-       * which is 4 & 5 index.
-       * @param button_press_xcb_t xcb
-       */
-      case XCB_BUTTON_PRESS:
-        // pluck relative items from the xcb event and place into
-        // interface.
-        x = xcb->event_x;
-        y = xcb->event_y;
+  /**
+   * @internal
+   * @brief handles mouse button press. this also includes wheel for linux
+   * which is 4 & 5 index.
+   * @param button_press_xcb_t xcb
+   */
+  case XCB_BUTTON_PRESS:
+    // pluck relative items from the xcb event and place into
+    // interface.
+    x = xcb->event_x;
+    y = xcb->event_y;
 
-        /** @brief interpret these values as up and down wheel.*/
-        if (xcb->detail == XCB_BUTTON_INDEX_4 ||
-            xcb->detail == XCB_BUTTON_INDEX_5) {
-          d = xcb->detail == XCB_BUTTON_INDEX_4 ? 1 : -1;
-          alias = std::type_index{typeid(listen_wheel_t)};
-        } else {
-          d = xcb->detail;
-          alias = std::type_index{typeid(listen_mousedown_t)};
-        }
-      }
-      break;
+    /** @brief interpret these values as up and down wheel.*/
+    if (xcb->detail == XCB_BUTTON_INDEX_4 ||
+        xcb->detail == XCB_BUTTON_INDEX_5) {
+      d = xcb->detail == XCB_BUTTON_INDEX_4 ? 1 : -1;
+      alias = std::type_index{typeid(listen_wheel_t)};
+    } else {
+      d = xcb->detail;
+      alias = std::type_index{typeid(listen_mousedown_t)};
+    }
+  }
+  break;
 
-      /**
-       * @internal
-       * @brief handles mouse button release
-       * @param button_release_xcb_t xcb
-       */
-      case XCB_BUTTON_RELEASE: {
-        // ignore button 4 and 5 which are wheel events.
-        if (xcb->detail != XCB_BUTTON_INDEX_4 &&
-            xcb->detail != XCB_BUTTON_INDEX_5)
-          alias = std::type_index{typeid(listen_mouseup_t)};
-        else
-          alias = std::type_index{typeid(mouse_device_xcb_t)};
-      }
-      break;
+/**
+ * @internal
+ * @brief handles mouse button release
+ * @param button_release_xcb_t xcb
+ */
+case XCB_BUTTON_RELEASE: {
+  // ignore button 4 and 5 which are wheel events.
+  if (xcb->detail != XCB_BUTTON_INDEX_4 && xcb->detail != XCB_BUTTON_INDEX_5)
+    alias = std::type_index{typeid(listen_mouseup_t)};
+  else
+    alias = std::type_index{typeid(mouse_device_xcb_t)};
+} break;
 
-      /**
-       * @internal
-       * @brief handles expose events which are translated into paint
-       * @param surface_expose_xcb_t xcb
-       */
-      case XCB_EXPOSE: {
-        x = xcb->x;
-        y = xcb->y;
-        w = xcb->width;
-        h = xcb->height;
-        alias = std::type_index{typeid(listen_paint_t)};
-      }
-      break;
+/**
+ * @internal
+ * @brief handles expose events which are translated into paint
+ * @param surface_expose_xcb_t xcb
+ */
+case XCB_EXPOSE: {
+  x = xcb->x;
+  y = xcb->y;
+  w = xcb->width;
+  h = xcb->height;
+  alias = std::type_index{typeid(listen_paint_t)};
+} break;
 
-      /**
-       * @internal
-       * @brief handles resize event
-       * @param configure_notify_xcb_t xcb
-       */
-      case XCB_CONFIGURE_NOTIFY: {
-        if (xcb->window == window_manager->window &&
-            ((short)xcb->width != window_manager->window_width ||
-             (short)xcb->height != window_manager->window_height)) {
-          w = xcb->width;
-          h = xcb->height;
+/**
+ * @internal
+ * @brief handles resize event
+ * @param configure_notify_xcb_t xcb
+ */
+case XCB_CONFIGURE_NOTIFY: {
+  if (xcb->window == window_manager->window &&
+      ((short)xcb->width != window_manager->window_width ||
+       (short)xcb->height != window_manager->window_height)) {
+    w = xcb->width;
+    h = xcb->height;
 
-          bvideo_output = true;
-          alias = std::type_index{typeid(listen_resize_t)};
-        }
-      }
-      break;
+    bvideo_output = true;
+    alias = std::type_index{typeid(listen_resize_t)};
+  }
+} break;
 
-      /**
-       * @internal
-       * @brief handles client message such as close window.
-       * @param client_message_xcb_t xcb
-       */
-      case XCB_CLIENT_MESSAGE: {
-        // filter subset for this... original from stack over flow
-        if (xcb->data.data32[0] == window_manager->reply2->atom) {
-          alias = std::type_index{typeid(listen_close_window_t)};
-        }
-      }
-      break;
-
-      }
-
-
+/**
+ * @internal
+ * @brief handles client message such as close window.
+ * @param client_message_xcb_t xcb
+ */
+case XCB_CLIENT_MESSAGE: {
+  // filter subset for this... original from stack over flow
+  if (xcb->data.data32[0] == window_manager->reply2->atom) {
+    alias = std::type_index{typeid(listen_close_window_t)};
+  }
+} break;
+}
 }
 
 /**
@@ -428,14 +402,7 @@ void viewManager::os_xcb_linux_t::fn_set_window_title(void) {
                       title.data());
 }
 
-
 // clang-format on
-
-
-
-
-
-
 
 /**
 \internal
@@ -456,7 +423,7 @@ void VM::os_xcb_linux_t::clear(void) {
 
 */
 void VM::os_xcb_linux_t::putPixel(const int x, const int y,
-                                                 const unsigned int color) {
+                                  const unsigned int color) {
   if (x < 0 || y < 0)
     return;
 
@@ -479,8 +446,7 @@ at 0,0, upper left. \param x - the left point of the pixel \param y - the
 top point of the pixel \param unsigned int color - the bgra color value
 
 */
-unsigned int VM::os_xcb_linux_t::getPixel(const int x,
-                                                         const int y) {
+unsigned int VM::os_xcb_linux_t::getPixel(const int x, const int y) {
   // clip coordinates
   if (x < 0 || y < 0)
     return 0;
@@ -505,7 +471,6 @@ void VM::os_xcb_linux_t::resize(const int _w, const int _h) {
 
   w = _w;
   h = _h;
-
 
   // free old one if it exists
   if (m_pix) {
@@ -547,9 +512,7 @@ void VM::os_xcb_linux_t::resize(const int _w, const int _h) {
 
   // clear to white
   clear();
-
 }
-
 
 /**
 \brief The function copies the pixel buffer to the screen
@@ -564,12 +527,9 @@ void VM::os_xcb_linux_t::fn_flip() {
   xcb_copy_area(m_connection, m_pix, m_window, m_graphics, 0, 0, 0, 0, _w, _h);
 
   xcb_flush(m_connection);
-
-
 }
 
-VM::os_xcb_linux_t::fn_library_open(
-    std::string &_library_name) {
+VM::os_xcb_linux_t::fn_library_open(std::string &_library_name) {
 
   // build correct path from os indenpendant name. (.so vs .dl). This would also
   // be a place to add current path and a software search path.
@@ -592,8 +552,7 @@ VM::os_xcb_linux_t::fn_library_open(
  * @brief The function issues the dlopen and stores the handle in dl_ptr.
  *
  */
-VM::os_xcb_linux_t::fn_library_close(
-    std::string &_library_name) {
+VM::os_xcb_linux_t::fn_library_close(std::string &_library_name) {
 
   if (dl_handle)
     if (dlclose(dl_handle)) {
@@ -613,8 +572,7 @@ VM::os_xcb_linux_t::fn_library_close(
  * @brief loads a symbol, low level pointer void * used with bind.
  *
  */
-void *
-VM::os_xcb_linux_t::library_symbol(std::string &symbol) {
+void *VM::os_xcb_linux_t::library_symbol(std::string &symbol) {
   void *ptr_sym = {};
 
   if (dl_handle) {
@@ -631,4 +589,3 @@ VM::os_xcb_linux_t::library_symbol(std::string &symbol) {
 
   return ptr_sym;
 }
-

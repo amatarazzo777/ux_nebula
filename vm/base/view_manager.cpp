@@ -18,7 +18,7 @@
   \brief
   this definition provides the ability to utilize the UX namespace
 */
-#include <vm/vm.h>
+#include "../vm.h"
 
 using namespace std;
 using namespace viewManager;
@@ -36,7 +36,23 @@ Elements may also be indexed using the indexBy attribute
 and the map contains a reference wrapper to the element. These items
 are not normally accessed by the developer. They are accessed using the
 API. The create, append, and getElement functions provide the searching and
-creation of the objects.
+creation of the objects. 
+
+Rather than create problems or more complexity, the ability to 
+place these structures in a shared memory position, provides a key elemental
+in redevelopment as a centralized visualization system. 
+
+One of the first problems a developer may employ is building a codebase that interfaces
+the data to the visualization layer. Often with previous systems, an interface layer to
+the os provisions is a type of foundation. Consisten framework technologies named a type
+of architecture called the document view, in which problems can be solved in more simple
+terms, maintenance, etc.
+
+typically shared memory components use only base types, as an advanced technique,
+utilizing std and api to utilize these allows select layers to exist. Design specifications 
+and generalized information suggests that depending on internal structures of std is 
+not a cross platform method. Yet data() exposure provides some capacity. 
+
 */
 std::unordered_map<std::size_t, std::unique_ptr<Element>> viewManager::elements;
 std::unordered_map<std::string, std::reference_wrapper<Element>>
@@ -952,8 +968,7 @@ and units are all expressed within the model as pixel units. After this
 function is ran, each element will have a rectangle attached that expresses
 it's pixel size on the viewing device.
 */
-void viewManager::Viewer::computeLayout(Element &e) {
-}
+void viewManager::Viewer::computeLayout(Element &e) {}
 
 /**
 \internal
@@ -964,7 +979,7 @@ void viewManager::Viewer::render(void) {
   computeLayout(*this);
 
   canvas_ity::canvas raster(this->getAttribute<objectWidth>(),
-            this->getAttribute<objectHeight>());
+                            this->getAttribute<objectHeight>());
 
   /* the display list is a sorted entity providing a searchable list
   for the beginning and ending of a viewport clipping region. */
@@ -972,67 +987,67 @@ void viewManager::Viewer::render(void) {
     n->ptr->render(&raster);
   }
 
-/*
-\internal
-\brief
-This is the only entry point from the platform for the event
-dispatching system. The routine expects only certain types
-of messages from the platform. The other events, that are computed,
-are developed by this routine as needed. Each of these events, whether
-passed through as the same message, or developed is placed into the
-viewManager message queue. The background event dispatching fetches
-messages from this queue, and calls the element's event processor
-routines. The main thing to remember is that the information is
-processed from a queue and using a background thread.
-*/
-void viewManager::Viewer::dispatchEvent(const event &evt) {
-  switch (evt.evtType) {
-  case eventType::paint:
-    m_device->clear();
-    render();
-    m_device->flip();
-    break;
-  case eventType::resize:
-    setAttribute<objectWidth>(
-        {static_cast<double>(evt.width), numericFormat::px});
-    setAttribute<objectHeight>(
-        {static_cast<double>(evt.height), numericFormat::px});
-    m_device->resize(evt.width, evt.height);
-    break;
-  case eventType::keydown: {
-    auto &state = getAttribute<documentState>();
-    state.focusField->dispatch(evt);
-    dispatchEvent(event{eventType::paint});
-  } break;
-  case eventType::keyup: {
-    auto &state = getAttribute<documentState>();
-    state.focusField->dispatch(evt);
-    dispatchEvent(event{eventType::paint});
-  } break;
-  case eventType::keypress: {
-    auto &state = getAttribute<documentState>();
-    state.focusField->dispatch(evt);
-    dispatchEvent(event{eventType::paint});
-  } break;
-  case eventType::mousemove:
-    break;
-  case eventType::mousedown:
-    break;
-  case eventType::mouseup:
-    if (evt.mouseButton == 1)
-      m_device->fontScale++;
-    else
-      m_device->fontScale--;
-    dispatchEvent(event{eventType::paint});
-    break;
-  case eventType::wheel:
-    if (evt.wheelDistance > 0)
-      m_device->fontScale += 1;
-    else
-      m_device->fontScale -= 1;
-    dispatchEvent(event{eventType::paint});
-    break;
-  }
+  /*
+  \internal
+  \brief
+  This is the only entry point from the platform for the event
+  dispatching system. The routine expects only certain types
+  of messages from the platform. The other events, that are computed,
+  are developed by this routine as needed. Each of these events, whether
+  passed through as the same message, or developed is placed into the
+  viewManager message queue. The background event dispatching fetches
+  messages from this queue, and calls the element's event processor
+  routines. The main thing to remember is that the information is
+  processed from a queue and using a background thread.
+  */
+  void viewManager::Viewer::dispatchEvent(const event &evt) {
+    switch (evt.evtType) {
+    case eventType::paint:
+      m_device->clear();
+      render();
+      m_device->flip();
+      break;
+    case eventType::resize:
+      setAttribute<objectWidth>(
+          {static_cast<double>(evt.width), numericFormat::px});
+      setAttribute<objectHeight>(
+          {static_cast<double>(evt.height), numericFormat::px});
+      m_device->resize(evt.width, evt.height);
+      break;
+    case eventType::keydown: {
+      auto &state = getAttribute<documentState>();
+      state.focusField->dispatch(evt);
+      dispatchEvent(event{eventType::paint});
+    } break;
+    case eventType::keyup: {
+      auto &state = getAttribute<documentState>();
+      state.focusField->dispatch(evt);
+      dispatchEvent(event{eventType::paint});
+    } break;
+    case eventType::keypress: {
+      auto &state = getAttribute<documentState>();
+      state.focusField->dispatch(evt);
+      dispatchEvent(event{eventType::paint});
+    } break;
+    case eventType::mousemove:
+      break;
+    case eventType::mousedown:
+      break;
+    case eventType::mouseup:
+      if (evt.mouseButton == 1)
+        m_device->fontScale++;
+      else
+        m_device->fontScale--;
+      dispatchEvent(event{eventType::paint});
+      break;
+    case eventType::wheel:
+      if (evt.wheelDistance > 0)
+        m_device->fontScale += 1;
+      else
+        m_device->fontScale -= 1;
+      dispatchEvent(event{eventType::paint});
+      break;
+    }
 /* these events do not come from the platform. However,
 they are spawned from conditions based upon the platform events.
 */
@@ -1045,1299 +1060,1302 @@ eventType::dblclick
 eventType::contextmenu
 eventType::mouseleave
 #endif
-}
-/**
-\internal
-\brief The entry point that processes messages from the operating
-system application level services. Typically on Linux this is a
-coupling of xcb and keysyms library for keyboard. Previous
-incarnations of technology such as this typically used xserver.
-However, XCB is the newer form. Primarily looking at the code of such
-programs as vlc, the routine simply places pixels into the memory
-buffer. while on windows the direct x library is used in combination
-with windows message queue processing.
-*/
-void viewManager::Viewer::processEvents(void) {
-  // setup the event dispatcher
-  eventHandler ev =
-      std::bind(&Viewer::dispatchEvent, this, std::placeholders::_1);
-  m_device = std::make_unique<Visualizer::platform>(
-      ev, getAttribute<objectWidth>().value,
-      getAttribute<objectHeight>().value);
-
-  m_device->openWindow(getAttribute<windowTitle>().value);
-
-  m_device->messageLoop();
-}
-
-/**
-\addtogroup udl User Defined Literals
-
-User defined liters are created for the project to consolidate parameter
-input.
-
-When more information would be required in a C++ constructor creation, the
-syntax provides the returning of the numerical format object in an easy to
-read syntax,
-
-For example:
-    getElement("testDiv").setAttribute<objectTop>(10_px);
-
-rather than
-    getElement("testDiv").setAttribute<objectTop>(10, numericFormat::px);
-
-@{
-*/
-
-/**
-\brief enables labeling numeric literals as _pt. The operator returns a
-doubleNF object.
-*/
-auto viewManager::operator""_pt(unsigned long long int value) -> doubleNF {
-  return doubleNF{static_cast<double>(value), numericFormat::pt};
-}
-
-/**
-\brief enables labeling numeric literals as _pt. The operator returns a
-doubleNF object.
-*/
-auto viewManager::operator""_pt(long double value) -> doubleNF {
-  return doubleNF{static_cast<double>(value), numericFormat::pt};
-}
-
-/**
-\brief enables labeling numeric literals as _em. The operator returns a
-doubleNF object.
-*/
-auto viewManager::operator""_em(unsigned long long int value) -> doubleNF {
-  return doubleNF{static_cast<double>(value), numericFormat::em};
-}
-
-/**
- \brief enables labeling numeric literals as _em. The operator returns a
- doubleNF object.
-*/
-auto viewManager::operator""_em(long double value) -> doubleNF {
-  return doubleNF{static_cast<double>(value), numericFormat::em};
-}
-
-/**
-\brief enables labeling numeric literals as _px. The operator returns a
-doubleNF object.
-*/
-auto viewManager::operator""_px(unsigned long long int value) -> doubleNF {
-  return doubleNF{static_cast<double>(value), numericFormat::px};
-}
-
-/**
-\brief enables labeling numeric literals as _px. The operator returns a
-doubleNF object.
-*/
-auto viewManager::operator""_px(long double value) -> doubleNF {
-  return doubleNF{static_cast<double>(value), numericFormat::px};
-}
-
-/**
-\brief enables labeling numeric literals as _percent. The operator returns a
-doubleNF object.
-*/
-auto viewManager::operator""_percent(unsigned long long int value) -> doubleNF {
-  return doubleNF{static_cast<double>(value), numericFormat::percent};
-}
-
-/**
-\brief enables labeling numeric literals as _percent. The operator returns a
-doubleNF object.
-*/
-auto viewManager::operator""_percent(long double value) -> doubleNF {
-  return doubleNF{static_cast<double>(value), numericFormat::percent};
-}
-
-/**
-\brief enables labeling numeric literals as _pct. The operator returns a
-doubleNF object.
-*/
-auto viewManager::operator""_pct(unsigned long long int value) -> doubleNF {
-  return doubleNF{static_cast<double>(value), numericFormat::percent};
-}
-
-/**
-\brief enables labeling numeric literals as _pct. The operator returns a
-doubleNF object.
-*/
-auto viewManager::operator""_pct(long double value) -> doubleNF {
-  return doubleNF{static_cast<double>(value), numericFormat::percent};
-}
-
-/**
-\brief enables labeling numeric literals as _normal. The operator returns a
-doubleNF object.
-*/
-auto viewManager::operator""_normal(unsigned long long int value)
-    -> lineHeight {
-  return lineHeight{static_cast<double>(value), lineHeight::normal};
-}
-
-/**
-\brief enables labeling numeric literals as _normal. The operator returns a
-doubleNF object.
-*/
-auto viewManager::operator""_normal(long double value) -> lineHeight {
-  return lineHeight{static_cast<double>(value), lineHeight::normal};
-}
-
-/**
-\brief enables labeling numeric literals as _numeric. The operator returns a
-doubleNF object.
-*/
-auto viewManager::operator""_numeric(unsigned long long int value)
-    -> lineHeight {
-  return lineHeight{static_cast<double>(value), lineHeight::numeric};
-}
-
-/**
-\brief enables labeling numeric literals as _numeric. The operator returns a
-doubleNF object.
-*/
-auto viewManager::operator""_numeric(long double value) -> lineHeight {
-  return lineHeight{static_cast<double>(value), lineHeight::numeric};
-}
-/** @}*/
-
-/**
-  \addtogroup API Global Document API
-  @{
-*/
-
-/**
-\brief given the string id, the function returns
-the element.
-
-jquery shows that handling large document models can be
-effectively managed using searching and iterators. Here,
-elements or groups of elements can be accessed through query strings.
-#, or *, or partial matches. Change attributes?
-@ for style,
-
-*/
-auto viewManager::query(const std::string &queryString) -> ElementList {
-  ElementList results;
-  if (queryString == "*") {
-    for (const auto &n : elements) {
-      results.push_back(std::ref(*(n.second.get())));
-    }
-  } else {
-    std::regex matchExpression(queryString.data(),
-                               std::regex_constants::ECMAScript |
-                                   std::regex_constants::icase);
-    for (const auto &n : elements) {
-      if (std::regex_match(n.second->getAttribute<indexBy>().value.data(),
-                           matchExpression))
-        results.push_back(std::ref(*(n.second.get())));
-    }
   }
-  return results;
-}
-
-/**
-\brief This version of the query interface provides a
-syntax whereby a lambda or a function may be used to provide matching.
-The function is simply passed an element within the traversal.
-The function is expected to return a true or false value.
-*/
-auto viewManager::query(const ElementQuery &queryFunction) -> ElementList {
-  ElementList results;
-  for (const auto &n : elements) {
-    if (queryFunction(std::ref(*(n.second.get()))))
-      results.push_back(std::ref(*(n.second.get())));
-  }
-  return results;
-}
-
-/**
-\brief The hasElement function returns a true or false value if the
-index is found within the index. This may be used to avoid possible
-exceptions.
-*/
-bool viewManager::hasElement(const std::string &key) {
-  auto it = indexedElements.find(key);
-  return it != indexedElements.end();
-}
-/** @}*/
-
-Element::iterator &Element::iterator::operator=(Element *pNode) {
-  this->m_pCurrentNode = pNode;
-  return *this;
-}
-
-// Prefix ++ overload
-Element::iterator &Element::iterator::operator++() {
-  if (m_pCurrentNode)
-    m_pCurrentNode = m_pCurrentNode->m_nextSibling;
-  return *this;
-}
-
-// Postfix ++ overload, AFM - is the ++ in front of * a BUG?
-Element::iterator Element::iterator::operator++(int) {
-  iterator it = *this;
-  ++*this;
-  return it;
-}
-
-// Prefix ++ overload
-Element::iterator &Element::iterator::operator--() {
-  if (m_pCurrentNode)
-    m_pCurrentNode = m_pCurrentNode->m_previousSibling;
-  return *this;
-}
-
-bool Element::iterator::operator!=(const Element::iterator &it) {
-  return m_pCurrentNode != it.m_pCurrentNode;
-}
-
-Element &Element::iterator::operator*() { return *m_pCurrentNode; }
-
-Element::iterator Element::iterator::begin() {
-  return Element::iterator(m_pCurrentNode->m_firstChild);
-}
-
-Element::iterator Element::iterator::end() {
-  return Element::iterator(nullptr);
-}
-
-/**
-\internal
-\brief copy constructor
-*/
-viewManager::Element::Element(const Element &other) {
-
-  m_self = other.m_self;
-  m_parent = other.m_parent;
-  m_firstChild = other.m_firstChild;
-  m_lastChild = other.m_lastChild;
-  m_nextChild = other.m_nextChild;
-  m_previousChild = other.m_previousChild;
-  m_nextSibling = other.m_nextSibling;
-  m_previousSibling = other.m_previousSibling;
-  m_childCount = other.m_childCount;
-  attributes = other.attributes;
-  styles = other.styles;
-}
-
-/**
-\internal
-\brief move constructor
-*/
-viewManager::Element::Element(Element &&other) noexcept {
-
-  m_self = other.m_self;
-  m_parent = other.m_parent;
-  m_firstChild = other.m_firstChild;
-  m_lastChild = other.m_lastChild;
-  m_nextChild = other.m_nextChild;
-  m_previousChild = other.m_previousChild;
-  m_nextSibling = other.m_nextSibling;
-  m_previousSibling = other.m_previousSibling;
-  m_childCount = other.m_childCount;
-  attributes = std::move(other.attributes);
-  styles = std::move(other.styles);
-}
-
-/**
-\internal
-\brief copy assignment operator
-*/
-Element &viewManager::Element::operator=(const Element &other) {
-
-  // Self-assignment detection
-  if (&other == this)
-    return *this;
-  m_self = other.m_self;
-  m_parent = other.m_parent;
-  m_firstChild = other.m_firstChild;
-  m_lastChild = other.m_lastChild;
-  m_nextChild = other.m_nextChild;
-  m_previousChild = other.m_previousChild;
-  m_nextSibling = other.m_nextSibling;
-  m_previousSibling = other.m_previousSibling;
-  m_childCount = other.m_childCount;
-  attributes = other.attributes;
-  styles = other.styles;
-  return *this;
-}
-
-/**
-\internal
-\brief move assignment operator
-*/
-Element &viewManager::Element::operator=(Element &&other) noexcept {
-
-  if (&other == this)
-    return *this;
-  m_self = other.m_self;
-  m_parent = other.m_parent;
-  m_firstChild = other.m_firstChild;
-  m_lastChild = other.m_lastChild;
-  m_nextChild = other.m_nextChild;
-  m_previousChild = other.m_previousChild;
-  m_nextSibling = other.m_nextSibling;
-  m_previousSibling = other.m_previousSibling;
-  m_childCount = other.m_childCount;
-  attributes = std::move(other.attributes);
-  styles = std::move(other.styles);
-  return *this;
-}
-
-/**
-  \brief
-  The function will parse the string as input searching for document tags.
-  These elements are added as children of the element for which the function
-  is invoked.
-
-  \param sMarkup a std::string containing the markup.
-  \return Element& returns the referenced element for continuation syntax.
-
-  Example
-  -------
-  \snippet examples.cpp appendChild_markup
-
-  \ref markupInputFormat
-
-*/
-auto viewManager::Element::appendChild(const std::string &sMarkup)
-    -> Element & {
-  return (ingestMarkup(*this, sMarkup));
-}
-
-/**
-  \brief The function will append the given document element within
-  the parameter as a child.
-
-  \param newChild a new child element that was previously created.
-  \return Element& returns the referenced element for continuation syntax.
-
-  Example
-  -------
-  \snippet examples.cpp appendChild_element
-*/
-auto viewManager::Element::appendChild(Element &newChild) -> Element & {
-  newChild.m_parent = this;
-  newChild.m_previousSibling = m_lastChild;
-
-  if (!m_firstChild)
-    m_firstChild = newChild.m_self;
-
-  if (m_lastChild)
-    m_lastChild->m_nextSibling = newChild.m_self;
-
-  m_lastChild = newChild.m_self;
-  m_childCount++;
-
-  return (newChild);
-}
-
-/**
-  \brief The function will append the given document elements within
-  the ElementList parameter as children.
-
-  \param elementCollection an ElementList of new child element that was
-  previously created.
-
-  \return Element& returns the referenced element for continuation syntax.
-
-  Example
-  -------
-  \snippet examples.cpp appendChild_elementlist
-*/
-auto viewManager::Element::appendChild(const ElementList &elementCollection)
-    -> Element & {
-  for (auto e : elementCollection) {
-    appendChild(e.get());
-  }
-  return (*this);
-}
-
-/**
-  \brief The function will append the given markup content as a sibling.
-
-  \param elementCollection an ElementList of new child element that was
-  previously created.
-
-  \return Element& returns the referenced element for continuation syntax.
-
-  Example
-  -------
-  \snippet examples.cpp append_markup
-
-  \ref markupInputFormat
-
-
-*/
-auto viewManager::Element::append(const std::string &sMarkup) -> Element & {
-  Element *base = this->m_parent;
-  if (base == nullptr)
-    base = this;
-  return (ingestMarkup(*base, sMarkup));
-}
-
-/**
-  \brief The function will append the given element as a sibling.
-
-  \return Element& returns the referenced element for continuation syntax.
-
-  Example
-  -------
-  \snippet examples.cpp append_element
-
-*/
-auto viewManager::Element::append(Element &sibling) -> Element & {
-  m_nextSibling = sibling.m_self;
-  sibling.m_parent = this->m_parent;
-  sibling.m_previousSibling = this;
-
-  if (!this->m_parent->m_firstChild)
-    this->m_parent->m_firstChild = sibling.m_self;
-
-  this->m_parent->m_lastChild = sibling.m_self;
-
-  this->m_parent->m_childCount++;
-  return (sibling);
-}
-
-/**
-  \brief The function will append the collection of elements as a
-  siblings.
-
-  \param elementCollection an ElementList of new child element that was
-  previously created.
-
-  \return Element& returns the referenced element for continuation syntax.
-
-  Example
-  -------
-  \snippet examples.cpp append_elementlist
-*/
-auto viewManager::Element::append(ElementList &elementCollection) -> Element & {
-  for (auto &e : elementCollection)
-    append(e);
-  return (*this);
-}
-
-/**
-\brief The function sets the given attribute inside the elements indexed
-map. Settings are filtered on specific types to determine if it is a true
-attribute or one that is filtered to be a compound. Compound attributes
-require other operations such as data insertion into the data property or
-using an official attribute object where only an enumeration value is given.
-
-\param
-setting an attribute.
-
-The following are supported filtered types:
-- char
-- double
-- float
-- int
-- std::string
-- const char *
-- std::vector<char>
-- std::vector<double>
-- std::vector<float>
-- std::vector<int>
-- std::vector<std::string>
-- std::vector<std::vector<std::string>>
-- std::vector<std::vector<std::pair<int, std::string>>>
-- std::vector<std::vector<std::pair<int, std::string>>>
-
-Example
--------
-\snippet examples.cpp setAttribute_base
-
-*/
-Element &viewManager::Element::setAttribute(const std::any &paramSetting) {
-
-  std::any setting = paramSetting;
   /**
   \internal
-  \enum _enumTypeFilter
+  \brief The entry point that processes messages from the operating
+  system application level services. Typically on Linux this is a
+  coupling of xcb and keysyms library for keyboard. Previous
+  incarnations of technology such as this typically used xserver.
+  However, XCB is the newer form. Primarily looking at the code of such
+  programs as vlc, the routine simply places pixels into the memory
+  buffer. while on windows the direct x library is used in combination
+  with windows message queue processing.
   */
-  enum _enumTypeFilter {
-    dt_char,
-    dt_double,
-    dt_float,
-    dt_int,
-    dt_std_string,
-    dt_const_char,
-    dt_vector_char,
-    dt_vector_double,
-    dt_vector_float,
-    dt_vector_int,
-    dt_vector_string,
-    dt_vector_vector_string,
-    dt_vector_pair_int_string,
-    dt_indexBy,
-    dt_display_enum,
-    dt_position_enum,
-    dt_textAlignment_enum,
-    dt_borderStyle_enum,
-    dt_listStyleType_enum,
+  void viewManager::Viewer::processEvents(void) {
+    // setup the event dispatcher
+    eventHandler ev =
+        std::bind(&Viewer::dispatchEvent, this, std::placeholders::_1);
+    m_device = std::make_unique<Visualizer::platform>(
+        ev, getAttribute<objectWidth>().value,
+        getAttribute<objectHeight>().value);
 
-    dt_nonFiltered
-  };
-  // filter map
-  static std::unordered_map<size_t, _enumTypeFilter> _umapTypeFilter = {
-      {std::type_index(typeid(char)).hash_code(), dt_char},
-      {std::type_index(typeid(double)).hash_code(), dt_double},
-      {std::type_index(typeid(float)).hash_code(), dt_float},
-      {std::type_index(typeid(int)).hash_code(), dt_int},
-      {std::type_index(typeid(std::string)).hash_code(), dt_std_string},
-      {std::type_index(typeid(const char *)).hash_code(), dt_const_char},
-      {std::type_index(typeid(std::vector<char>)).hash_code(), dt_vector_char},
-      {std::type_index(typeid(std::vector<double>)).hash_code(),
-       dt_vector_double},
-      {std::type_index(typeid(std::vector<float>)).hash_code(),
-       dt_vector_float},
-      {std::type_index(typeid(std::vector<int>)).hash_code(), dt_vector_int},
-      {std::type_index(typeid(std::vector<std::string>)).hash_code(),
-       dt_vector_string},
-      {std::type_index(typeid(std::vector<std::vector<std::string>>))
-           .hash_code(),
-       dt_vector_vector_string},
-      {std::type_index(
-           typeid(std::vector<std::vector<std::pair<int, std::string>>>))
-           .hash_code(),
-       dt_vector_pair_int_string},
-      {std::type_index(typeid(indexBy)).hash_code(), dt_indexBy},
-      {std::type_index(typeid(display::optionEnum)).hash_code(),
-       dt_display_enum},
-      {std::type_index(typeid(position::optionEnum)).hash_code(),
-       dt_position_enum},
-      {std::type_index(typeid(textAlignment::optionEnum)).hash_code(),
-       dt_textAlignment_enum},
-      {std::type_index(typeid(borderStyle::optionEnum)).hash_code(),
-       dt_borderStyle_enum},
-      {std::type_index(typeid(listStyleType::optionEnum)).hash_code(),
-       dt_listStyleType_enum}
+    m_device->openWindow(getAttribute<windowTitle>().value);
 
-  };
-  // set search result defaults for not found in filter
-  _enumTypeFilter dtFilter = dt_nonFiltered;
-  bool bSaveInMap = false;
-  auto it = _umapTypeFilter.find(setting.type().hash_code());
-  if (it != _umapTypeFilter.end())
-    dtFilter = it->second;
-
-  /* filter these types specifically and do not store them in the map.
-  these items change the dataAdaptor. This creates a more usable
-  syntax for population of large and small data within the
-  simple initializer list format given within the attribute list.*/
-  switch (dtFilter) {
-  case dt_char: {
-    auto v = std::any_cast<char>(setting);
-    data<char>() = std::vector<char>{v};
-  } break;
-  case dt_double: {
-    auto v = std::any_cast<double>(setting);
-    data<double>() = std::vector<double>{v};
-  } break;
-  case dt_float: {
-    auto v = std::any_cast<float>(setting);
-    data<float>() = std::vector<float>{v};
-  } break;
-  case dt_int: {
-    auto v = std::any_cast<int>(setting);
-    data<int>() = std::vector<int>{v};
-  } break;
-  case dt_const_char: {
-    auto v = std::any_cast<const char *>(setting);
-    data<std::string>() = std::vector<std::string>{v};
-  } break;
-  case dt_std_string: {
-    auto v = std::any_cast<std::string>(setting);
-    data<std::string>() = std::vector<std::string>{v};
-  } break;
-  case dt_vector_char: {
-    auto v = std::any_cast<std::vector<char>>(setting);
-    data<char>() = v;
-  } break;
-  case dt_vector_double: {
-    auto v = std::any_cast<std::vector<double>>(setting);
-    data<double>() = v;
-  } break;
-  case dt_vector_float: {
-    auto v = std::any_cast<std::vector<float>>(setting);
-    data<float>() = v;
-  } break;
-  case dt_vector_int: {
-    auto v = std::any_cast<std::vector<int>>(setting);
-    data<int>() = v;
-  } break;
-  case dt_vector_string: {
-    auto v = std::any_cast<std::vector<std::string>>(setting);
-    data<std::string>() = v;
-  } break;
-  case dt_vector_vector_string: {
-    auto v = std::any_cast<std::vector<std::vector<std::string>>>(setting);
-    data<std::vector<std::string>>() = v;
-  } break;
-  case dt_vector_pair_int_string: {
-    auto v = std::any_cast<std::vector<std::pair<int, std::string>>>(setting);
-    data<std::pair<int, std::string>>() = v;
-  } break;
-  // attributes stored in map but filtered for processing.
-  case dt_indexBy: {
-    updateIndexBy(std::any_cast<indexBy>(setting));
-    bSaveInMap = true;
-  } break;
-  case dt_display_enum: {
-    setting = display{std::any_cast<display::optionEnum>(paramSetting)};
-    bSaveInMap = true;
-  } break;
-  case dt_position_enum: {
-    setting = position{std::any_cast<position::optionEnum>(paramSetting)};
-    bSaveInMap = true;
-  } break;
-  case dt_textAlignment_enum: {
-    setting =
-        textAlignment{std::any_cast<textAlignment::optionEnum>(paramSetting)};
-    bSaveInMap = true;
-  } break;
-  case dt_borderStyle_enum: {
-    setting = borderStyle{std::any_cast<borderStyle::optionEnum>(paramSetting)};
-    bSaveInMap = true;
-  } break;
-  case dt_listStyleType_enum: {
-    setting =
-        listStyleType{std::any_cast<listStyleType::optionEnum>(paramSetting)};
-    bSaveInMap = true;
-  } break;
-
-  // other items are not filtered, so just pass through to storage.
-  case dt_nonFiltered: {
-    bSaveInMap = true;
-  } break;
+    m_device->messageLoop();
   }
 
-  if (bSaveInMap)
-    attributes[std::type_index(setting.type())] = setting;
-  return *this;
-}
+  /**
+  \addtogroup udl User Defined Literals
 
-/**
-\internal
-\brief The attribute being set can be contained in an array of std::any
-Typically the caller does not use this function but relies on the
-varodic template version.
-*/
-Element &
-viewManager::Element::setAttribute(const std::vector<std::any> &attribs) {
-  for (auto n : attribs)
-    setAttribute(n);
-  return *this;
-}
+  User defined liters are created for the project to consolidate parameter
+  input.
 
-/**
-\internal
+  When more information would be required in a C++ constructor creation, the
+  syntax provides the returning of the numerical format object in an easy to
+  read syntax,
 
-\brief updates the id within the index if the item has changed.
+  For example:
+      getElement("testDiv").setAttribute<objectTop>(10_px);
 
-*/
-void viewManager::Element::updateIndexBy(const indexBy &setting) {
-  // changing id just changes
-  // the key in elementById
-  // map
-  std::string oldKey = "";
-  const std::string &newKey = setting.value;
-  auto it = attributes.find(std::type_index(typeid(indexBy)));
+  rather than
+      getElement("testDiv").setAttribute<objectTop>(10, numericFormat::px);
 
-  // get the key of the old id
-  if (it != attributes.end()) {
-    oldKey = std::any_cast<indexBy>(it->second).value;
+  @{
+  */
+
+  /**
+  \brief enables labeling numeric literals as _pt. The operator returns a
+  doubleNF object.
+  */
+  auto viewManager::operator""_pt(unsigned long long int value) -> doubleNF {
+    return doubleNF{static_cast<double>(value), numericFormat::pt};
   }
 
-  // case a. key is not blank,
-  // yet it is the same value
-  // as the old key therefore
-  // there is no change.
-  if (!oldKey.empty() && oldKey == newKey) {
-    return;
-    // case b. remap just the
-    // key
-  } else if (!oldKey.empty() && !newKey.empty()) {
-    auto nodeHandler = indexedElements.extract(oldKey);
-    nodeHandler.key() = newKey;
-    indexedElements.insert(std::move(nodeHandler));
-    // case c. remove key from
-    // map
-  } else if (!oldKey.empty() && newKey.empty()) {
-    indexedElements.erase(oldKey);
-    // case d. did not exist
-    // before, add key to map
-  } else if (!newKey.empty()) {
-    indexedElements.insert({newKey, std::ref(*this)});
+  /**
+  \brief enables labeling numeric literals as _pt. The operator returns a
+  doubleNF object.
+  */
+  auto viewManager::operator""_pt(long double value) -> doubleNF {
+    return doubleNF{static_cast<double>(value), numericFormat::pt};
   }
-  return;
-}
 
-/**
-\brief inserts the given element before the named second parameter.
-The version of the function is useful when the element is indexed by a
-string and a reference to it does not exist.
-
-\param Element &newChild
-
-\param std::string sID
-
-Example
--------
-\snippet examples.cpp insertBefore_string
-*/
-auto viewManager::Element::insertBefore(Element &newChild, std::string &sID)
-    -> Element & {
-  return insertBefore(newChild, getElement(sID));
-}
-
-/**
-\brief inserts the given element before the named second parameter.
-
-\param Element &newChild
-
-\param Element &existingElement
-
-Example
--------
-\snippet examples.cpp insertBefore
-*/
-auto viewManager::Element::insertBefore(Element &newChild,
-                                        Element &existingElement) -> Element & {
-  Element &child = newChild;
-  // maintain tree structure
-  child.m_parent = existingElement.m_parent;
-  child.m_nextSibling = existingElement.m_self;
-  child.m_previousSibling = existingElement.m_previousSibling;
-  existingElement.m_previousSibling = child.m_self;
-  // provide linkage
-  if (child.m_previousSibling)
-    child.m_previousSibling->m_nextSibling = child.m_self;
-  if (child.m_nextSibling)
-    child.m_nextSibling->m_previousSibling = child.m_self;
-  // case where insert is at the first
-  if (existingElement.m_self == m_firstChild) {
-    m_firstChild = child.m_self;
+  /**
+  \brief enables labeling numeric literals as _em. The operator returns a
+  doubleNF object.
+  */
+  auto viewManager::operator""_em(unsigned long long int value) -> doubleNF {
+    return doubleNF{static_cast<double>(value), numericFormat::em};
   }
-  m_childCount++;
-  return child;
-}
 
-/**
-\brief inserts the given element after the named second parameter element.
-The version of the function is useful when the element is indexed by a
-string and a reference to it does not exist.
+  /**
+   \brief enables labeling numeric literals as _em. The operator returns a
+   doubleNF object.
+  */
+  auto viewManager::operator""_em(long double value) -> doubleNF {
+    return doubleNF{static_cast<double>(value), numericFormat::em};
+  }
 
-\param Element &newChild
+  /**
+  \brief enables labeling numeric literals as _px. The operator returns a
+  doubleNF object.
+  */
+  auto viewManager::operator""_px(unsigned long long int value) -> doubleNF {
+    return doubleNF{static_cast<double>(value), numericFormat::px};
+  }
 
-\param std::string sID
+  /**
+  \brief enables labeling numeric literals as _px. The operator returns a
+  doubleNF object.
+  */
+  auto viewManager::operator""_px(long double value) -> doubleNF {
+    return doubleNF{static_cast<double>(value), numericFormat::px};
+  }
 
-Example
--------
-\snippet examples.cpp insertAfter_string
-*/
-auto viewManager::Element::insertAfter(Element &newChild, std::string &sID)
-    -> Element & {
-  return insertAfter(newChild, getElement(sID));
-}
+  /**
+  \brief enables labeling numeric literals as _percent. The operator returns a
+  doubleNF object.
+  */
+  auto viewManager::operator""_percent(
+      unsigned long long int value) -> doubleNF {
+    return doubleNF{static_cast<double>(value), numericFormat::percent};
+  }
 
-/**
-\brief inserts the given element after the named second parameter element.
+  /**
+  \brief enables labeling numeric literals as _percent. The operator returns a
+  doubleNF object.
+  */
+  auto viewManager::operator""_percent(long double value) -> doubleNF {
+    return doubleNF{static_cast<double>(value), numericFormat::percent};
+  }
 
-\param Element &newChild
+  /**
+  \brief enables labeling numeric literals as _pct. The operator returns a
+  doubleNF object.
+  */
+  auto viewManager::operator""_pct(unsigned long long int value) -> doubleNF {
+    return doubleNF{static_cast<double>(value), numericFormat::percent};
+  }
 
-\param Element &existingElement
+  /**
+  \brief enables labeling numeric literals as _pct. The operator returns a
+  doubleNF object.
+  */
+  auto viewManager::operator""_pct(long double value) -> doubleNF {
+    return doubleNF{static_cast<double>(value), numericFormat::percent};
+  }
 
-Example
--------
-\snippet examples.cpp insertAfter
-*/
-auto viewManager::Element::insertAfter(Element &newChild,
-                                       Element &existingElement) -> Element & {
+  /**
+  \brief enables labeling numeric literals as _normal. The operator returns a
+  doubleNF object.
+  */
+  auto viewManager::operator""_normal(
+      unsigned long long int value) -> lineHeight {
+    return lineHeight{static_cast<double>(value), lineHeight::normal};
+  }
 
-  // maintain tree structure
-  newChild.m_parent = existingElement.m_parent;
-  newChild.m_nextSibling = existingElement.m_previousSibling;
-  newChild.m_previousSibling = existingElement.m_self;
-  if (existingElement.m_nextSibling)
-    existingElement.m_nextSibling->m_previousSibling = newChild.m_self;
+  /**
+  \brief enables labeling numeric literals as _normal. The operator returns a
+  doubleNF object.
+  */
+  auto viewManager::operator""_normal(long double value) -> lineHeight {
+    return lineHeight{static_cast<double>(value), lineHeight::normal};
+  }
 
-  existingElement.m_nextSibling = newChild.m_self;
+  /**
+  \brief enables labeling numeric literals as _numeric. The operator returns a
+  doubleNF object.
+  */
+  auto viewManager::operator""_numeric(
+      unsigned long long int value) -> lineHeight {
+    return lineHeight{static_cast<double>(value), lineHeight::numeric};
+  }
 
-  // case where insert is at the end
-  if (existingElement.m_self == m_lastChild) {
+  /**
+  \brief enables labeling numeric literals as _numeric. The operator returns a
+  doubleNF object.
+  */
+  auto viewManager::operator""_numeric(long double value) -> lineHeight {
+    return lineHeight{static_cast<double>(value), lineHeight::numeric};
+  }
+  /** @}*/
+
+  /**
+    \addtogroup API Global Document API
+    @{
+  */
+
+  /**
+  \brief given the string id, the function returns
+  the element.
+
+  jquery shows that handling large document models can be
+  effectively managed using searching and iterators. Here,
+  elements or groups of elements can be accessed through query strings.
+  #, or *, or partial matches. Change attributes?
+  @ for style,
+
+  */
+  auto viewManager::query(const std::string &queryString) -> ElementList {
+    ElementList results;
+    if (queryString == "*") {
+      for (const auto &n : elements) {
+        results.push_back(std::ref(*(n.second.get())));
+      }
+    } else {
+      std::regex matchExpression(queryString.data(),
+                                 std::regex_constants::ECMAScript |
+                                     std::regex_constants::icase);
+      for (const auto &n : elements) {
+        if (std::regex_match(n.second->getAttribute<indexBy>().value.data(),
+                             matchExpression))
+          results.push_back(std::ref(*(n.second.get())));
+      }
+    }
+    return results;
+  }
+
+  /**
+  \brief This version of the query interface provides a
+  syntax whereby a lambda or a function may be used to provide matching.
+  The function is simply passed an element within the traversal.
+  The function is expected to return a true or false value.
+  */
+  auto viewManager::query(const ElementQuery &queryFunction) -> ElementList {
+    ElementList results;
+    for (const auto &n : elements) {
+      if (queryFunction(std::ref(*(n.second.get()))))
+        results.push_back(std::ref(*(n.second.get())));
+    }
+    return results;
+  }
+
+  /**
+  \brief The hasElement function returns a true or false value if the
+  index is found within the index. This may be used to avoid possible
+  exceptions.
+  */
+  bool viewManager::hasElement(const std::string &key) {
+    auto it = indexedElements.find(key);
+    return it != indexedElements.end();
+  }
+  /** @}*/
+
+  Element::iterator &Element::iterator::operator=(Element *pNode) {
+    this->m_pCurrentNode = pNode;
+    return *this;
+  }
+
+  // Prefix ++ overload
+  Element::iterator &Element::iterator::operator++() {
+    if (m_pCurrentNode)
+      m_pCurrentNode = m_pCurrentNode->m_nextSibling;
+    return *this;
+  }
+
+  // Postfix ++ overload, AFM - is the ++ in front of * a BUG?
+  Element::iterator Element::iterator::operator++(int) {
+    iterator it = *this;
+    ++*this;
+    return it;
+  }
+
+  // Prefix ++ overload
+  Element::iterator &Element::iterator::operator--() {
+    if (m_pCurrentNode)
+      m_pCurrentNode = m_pCurrentNode->m_previousSibling;
+    return *this;
+  }
+
+  bool Element::iterator::operator!=(const Element::iterator &it) {
+    return m_pCurrentNode != it.m_pCurrentNode;
+  }
+
+  Element &Element::iterator::operator*() { return *m_pCurrentNode; }
+
+  Element::iterator Element::iterator::begin() {
+    return Element::iterator(m_pCurrentNode->m_firstChild);
+  }
+
+  Element::iterator Element::iterator::end() {
+    return Element::iterator(nullptr);
+  }
+
+  /**
+  \internal
+  \brief copy constructor
+  */
+  viewManager::Element::Element(const Element &other) {
+
+    m_self = other.m_self;
+    m_parent = other.m_parent;
+    m_firstChild = other.m_firstChild;
+    m_lastChild = other.m_lastChild;
+    m_nextChild = other.m_nextChild;
+    m_previousChild = other.m_previousChild;
+    m_nextSibling = other.m_nextSibling;
+    m_previousSibling = other.m_previousSibling;
+    m_childCount = other.m_childCount;
+    attributes = other.attributes;
+    styles = other.styles;
+  }
+
+  /**
+  \internal
+  \brief move constructor
+  */
+  viewManager::Element::Element(Element && other) noexcept {
+
+    m_self = other.m_self;
+    m_parent = other.m_parent;
+    m_firstChild = other.m_firstChild;
+    m_lastChild = other.m_lastChild;
+    m_nextChild = other.m_nextChild;
+    m_previousChild = other.m_previousChild;
+    m_nextSibling = other.m_nextSibling;
+    m_previousSibling = other.m_previousSibling;
+    m_childCount = other.m_childCount;
+    attributes = std::move(other.attributes);
+    styles = std::move(other.styles);
+  }
+
+  /**
+  \internal
+  \brief copy assignment operator
+  */
+  Element &viewManager::Element::operator=(const Element &other) {
+
+    // Self-assignment detection
+    if (&other == this)
+      return *this;
+    m_self = other.m_self;
+    m_parent = other.m_parent;
+    m_firstChild = other.m_firstChild;
+    m_lastChild = other.m_lastChild;
+    m_nextChild = other.m_nextChild;
+    m_previousChild = other.m_previousChild;
+    m_nextSibling = other.m_nextSibling;
+    m_previousSibling = other.m_previousSibling;
+    m_childCount = other.m_childCount;
+    attributes = other.attributes;
+    styles = other.styles;
+    return *this;
+  }
+
+  /**
+  \internal
+  \brief move assignment operator
+  */
+  Element &viewManager::Element::operator=(Element &&other) noexcept {
+
+    if (&other == this)
+      return *this;
+    m_self = other.m_self;
+    m_parent = other.m_parent;
+    m_firstChild = other.m_firstChild;
+    m_lastChild = other.m_lastChild;
+    m_nextChild = other.m_nextChild;
+    m_previousChild = other.m_previousChild;
+    m_nextSibling = other.m_nextSibling;
+    m_previousSibling = other.m_previousSibling;
+    m_childCount = other.m_childCount;
+    attributes = std::move(other.attributes);
+    styles = std::move(other.styles);
+    return *this;
+  }
+
+  /**
+    \brief
+    The function will parse the string as input searching for document tags.
+    These elements are added as children of the element for which the function
+    is invoked.
+
+    \param sMarkup a std::string containing the markup.
+    \return Element& returns the referenced element for continuation syntax.
+
+    Example
+    -------
+    \snippet examples.cpp appendChild_markup
+
+    \ref markupInputFormat
+
+  */
+  auto viewManager::Element::appendChild(
+      const std::string &sMarkup) -> Element & {
+    return (ingestMarkup(*this, sMarkup));
+  }
+
+  /**
+    \brief The function will append the given document element within
+    the parameter as a child.
+
+    \param newChild a new child element that was previously created.
+    \return Element& returns the referenced element for continuation syntax.
+
+    Example
+    -------
+    \snippet examples.cpp appendChild_element
+  */
+  auto viewManager::Element::appendChild(Element & newChild) -> Element & {
+    newChild.m_parent = this;
+    newChild.m_previousSibling = m_lastChild;
+
+    if (!m_firstChild)
+      m_firstChild = newChild.m_self;
+
+    if (m_lastChild)
+      m_lastChild->m_nextSibling = newChild.m_self;
+
     m_lastChild = newChild.m_self;
-  }
-  m_childCount++;
-  return newChild;
-}
+    m_childCount++;
 
-/**
-\brief replaces the child with the new one specified.
-\details The function replaces the reference child with the new one
-selected. The ne child should be within the first parameter while the second
-parameter should contain an existing child. When the oldChild is replaced,
-it is removed from the indexBy list and its memory is freed.
-
-\param Element& newChild a newly created child.
-\param std::string& sID an existing child that is to be replaced.
-
-Example
--------
-\snippet examples.cpp replaceChild_string
-*/
-auto viewManager::Element::replaceChild(Element &newChild, std::string &sID)
-    -> Element & {
-  return replaceChild(newChild, getElement(sID));
-}
-
-/**
-\brief replaces the child with the new one specified.
-\details The function replaces the reference child with the new one
-selected. The new child should be within the first parameter while the
-second parameter should contain an existing child. When the oldChild is
-replaced, it is removed from the indexBy list and its memory is freed.
-
-\param Element& newChild a newly created child.
-\param Element& oldChild an existing child that is to be replaced.
-
-Example
--------
-\snippet examples.cpp replaceChild
-*/
-auto viewManager::Element::replaceChild(Element &newChild, Element &oldChild)
-    -> Element & {
-
-  // unattach the old one and insert the new one
-  if (oldChild.m_parent->m_firstChild == oldChild.m_self)
-    oldChild.m_parent->m_firstChild = newChild.m_self;
-
-  if (oldChild.m_parent->m_lastChild == oldChild.m_self)
-    oldChild.m_parent->m_lastChild = newChild.m_self;
-
-  if (oldChild.m_previousSibling)
-    oldChild.m_previousSibling->m_nextSibling = newChild.m_self;
-
-  if (oldChild.m_nextSibling)
-    oldChild.m_nextSibling->m_previousSibling = newChild.m_self;
-
-  newChild.m_parent = oldChild.m_parent;
-
-  // remove reference from string id indexed list
-  try {
-    indexedElements.erase(oldChild.getAttribute<indexBy>().value);
-
-  } catch (const std::exception &e) {
-    // std::cout << " Exception: " << e.what() << "\n";
+    return (newChild);
   }
 
-  // remove the element smart pointer
-  auto it = elements.find((std::size_t)oldChild.m_self);
-  if (it != elements.end())
-    elements.erase(it);
+  /**
+    \brief The function will append the given document elements within
+    the ElementList parameter as children.
 
-  return *this;
-}
+    \param elementCollection an ElementList of new child element that was
+    previously created.
 
-/**
-\brief moves the element to the specified location.
-\details The method provides a shortened call to move both coordinates
-at the same time. The objectTop and objectLeft are set. The method accepts
-numerical values and only sets the value of the attribute. It does not
-change the numerical format of the underlying attribute values.
+    \return Element& returns the referenced element for continuation syntax.
 
-Example
--------
-\snippet examples.cpp move
-*/
-auto viewManager::Element::move(const double t, const double l) -> Element & {
-  getAttribute<objectTop>().value = t;
-  getAttribute<objectLeft>().value = l;
-  return *this;
-}
-
-/**
-\brief resizes the element
-\details The method provides a shortened call to resize an element.
-The objectWidth and objectHeight are set at the same time. The method
-accepts numerical values and only sets the value of the attribute. It does
-not change the numerical format of the underlying attribute values.
-
-Example
--------
-\snippet examples.cpp resize
-*/
-auto viewManager::Element::resize(const double w, const double h) -> Element & {
-  getAttribute<objectWidth>().value = w;
-  getAttribute<objectHeight>().value = h;
-  return *this;
-}
-
-/**
-\brief removes the element from the document tree and free the memory
-associated.
-
-\details The remove method provides an easy method to delete an
-object from the document hierarchy. The method does not provide continuation
-syntax as after the call is complete, all memory associated with the object
-will be freed. The indexBy list is also modified to update the change.
-
-Example
--------
-\snippet examples.cpp remove
-*/
-void viewManager::Element::remove(void) {
-  // recursively remove all children
-  removeChildren();
-
-  // update tree linkage
-  if (m_parent && m_parent->m_firstChild == m_self)
-    m_parent->m_firstChild = m_nextSibling;
-
-  if (m_parent && m_parent->m_lastChild == m_self)
-    m_parent->m_lastChild = m_previousSibling;
-
-  if (m_nextSibling)
-    m_nextSibling->m_previousSibling = m_previousSibling;
-
-  if (m_previousSibling)
-    m_previousSibling->m_nextSibling = m_nextSibling;
-
-  // remove reference from string id indexed list
-  try {
-    indexedElements.erase(getAttribute<indexBy>().value);
-
-  } catch (const std::exception &e) {
-    // std::cout << " Exception: " << e.what() << "\n";
+    Example
+    -------
+    \snippet examples.cpp appendChild_elementlist
+  */
+  auto viewManager::Element::appendChild(
+      const ElementList &elementCollection) -> Element & {
+    for (auto e : elementCollection) {
+      appendChild(e.get());
+    }
+    return (*this);
   }
 
-  // free smart pointer
-  auto it = elements.find((std::size_t)m_self);
-  if (it != elements.end())
-    elements.erase(it);
+  /**
+    \brief The function will append the given markup content as a sibling.
 
-  return;
-}
+    \param elementCollection an ElementList of new child element that was
+    previously created.
 
-/**
-\brief removes a child element from the list and free the associated memory.
-\param std::string& isID is an existing child of the referenced element to
-remove.
+    \return Element& returns the referenced element for continuation syntax.
 
-\details The removeChild destroys an existing child element of a document
-tree. After the function completes, all associated reference within the
-system will be discontinued. This includes the smart pointer and the indexBy
-list.
+    Example
+    -------
+    \snippet examples.cpp append_markup
 
-\exception std::invalid_argument may be thrown if the element is not found
-by the given id or the referenced element is not a child.
+    \ref markupInputFormat
 
-Example
--------
-\snippet examples.cpp removeChild_string
-*/
-auto viewManager::Element::removeChild(std::string &sID) -> Element & {
-  return removeChild(getElement(sID));
-}
 
-/**
-\brief removes a child element from the list and free the associated memory.
-\param Element& oldChild is an existing child of the referenced element to
-remove.
-
-\details The removeChild destroys an existing child element of a document
-tree. After the function completes, all associated reference within the
-system will be discontinued. This includes the smart pointer and the indexBy
-list.
-
-\exception std::invalid_argument may be thrown if the element is not a
-child. Example
--------
-\snippet examples.cpp removeChild
-*/
-auto viewManager::Element::removeChild(Element &oldChild) -> Element & {
-  // only remove children that are attached to the object
-  if (oldChild.m_parent != m_self) {
-    std::string info = "Referenced element is not a child.";
-    throw std::invalid_argument(info);
+  */
+  auto viewManager::Element::append(const std::string &sMarkup) -> Element & {
+    Element *base = this->m_parent;
+    if (base == nullptr)
+      base = this;
+    return (ingestMarkup(*base, sMarkup));
   }
 
-  // recursively remove children
-  auto pItem = oldChild.m_firstChild;
-  while (pItem) {
-    pItem->removeChild(*pItem);
-    pItem = pItem->m_nextSibling;
+  /**
+    \brief The function will append the given element as a sibling.
+
+    \return Element& returns the referenced element for continuation syntax.
+
+    Example
+    -------
+    \snippet examples.cpp append_element
+
+  */
+  auto viewManager::Element::append(Element & sibling) -> Element & {
+    m_nextSibling = sibling.m_self;
+    sibling.m_parent = this->m_parent;
+    sibling.m_previousSibling = this;
+
+    if (!this->m_parent->m_firstChild)
+      this->m_parent->m_firstChild = sibling.m_self;
+
+    this->m_parent->m_lastChild = sibling.m_self;
+
+    this->m_parent->m_childCount++;
+    return (sibling);
   }
 
-  // modify tree linkage
-  if (m_firstChild == oldChild.m_self) {
-    m_firstChild = oldChild.m_nextSibling;
+  /**
+    \brief The function will append the collection of elements as a
+    siblings.
+
+    \param elementCollection an ElementList of new child element that was
+    previously created.
+
+    \return Element& returns the referenced element for continuation syntax.
+
+    Example
+    -------
+    \snippet examples.cpp append_elementlist
+  */
+  auto viewManager::Element::append(ElementList &
+                                    elementCollection) -> Element & {
+    for (auto &e : elementCollection)
+      append(e);
+    return (*this);
   }
 
-  if (m_lastChild == oldChild.m_self) {
-    m_lastChild = oldChild.m_previousSibling;
+  /**
+  \brief The function sets the given attribute inside the elements indexed
+  map. Settings are filtered on specific types to determine if it is a true
+  attribute or one that is filtered to be a compound. Compound attributes
+  require other operations such as data insertion into the data property or
+  using an official attribute object where only an enumeration value is given.
+
+  \param
+  setting an attribute.
+
+  The following are supported filtered types:
+  - char
+  - double
+  - float
+  - int
+  - std::string
+  - const char *
+  - std::vector<char>
+  - std::vector<double>
+  - std::vector<float>
+  - std::vector<int>
+  - std::vector<std::string>
+  - std::vector<std::vector<std::string>>
+  - std::vector<std::vector<std::pair<int, std::string>>>
+  - std::vector<std::vector<std::pair<int, std::string>>>
+
+  Example
+  -------
+  \snippet examples.cpp setAttribute_base
+
+  */
+  Element &viewManager::Element::setAttribute(const std::any &paramSetting) {
+
+    std::any setting = paramSetting;
+    /**
+    \internal
+    \enum _enumTypeFilter
+    */
+    enum _enumTypeFilter {
+      dt_char,
+      dt_double,
+      dt_float,
+      dt_int,
+      dt_std_string,
+      dt_const_char,
+      dt_vector_char,
+      dt_vector_double,
+      dt_vector_float,
+      dt_vector_int,
+      dt_vector_string,
+      dt_vector_vector_string,
+      dt_vector_pair_int_string,
+      dt_indexBy,
+      dt_display_enum,
+      dt_position_enum,
+      dt_textAlignment_enum,
+      dt_borderStyle_enum,
+      dt_listStyleType_enum,
+
+      dt_nonFiltered
+    };
+    // filter map
+    static std::unordered_map<size_t, _enumTypeFilter> _umapTypeFilter = {
+        {std::type_index(typeid(char)).hash_code(), dt_char},
+        {std::type_index(typeid(double)).hash_code(), dt_double},
+        {std::type_index(typeid(float)).hash_code(), dt_float},
+        {std::type_index(typeid(int)).hash_code(), dt_int},
+        {std::type_index(typeid(std::string)).hash_code(), dt_std_string},
+        {std::type_index(typeid(const char *)).hash_code(), dt_const_char},
+        {std::type_index(typeid(std::vector<char>)).hash_code(),
+         dt_vector_char},
+        {std::type_index(typeid(std::vector<double>)).hash_code(),
+         dt_vector_double},
+        {std::type_index(typeid(std::vector<float>)).hash_code(),
+         dt_vector_float},
+        {std::type_index(typeid(std::vector<int>)).hash_code(), dt_vector_int},
+        {std::type_index(typeid(std::vector<std::string>)).hash_code(),
+         dt_vector_string},
+        {std::type_index(typeid(std::vector<std::vector<std::string>>))
+             .hash_code(),
+         dt_vector_vector_string},
+        {std::type_index(
+             typeid(std::vector<std::vector<std::pair<int, std::string>>>))
+             .hash_code(),
+         dt_vector_pair_int_string},
+        {std::type_index(typeid(indexBy)).hash_code(), dt_indexBy},
+        {std::type_index(typeid(display::optionEnum)).hash_code(),
+         dt_display_enum},
+        {std::type_index(typeid(position::optionEnum)).hash_code(),
+         dt_position_enum},
+        {std::type_index(typeid(textAlignment::optionEnum)).hash_code(),
+         dt_textAlignment_enum},
+        {std::type_index(typeid(borderStyle::optionEnum)).hash_code(),
+         dt_borderStyle_enum},
+        {std::type_index(typeid(listStyleType::optionEnum)).hash_code(),
+         dt_listStyleType_enum}
+
+    };
+    // set search result defaults for not found in filter
+    _enumTypeFilter dtFilter = dt_nonFiltered;
+    bool bSaveInMap = false;
+    auto it = _umapTypeFilter.find(setting.type().hash_code());
+    if (it != _umapTypeFilter.end())
+      dtFilter = it->second;
+
+    /* filter these types specifically and do not store them in the map.
+    these items change the dataAdaptor. This creates a more usable
+    syntax for population of large and small data within the
+    simple initializer list format given within the attribute list.*/
+    switch (dtFilter) {
+    case dt_char: {
+      auto v = std::any_cast<char>(setting);
+      data<char>() = std::vector<char>{v};
+    } break;
+    case dt_double: {
+      auto v = std::any_cast<double>(setting);
+      data<double>() = std::vector<double>{v};
+    } break;
+    case dt_float: {
+      auto v = std::any_cast<float>(setting);
+      data<float>() = std::vector<float>{v};
+    } break;
+    case dt_int: {
+      auto v = std::any_cast<int>(setting);
+      data<int>() = std::vector<int>{v};
+    } break;
+    case dt_const_char: {
+      auto v = std::any_cast<const char *>(setting);
+      data<std::string>() = std::vector<std::string>{v};
+    } break;
+    case dt_std_string: {
+      auto v = std::any_cast<std::string>(setting);
+      data<std::string>() = std::vector<std::string>{v};
+    } break;
+    case dt_vector_char: {
+      auto v = std::any_cast<std::vector<char>>(setting);
+      data<char>() = v;
+    } break;
+    case dt_vector_double: {
+      auto v = std::any_cast<std::vector<double>>(setting);
+      data<double>() = v;
+    } break;
+    case dt_vector_float: {
+      auto v = std::any_cast<std::vector<float>>(setting);
+      data<float>() = v;
+    } break;
+    case dt_vector_int: {
+      auto v = std::any_cast<std::vector<int>>(setting);
+      data<int>() = v;
+    } break;
+    case dt_vector_string: {
+      auto v = std::any_cast<std::vector<std::string>>(setting);
+      data<std::string>() = v;
+    } break;
+    case dt_vector_vector_string: {
+      auto v = std::any_cast<std::vector<std::vector<std::string>>>(setting);
+      data<std::vector<std::string>>() = v;
+    } break;
+    case dt_vector_pair_int_string: {
+      auto v = std::any_cast<std::vector<std::pair<int, std::string>>>(setting);
+      data<std::pair<int, std::string>>() = v;
+    } break;
+    // attributes stored in map but filtered for processing.
+    case dt_indexBy: {
+      updateIndexBy(std::any_cast<indexBy>(setting));
+      bSaveInMap = true;
+    } break;
+    case dt_display_enum: {
+      setting = display{std::any_cast<display::optionEnum>(paramSetting)};
+      bSaveInMap = true;
+    } break;
+    case dt_position_enum: {
+      setting = position{std::any_cast<position::optionEnum>(paramSetting)};
+      bSaveInMap = true;
+    } break;
+    case dt_textAlignment_enum: {
+      setting =
+          textAlignment{std::any_cast<textAlignment::optionEnum>(paramSetting)};
+      bSaveInMap = true;
+    } break;
+    case dt_borderStyle_enum: {
+      setting =
+          borderStyle{std::any_cast<borderStyle::optionEnum>(paramSetting)};
+      bSaveInMap = true;
+    } break;
+    case dt_listStyleType_enum: {
+      setting =
+          listStyleType{std::any_cast<listStyleType::optionEnum>(paramSetting)};
+      bSaveInMap = true;
+    } break;
+
+    // other items are not filtered, so just pass through to storage.
+    case dt_nonFiltered: {
+      bSaveInMap = true;
+    } break;
+    }
+
+    if (bSaveInMap)
+      attributes[std::type_index(setting.type())] = setting;
+    return *this;
   }
 
-  if (oldChild.m_previousSibling)
-    oldChild.m_previousSibling->m_nextSibling = oldChild.m_nextSibling;
-
-  if (oldChild.m_nextSibling)
-    oldChild.m_nextSibling->m_previousSibling = oldChild.m_previousSibling;
-
-  // update string index list
-  try {
-    indexedElements.erase(oldChild.getAttribute<indexBy>().value);
-
-  } catch (const std::exception &e) {
-    // std::cout << " Exception: " << e.what() << "\n";
+  /**
+  \internal
+  \brief The attribute being set can be contained in an array of std::any
+  Typically the caller does not use this function but relies on the
+  varodic template version.
+  */
+  Element &viewManager::Element::setAttribute(
+      const std::vector<std::any> &attribs) {
+    for (auto n : attribs)
+      setAttribute(n);
+    return *this;
   }
 
-  // free memory
-  auto it = elements.find((std::size_t)oldChild.m_self);
-  if (it != elements.end())
-    elements.erase(it);
+  /**
+  \internal
 
-  m_childCount--;
-  return *this;
-}
+  \brief updates the id within the index if the item has changed.
 
-/**
-\brief removes all children from the document tree associated with the given
-element and free the memory.
-\details The removeChild is a bulk operation function in which all
-child document elements of the referenced element is freed. After the
-function completes, all associated references will not longer be tracked
-within the system.
+  */
+  void viewManager::Element::updateIndexBy(const indexBy &setting) {
+    // changing id just changes
+    // the key in elementById
+    // map
+    std::string oldKey = "";
+    const std::string &newKey = setting.value;
+    auto it = attributes.find(std::type_index(typeid(indexBy)));
 
-Example
--------
-\snippet examples.cpp removeChildren
+    // get the key of the old id
+    if (it != attributes.end()) {
+      oldKey = std::any_cast<indexBy>(it->second).value;
+    }
 
-*/
-auto viewManager::Element::removeChildren(void) -> Element & {
+    // case a. key is not blank,
+    // yet it is the same value
+    // as the old key therefore
+    // there is no change.
+    if (!oldKey.empty() && oldKey == newKey) {
+      return;
+      // case b. remap just the
+      // key
+    } else if (!oldKey.empty() && !newKey.empty()) {
+      auto nodeHandler = indexedElements.extract(oldKey);
+      nodeHandler.key() = newKey;
+      indexedElements.insert(std::move(nodeHandler));
+      // case c. remove key from
+      // map
+    } else if (!oldKey.empty() && newKey.empty()) {
+      indexedElements.erase(oldKey);
+      // case d. did not exist
+      // before, add key to map
+    } else if (!newKey.empty()) {
+      indexedElements.insert({newKey, std::ref(*this)});
+    }
+    return;
+  }
 
-  auto pItem = m_firstChild;
-  while (pItem) {
-    std::size_t storageKey = (std::size_t)pItem;
-    if (pItem->m_childCount)
-      pItem->removeChildren();
+  /**
+  \brief inserts the given element before the named second parameter.
+  The version of the function is useful when the element is indexed by a
+  string and a reference to it does not exist.
+
+  \param Element &newChild
+
+  \param std::string sID
+
+  Example
+  -------
+  \snippet examples.cpp insertBefore_string
+  */
+  auto viewManager::Element::insertBefore(Element & newChild,
+                                          std::string & sID) -> Element & {
+    return insertBefore(newChild, getElement(sID));
+  }
+
+  /**
+  \brief inserts the given element before the named second parameter.
+
+  \param Element &newChild
+
+  \param Element &existingElement
+
+  Example
+  -------
+  \snippet examples.cpp insertBefore
+  */
+  auto viewManager::Element::insertBefore(
+      Element & newChild, Element & existingElement) -> Element & {
+    Element &child = newChild;
+    // maintain tree structure
+    child.m_parent = existingElement.m_parent;
+    child.m_nextSibling = existingElement.m_self;
+    child.m_previousSibling = existingElement.m_previousSibling;
+    existingElement.m_previousSibling = child.m_self;
+    // provide linkage
+    if (child.m_previousSibling)
+      child.m_previousSibling->m_nextSibling = child.m_self;
+    if (child.m_nextSibling)
+      child.m_nextSibling->m_previousSibling = child.m_self;
+    // case where insert is at the first
+    if (existingElement.m_self == m_firstChild) {
+      m_firstChild = child.m_self;
+    }
+    m_childCount++;
+    return child;
+  }
+
+  /**
+  \brief inserts the given element after the named second parameter element.
+  The version of the function is useful when the element is indexed by a
+  string and a reference to it does not exist.
+
+  \param Element &newChild
+
+  \param std::string sID
+
+  Example
+  -------
+  \snippet examples.cpp insertAfter_string
+  */
+  auto viewManager::Element::insertAfter(Element & newChild,
+                                         std::string & sID) -> Element & {
+    return insertAfter(newChild, getElement(sID));
+  }
+
+  /**
+  \brief inserts the given element after the named second parameter element.
+
+  \param Element &newChild
+
+  \param Element &existingElement
+
+  Example
+  -------
+  \snippet examples.cpp insertAfter
+  */
+  auto viewManager::Element::insertAfter(
+      Element & newChild, Element & existingElement) -> Element & {
+
+    // maintain tree structure
+    newChild.m_parent = existingElement.m_parent;
+    newChild.m_nextSibling = existingElement.m_previousSibling;
+    newChild.m_previousSibling = existingElement.m_self;
+    if (existingElement.m_nextSibling)
+      existingElement.m_nextSibling->m_previousSibling = newChild.m_self;
+
+    existingElement.m_nextSibling = newChild.m_self;
+
+    // case where insert is at the end
+    if (existingElement.m_self == m_lastChild) {
+      m_lastChild = newChild.m_self;
+    }
+    m_childCount++;
+    return newChild;
+  }
+
+  /**
+  \brief replaces the child with the new one specified.
+  \details The function replaces the reference child with the new one
+  selected. The ne child should be within the first parameter while the second
+  parameter should contain an existing child. When the oldChild is replaced,
+  it is removed from the indexBy list and its memory is freed.
+
+  \param Element& newChild a newly created child.
+  \param std::string& sID an existing child that is to be replaced.
+
+  Example
+  -------
+  \snippet examples.cpp replaceChild_string
+  */
+  auto viewManager::Element::replaceChild(Element & newChild,
+                                          std::string & sID) -> Element & {
+    return replaceChild(newChild, getElement(sID));
+  }
+
+  /**
+  \brief replaces the child with the new one specified.
+  \details The function replaces the reference child with the new one
+  selected. The new child should be within the first parameter while the
+  second parameter should contain an existing child. When the oldChild is
+  replaced, it is removed from the indexBy list and its memory is freed.
+
+  \param Element& newChild a newly created child.
+  \param Element& oldChild an existing child that is to be replaced.
+
+  Example
+  -------
+  \snippet examples.cpp replaceChild
+  */
+  auto viewManager::Element::replaceChild(Element & newChild,
+                                          Element & oldChild) -> Element & {
+
+    // unattach the old one and insert the new one
+    if (oldChild.m_parent->m_firstChild == oldChild.m_self)
+      oldChild.m_parent->m_firstChild = newChild.m_self;
+
+    if (oldChild.m_parent->m_lastChild == oldChild.m_self)
+      oldChild.m_parent->m_lastChild = newChild.m_self;
+
+    if (oldChild.m_previousSibling)
+      oldChild.m_previousSibling->m_nextSibling = newChild.m_self;
+
+    if (oldChild.m_nextSibling)
+      oldChild.m_nextSibling->m_previousSibling = newChild.m_self;
+
+    newChild.m_parent = oldChild.m_parent;
+
+    // remove reference from string id indexed list
+    try {
+      indexedElements.erase(oldChild.getAttribute<indexBy>().value);
+
+    } catch (const std::exception &e) {
+      // std::cout << " Exception: " << e.what() << "\n";
+    }
+
+    // remove the element smart pointer
+    auto it = elements.find((std::size_t)oldChild.m_self);
+    if (it != elements.end())
+      elements.erase(it);
+
+    return *this;
+  }
+
+  /**
+  \brief moves the element to the specified location.
+  \details The method provides a shortened call to move both coordinates
+  at the same time. The objectTop and objectLeft are set. The method accepts
+  numerical values and only sets the value of the attribute. It does not
+  change the numerical format of the underlying attribute values.
+
+  Example
+  -------
+  \snippet examples.cpp move
+  */
+  auto viewManager::Element::move(const double t, const double l) -> Element & {
+    getAttribute<objectTop>().value = t;
+    getAttribute<objectLeft>().value = l;
+    return *this;
+  }
+
+  /**
+  \brief resizes the element
+  \details The method provides a shortened call to resize an element.
+  The objectWidth and objectHeight are set at the same time. The method
+  accepts numerical values and only sets the value of the attribute. It does
+  not change the numerical format of the underlying attribute values.
+
+  Example
+  -------
+  \snippet examples.cpp resize
+  */
+  auto viewManager::Element::resize(const double w,
+                                    const double h) -> Element & {
+    getAttribute<objectWidth>().value = w;
+    getAttribute<objectHeight>().value = h;
+    return *this;
+  }
+
+  /**
+  \brief removes the element from the document tree and free the memory
+  associated.
+
+  \details The remove method provides an easy method to delete an
+  object from the document hierarchy. The method does not provide continuation
+  syntax as after the call is complete, all memory associated with the object
+  will be freed. The indexBy list is also modified to update the change.
+
+  Example
+  -------
+  \snippet examples.cpp remove
+  */
+  void viewManager::Element::remove(void) {
+    // recursively remove all children
+    removeChildren();
+
+    // update tree linkage
+    if (m_parent && m_parent->m_firstChild == m_self)
+      m_parent->m_firstChild = m_nextSibling;
+
+    if (m_parent && m_parent->m_lastChild == m_self)
+      m_parent->m_lastChild = m_previousSibling;
+
+    if (m_nextSibling)
+      m_nextSibling->m_previousSibling = m_previousSibling;
+
+    if (m_previousSibling)
+      m_previousSibling->m_nextSibling = m_nextSibling;
+
+    // remove reference from string id indexed list
+    try {
+      indexedElements.erase(getAttribute<indexBy>().value);
+
+    } catch (const std::exception &e) {
+      // std::cout << " Exception: " << e.what() << "\n";
+    }
+
+    // free smart pointer
+    auto it = elements.find((std::size_t)m_self);
+    if (it != elements.end())
+      elements.erase(it);
+
+    return;
+  }
+
+  /**
+  \brief removes a child element from the list and free the associated memory.
+  \param std::string& isID is an existing child of the referenced element to
+  remove.
+
+  \details The removeChild destroys an existing child element of a document
+  tree. After the function completes, all associated reference within the
+  system will be discontinued. This includes the smart pointer and the indexBy
+  list.
+
+  \exception std::invalid_argument may be thrown if the element is not found
+  by the given id or the referenced element is not a child.
+
+  Example
+  -------
+  \snippet examples.cpp removeChild_string
+  */
+  auto viewManager::Element::removeChild(std::string & sID) -> Element & {
+    return removeChild(getElement(sID));
+  }
+
+  /**
+  \brief removes a child element from the list and free the associated memory.
+  \param Element& oldChild is an existing child of the referenced element to
+  remove.
+
+  \details The removeChild destroys an existing child element of a document
+  tree. After the function completes, all associated reference within the
+  system will be discontinued. This includes the smart pointer and the indexBy
+  list.
+
+  \exception std::invalid_argument may be thrown if the element is not a
+  child. Example
+  -------
+  \snippet examples.cpp removeChild
+  */
+  auto viewManager::Element::removeChild(Element & oldChild) -> Element & {
+    // only remove children that are attached to the object
+    if (oldChild.m_parent != m_self) {
+      std::string info = "Referenced element is not a child.";
+      throw std::invalid_argument(info);
+    }
+
+    // recursively remove children
+    auto pItem = oldChild.m_firstChild;
+    while (pItem) {
+      pItem->removeChild(*pItem);
+      pItem = pItem->m_nextSibling;
+    }
+
+    // modify tree linkage
+    if (m_firstChild == oldChild.m_self) {
+      m_firstChild = oldChild.m_nextSibling;
+    }
+
+    if (m_lastChild == oldChild.m_self) {
+      m_lastChild = oldChild.m_previousSibling;
+    }
+
+    if (oldChild.m_previousSibling)
+      oldChild.m_previousSibling->m_nextSibling = oldChild.m_nextSibling;
+
+    if (oldChild.m_nextSibling)
+      oldChild.m_nextSibling->m_previousSibling = oldChild.m_previousSibling;
 
     // update string index list
     try {
-      indexedElements.erase(pItem->getAttribute<indexBy>().value);
+      indexedElements.erase(oldChild.getAttribute<indexBy>().value);
 
     } catch (const std::exception &e) {
       // std::cout << " Exception: " << e.what() << "\n";
     }
 
     // free memory
-    pItem = pItem->m_nextSibling;
-    auto it = elements.find(storageKey);
+    auto it = elements.find((std::size_t)oldChild.m_self);
     if (it != elements.end())
       elements.erase(it);
+
+    m_childCount--;
+    return *this;
   }
 
-  // update linkage
-  m_firstChild = nullptr;
-  m_lastChild = nullptr;
-  m_childCount = 0;
+  /**
+  \brief removes all children from the document tree associated with the given
+  element and free the memory.
+  \details The removeChild is a bulk operation function in which all
+  child document elements of the referenced element is freed. After the
+  function completes, all associated references will not longer be tracked
+  within the system.
 
-  return *this;
-}
+  Example
+  -------
+  \snippet examples.cpp removeChildren
 
-/**
-\brief The function removes all children and data from the
-the element. All memory for each of the elements is freed.
+  */
+  auto viewManager::Element::removeChildren(void) -> Element & {
 
-\details The clear method is a bulk operation that removes
-all associated data within the public data members as well as
-all manually document elements. It should be noted that
-all of the data() adapters are erased.
+    auto pItem = m_firstChild;
+    while (pItem) {
+      std::size_t storageKey = (std::size_t)pItem;
+      if (pItem->m_childCount)
+        pItem->removeChildren();
 
-Example
--------
-\snippet examples.cpp clear
-*/
-auto viewManager::Element::clear(void) -> Element & {
-  // delete all items in the dat vector
-  auto n = m_usageAdaptorMap.begin();
-  while (n != m_usageAdaptorMap.end())
-    n = m_usageAdaptorMap.erase(n);
+      // update string index list
+      try {
+        indexedElements.erase(pItem->getAttribute<indexBy>().value);
 
-  removeChildren();
-  return *this;
-}
+      } catch (const std::exception &e) {
+        // std::cout << " Exception: " << e.what() << "\n";
+      }
 
-/**
-\internal
+      // free memory
+      pItem = pItem->m_nextSibling;
+      auto it = elements.find(storageKey);
+      if (it != elements.end())
+        elements.erase(it);
+    }
 
-\brief The function maps the event id to the appropriate vector.
-This is kept statically here for resource management.
+    // update linkage
+    m_firstChild = nullptr;
+    m_lastChild = nullptr;
+    m_childCount = 0;
 
-\param eventType evtType
-*/
-vector<eventHandler> &viewManager::Element::getEventVector(eventType evtType) {
-  static unordered_map<eventType, vector<eventHandler> &> eventTypeMap = {
-      {eventType::focus, onfocus},
-      {eventType::blur, onblur},
-      {eventType::resize, onresize},
-      {eventType::keydown, onkeydown},
-      {eventType::keyup, onkeyup},
-      {eventType::keypress, onkeypress},
-      {eventType::mouseenter, onmouseenter},
-      {eventType::mouseleave, onmouseleave},
-      {eventType::mousemove, onmousemove},
-      {eventType::mousedown, onmousedown},
-      {eventType::mouseup, onmouseup},
-      {eventType::click, onclick},
-      {eventType::dblclick, ondblclick},
-      {eventType::contextmenu, oncontextmenu},
-      {eventType::wheel, onwheel}};
-  auto it = eventTypeMap.find(evtType);
-  return it->second;
-}
-/**
-\internal
-\brief
-The function will return the address of a std::function for the purposes
-of equality testing. Function from
-https://stackoverflow.com/questions/20833453/comparing-stdfunctions-for-equality
-
-*/
-template <typename T, typename... U>
-size_t getAddress(std::function<T(U...)> f) {
-  typedef T(fnType)(U...);
-  fnType **fnPointer = f.template target<fnType *>();
-  return (size_t)*fnPointer;
-}
-
-/**
-\brief adds a new event handler to the element.
-\param eventType - the type of event to associate the handler with.
-\param eventHandler - the std::function to invoke when the event occurs
-within the system.
-
-\details The addListener function provides an method for attaching
-an event handler with a event of the referenced element. The
-method accepts a function as its eventHandler. This is a std::function
-which may be a lambda, or a function pointer. The following events
-are accepted:
-
-\copydoc viewManager::eventType
-
-Example
--------
-\snippet examples.cpp addListener
-
-*/
-auto viewManager::Element::addListener(eventType evtType,
-                                       eventHandler evtHandler) -> Element & {
-  getEventVector(evtType).push_back(evtHandler);
-  return *this;
-}
-
-/**
-
-\brief The function is invoked when an event occurrs. Normally this occurs
-from the platform device. However, this may be invoked by the soft
-generation of events.
-
-*/
-void viewManager::Element::dispatch(const event &e) {
-  auto &v = getEventVector(e.evtType);
-  for (auto &fn : v)
-    fn(e);
-}
-
-/**
-\brief removes dispatching of an event to the caller.
-<summary>The function will remove an event listener from the list of
-events to receive messages.</summary>
-
-\param evtType is the type of event to remove.</param>
-\param evtHandler is the event to remove.?</param>
-
-Example
--------
-\snippet examples.cpp removeListener
-
-*/
-auto viewManager::Element::removeListener(eventType evtType,
-                                          eventHandler evtHandler)
-    -> Element & {
-  auto eventList = getEventVector(evtType);
-  auto it = eventList.begin();
-  while (it != eventList.end()) {
-    if (getAddress(*it) == getAddress(evtHandler))
-      it = eventList.erase(it);
-    else
-      it++;
+    return *this;
   }
-  return *this;
-}
+
+  /**
+  \brief The function removes all children and data from the
+  the element. All memory for each of the elements is freed.
+
+  \details The clear method is a bulk operation that removes
+  all associated data within the public data members as well as
+  all manually document elements. It should be noted that
+  all of the data() adapters are erased.
+
+  Example
+  -------
+  \snippet examples.cpp clear
+  */
+  auto viewManager::Element::clear(void) -> Element & {
+    // delete all items in the dat vector
+    auto n = m_usageAdaptorMap.begin();
+    while (n != m_usageAdaptorMap.end())
+      n = m_usageAdaptorMap.erase(n);
+
+    removeChildren();
+    return *this;
+  }
+
+  /**
+  \internal
+
+  \brief The function maps the event id to the appropriate vector.
+  This is kept statically here for resource management.
+
+  \param eventType evtType
+  */
+  vector<eventHandler> &viewManager::Element::getEventVector(
+      eventType evtType) {
+    static unordered_map<eventType, vector<eventHandler> &> eventTypeMap = {
+        {eventType::focus, onfocus},
+        {eventType::blur, onblur},
+        {eventType::resize, onresize},
+        {eventType::keydown, onkeydown},
+        {eventType::keyup, onkeyup},
+        {eventType::keypress, onkeypress},
+        {eventType::mouseenter, onmouseenter},
+        {eventType::mouseleave, onmouseleave},
+        {eventType::mousemove, onmousemove},
+        {eventType::mousedown, onmousedown},
+        {eventType::mouseup, onmouseup},
+        {eventType::click, onclick},
+        {eventType::dblclick, ondblclick},
+        {eventType::contextmenu, oncontextmenu},
+        {eventType::wheel, onwheel}};
+    auto it = eventTypeMap.find(evtType);
+    return it->second;
+  }
+  /**
+  \internal
+  \brief
+  The function will return the address of a std::function for the purposes
+  of equality testing. Function from
+  https://stackoverflow.com/questions/20833453/comparing-stdfunctions-for-equality
+
+  */
+  template <typename T, typename... U>
+  size_t getAddress(std::function<T(U...)> f) {
+    typedef T(fnType)(U...);
+    fnType **fnPointer = f.template target<fnType *>();
+    return (size_t)*fnPointer;
+  }
+
+  /**
+  \brief adds a new event handler to the element.
+  \param eventType - the type of event to associate the handler with.
+  \param eventHandler - the std::function to invoke when the event occurs
+  within the system.
+
+  \details The addListener function provides an method for attaching
+  an event handler with a event of the referenced element. The
+  method accepts a function as its eventHandler. This is a std::function
+  which may be a lambda, or a function pointer. The following events
+  are accepted:
+
+  \copydoc viewManager::eventType
+
+  Example
+  -------
+  \snippet examples.cpp addListener
+
+  */
+  auto viewManager::Element::addListener(eventType evtType,
+                                         eventHandler evtHandler) -> Element & {
+    getEventVector(evtType).push_back(evtHandler);
+    return *this;
+  }
+
+  /**
+
+  \brief The function is invoked when an event occurrs. Normally this occurs
+  from the platform device. However, this may be invoked by the soft
+  generation of events.
+
+  */
+  void viewManager::Element::dispatch(const event &e) {
+    auto &v = getEventVector(e.evtType);
+    for (auto &fn : v)
+      fn(e);
+  }
+
+  /**
+  \brief removes dispatching of an event to the caller.
+  <summary>The function will remove an event listener from the list of
+  events to receive messages.</summary>
+
+  \param evtType is the type of event to remove.</param>
+  \param evtHandler is the event to remove.?</param>
+
+  Example
+  -------
+  \snippet examples.cpp removeListener
+
+  */
+  auto viewManager::Element::removeListener(
+      eventType evtType, eventHandler evtHandler) -> Element & {
+    auto eventList = getEventVector(evtType);
+    auto it = eventList.begin();
+    while (it != eventList.end()) {
+      if (getAddress(*it) == getAddress(evtHandler))
+        it = eventList.erase(it);
+      else
+        it++;
+    }
+    return *this;
+  }
+
+  /**
+  \internal
+  \brief This is the main function which invokes drawing of the item and
+  its children. It is called recursively when painting needs to occur.
+  This function is used internally and is not necessary to invoke. That
+  is, system already invokes this as part of the processing stack. The
+  work performed by this routine is accomplished using the surface image.
+  */
+  void viewManager::Element::render(Visualizer::platform & device) {}
+
+  /**
+  \brief Uses the standard printf function to format the given
+  parameters with the format string. When the Boolean member
+  ingestStream is set to true, the API inserts the named
+  elements within the markup into the document along with any
+  text.
+
+  \param fmt is a printf format string. It should be a literal
+  string.
+  \param ...  is a variable argument parameter passed to the standard
+    printf function.
+
+  \code
+    vector<string> movies={"The Hulk",
+                          "Super Action Hero",
+                          "Star Invader Eclipse"};
+
+    auto& e=createElement();
+    e.ingestStream=true;
+    e.printf("The movie theatre is <blue>opened</blue> today for matinee.");
+    e.printf("Here is a list of movies: <ul>");
+
+    for(auto n : movies)
+      e.prinf("<li>%s</li>",n.c_str());
+    e.printf("</ul>");
+
+  \endcode
+
+  \note If a literal is not used for the first parameter, a warning will
+  be issued. This warning is effective because at times, it reminds the
+  developer that if the format string comes from a foreign source
+  and is not controlled, the stack may be violated.
+  \endnote
 
 
-/**
-\internal
-\brief This is the main function which invokes drawing of the item and
-its children. It is called recursively when painting needs to occur.
-This function is used internally and is not necessary to invoke. That
-is, system already invokes this as part of the processing stack. The
-work performed by this routine is accomplished using the surface image.
-*/
-void viewManager::Element::render(Visualizer::platform &device) {
-}
-
-/**
-\brief Uses the standard printf function to format the given
-parameters with the format string. When the Boolean member
-ingestStream is set to true, the API inserts the named
-elements within the markup into the document along with any
-text.
-
-\param fmt is a printf format string. It should be a literal
-string.
-\param ...  is a variable argument parameter passed to the standard
-  printf function.
-
-\code
-  vector<string> movies={"The Hulk",
-                        "Super Action Hero",
-                        "Star Invader Eclipse"};
-
-  auto& e=createElement();
-  e.ingestStream=true;
-  e.printf("The movie theatre is <blue>opened</blue> today for matinee.");
-  e.printf("Here is a list of movies: <ul>");
-
-  for(auto n : movies)
-    e.prinf("<li>%s</li>",n.c_str());
-  e.printf("</ul>");
-
-\endcode
-
-\note If a literal is not used for the first parameter, a warning will
-be issued. This warning is effective because at times, it reminds the
-developer that if the format string comes from a foreign source
-and is not controlled, the stack may be violated.
-\endnote
+  \ref markupInputFormat
 
 
-\ref markupInputFormat
-
-
-*/
-void viewManager::Element::printf(const char *fmt, ...) {
+  */
+  void viewManager::Element::printf(const char *fmt, ...) {
 #if defined(__linux__)
-  va_list ap;
-  va_start(ap, fmt);
-  char *buffer = nullptr;
+    va_list ap;
+    va_start(ap, fmt);
+    char *buffer = nullptr;
 /* These are checked with the __attribute__ setting on the function
  * declare above. Turning them off here makes it only report warnings to
  * calls of this member function and not the asprintf call. As well,
@@ -2345,299 +2363,302 @@ void viewManager::Element::printf(const char *fmt, ...) {
  * memory. It is also freed within this routine. */
 #pragma clang diagnostic ignored "-Wformat-security"
 #pragma clang diagnostic ignored "-Wformat-nonliteral"
-  vasprintf(&buffer, fmt, ap);
+    vasprintf(&buffer, fmt, ap);
 #pragma clang diagnostic warning "-Wformat-security"
 #pragma clang diagnostic warning "-Wformat-nonliteral"
 
-  // if stream ingestion is on, interprets the markup as it arrives.
-  if (ingestStream)
-    ingestMarkup(*this, buffer);
-  else
-    data().push_back(buffer);
+    // if stream ingestion is on, interprets the markup as it arrives.
+    if (ingestStream)
+      ingestMarkup(*this, buffer);
+    else
+      data().push_back(buffer);
 
-  free(buffer);
-  va_end(ap);
+    free(buffer);
+    va_end(ap);
 #elif defined(_WIN64)
-  va_list ap;
-  va_start(ap, fmt);
-  char *buffer = nullptr;
-  int len;
+    va_list ap;
+    va_start(ap, fmt);
+    char *buffer = nullptr;
+    int len;
 
-  len = _vscprintf_l(fmt, NULL, ap) + 1;
-  buffer = (char *)malloc(len * sizeof(char));
-  len = vsprintf_s(buffer, len, fmt, ap);
+    len = _vscprintf_l(fmt, NULL, ap) + 1;
+    buffer = (char *)malloc(len * sizeof(char));
+    len = vsprintf_s(buffer, len, fmt, ap);
 
-  // if stream ingestion is on, interprets the markup as it arrives.
-  if (ingestStream)
-    ingestMarkup(*this, buffer);
-  else
-    data().push_back(buffer);
+    // if stream ingestion is on, interprets the markup as it arrives.
+    if (ingestStream)
+      ingestMarkup(*this, buffer);
+    else
+      data().push_back(buffer);
 
-  free(buffer);
-  va_end(ap);
+    free(buffer);
+    va_end(ap);
 #endif
-}
-
-/**
-\internal
-\brief The ingestMarkup function provides a method to parse markup that is
-similar to HTML. The format is more restrictive in that the parser is not as
-forgiving for errors.
-
-\details
-The routine is called by the functions that allow a markup string.
-This routine uses the object factory and color map to query the
-contents of the maps.
-
-The parser context applies memory to successive calls to the function.
-This is important for functions like printf or the stream insertion
-operators so that markup gets interpreted correctly. Since there is one of
-these contexts per element, each element operates independently.
-
-The parser acts in a two phase operation, first locating each of the tags
-as markup and those that appears as tags but are not markup elements. The
-second phase builds the elements and applies the attributes to the
-elements. Since document fragments can be nested, the parser function
-maintains a stack of created elements.
-
-\ref markupInputFormat
-
-*/
-Element &viewManager::Element::ingestMarkup(Element &node,
-                                            const std::string &markup) {
-
-  static parserContext pc;
-
-  if (pc.elementStack.size() == 0)
-    pc.elementStack.push_back(node);
-
-  // pointer to the input buffer.
-  const char *p = markup.data();
-
-  // tokenize the markup string
-  for (auto ch : markup) {
-    switch (ch) {
-    case '<':
-      if (pc.sText.size() != 0) {
-        pc.parsedData.emplace_back(textData, false, pc.sText);
-        pc.sText = "";
-      }
-      pc.bAttributeList=false;
-      pc.bAttributeListValue=false;
-      pc.bSignal = true;
-      pc.bSkip = true;
-      break;
-    case ' ':
-      if (pc.bSignal && (!pc.bToken || pc.bAttributeList)) {
-        pc.bQuery = true;
-        pc.bSkip = true;
-      }
-      break;
-    case '=':
-      if (pc.bAttributeList) {
-        pc.bQuery = true;
-        pc.bSkip = true;
-      }
-      break;
-    case '>':
-      if (pc.bSignal) {
-        pc.bSignal = false;
-        pc.bToken = false;
-        pc.bSkip = true;
-        pc.bQuery = true;
-      }
-      break;
-    case '/':
-      if (pc.bSignal) {
-        pc.bTerminal = true;
-        pc.bSkip = true;
-      }
-      break;
-    }
-
-    // the query flag is on when a item has been tokenized after a signal
-    // has been found.
-    if (pc.bQuery)
-      processParseContext(pc);
-
-    if (!pc.bSkip)
-      if (pc.bSignal)
-        pc.sCapture += ch;
-      else
-        pc.sText += ch;
-
-    pc.bSkip = false;
   }
 
-  // if text exists, add as a textdata element.
-  if (pc.sText.size() != 0) {
-    pc.parsedData.emplace_back(textData, false, pc.sText);
-    pc.sText = "";
-  }
+  /**
+  \internal
+  \brief The ingestMarkup function provides a method to parse markup that is
+  similar to HTML. The format is more restrictive in that the parser is not as
+  forgiving for errors.
 
-  // second phase, iterate over the parsed context and develop the elements,
-  // color text nodes, and set attributes for the items on the stack. once
-  // items are processed, they are removed from the stack using the delete
-  // range operator, For a complete tag to exist, the end tab must also
-  // exist.
-  auto item = pc.parsedData.begin();
-  while (item != pc.parsedData.end()) {
+  \details
+  The routine is called by the functions that allow a markup string.
+  This routine uses the object factory and color map to query the
+  contents of the maps.
 
-    // if the item is processed
-    if (get<1>(*item))
-      continue;
+  The parser context applies memory to successive calls to the function.
+  This is important for functions like printf or the stream insertion
+  operators so that markup gets interpreted correctly. Since there is one of
+  these contexts per element, each element operates independently.
 
-    switch (get<0>(*item)) {
-    case element: {
-      Element &e = get<factoryLambda>(get<2>(*item))({});
-      pc.elementStack.back().get().appendChild(e);
-      pc.elementStack.push_back(e);
-      get<1>(*item) = true;
-    } break;
+  The parser acts in a two phase operation, first locating each of the tags
+  as markup and those that appears as tags but are not markup elements. The
+  second phase builds the elements and applies the attributes to the
+  elements. Since document fragments can be nested, the parser function
+  maintains a stack of created elements.
 
-    case elementTerminal: {
-      pc.elementStack.pop_back();
-      // mark as processed
-      get<1>(*item) = true;
-    } break;
+  \ref markupInputFormat
 
-    // the attribute and value are handled here together
-    case attribute: {
-      auto itAttributeValue = std::next(item, 1);
-      if (itAttributeValue != pc.parsedData.end() &&
-          get<0>(*itAttributeValue) == attributeValue) {
-        get<attributeLambda>(get<2>(*item))(
-            pc.elementStack.back(), get<string>(get<2>(*itAttributeValue)));
-        get<1>(*itAttributeValue) = true;
-        // mark as processed
-        get<1>(*item) = true;
-        item++;
-      }
+  */
+  Element &viewManager::Element::ingestMarkup(Element & node,
+                                              const std::string &markup) {
 
-    } break;
+    static parserContext pc;
 
-    case attributeSimple: {
-      get<attributeLambda>(get<2>(*item))(pc.elementStack.back(), "");
-      // mark as processed
-      get<1>(*item) = true;
-    } break;
+    if (pc.elementStack.size() == 0)
+      pc.elementStack.push_back(node);
 
-    case color: {
-      auto &e = pc.elementStack.back().get().appendChild<textNode>(
-          textColor{get<colorNF>(get<2>(*item))});
-      pc.elementStack.push_back(e);
-      get<1>(*item) = true;
-    } break;
+    // pointer to the input buffer.
+    const char *p = markup.data();
 
-    case textData: {
-      pc.elementStack.back().get().data().push_back(get<string>(get<2>(*item)));
-      get<1>(*item) = true;
-      break;
-    }
-    }
-
-    // goto next item
-    item++;
-  }
-
-  // if all items have been terminated, and only one element is on the stack
-  // it should be the node, so pop it off.
-  if (pc.elementStack.size() == 1) {
-    Element &eRet = pc.elementStack.back().get();
-    if (eRet.m_self == node.m_self)
-      pc.elementStack.pop_back();
-  }
-
-  // erase processed items when marked,
-  pc.parsedData.erase(std::remove_if(pc.parsedData.begin(), pc.parsedData.end(),
-                                     [](auto &n) { return get<1>(n); }),
-                      pc.parsedData.end());
-
-  return node;
-}
-
-/**
-\internal
-\brief The function processes one query of a parse context.
-\details The first process of the function is to transform the
-input to lowr case to ensure case insensitive comparisons. The
-pc parserContext structure operates on a stream basis. Therefore
-the logic within this function provides the pass through and control
-break logic to implement the functionality. An intersting effect
-is that at times a token must be completely found before it may be
-processed. For example the ID of a element should be sent within one
-context.
-
-*/
-void viewManager::Element::processParseContext(
-    viewManager::Element::parserContext &pc) {
-
-  string sKey = pc.sCapture;
-  std::transform(sKey.begin(), sKey.end(), sKey.begin(),
-                 [](unsigned char c) { return std::tolower(c); });
-
-  if (pc.bAttributeList && !pc.bAttributeListValue) {
-
-    // store iterator to the function
-    auto it = attributeFactory.find(sKey);
-    if (it != attributeFactory.end())
-
-      // if the attribute is a series of two tokens
-      if (get<0>(it->second)) {
-        pc.parsedData.emplace_back(attribute, false, get<1>(it->second));
-        pc.bAttributeListValue = true; // value is expected to follow.
-
-      } else {
-        pc.parsedData.emplace_back(attributeSimple, false, get<1>(it->second));
-        pc.bAttributeListValue = false;
-      }
-    pc.sCapture = "";
-    pc.bQuery = false;
-    if (!pc.bSignal)
-      pc.bToken = false;
-
-  } else if (pc.bAttributeList && pc.bAttributeListValue) {
-    pc.parsedData.emplace_back(attributeValue, false, pc.sCapture);
-    pc.sCapture = "";
-    pc.bQuery = false;
-
-    if (!pc.bSignal) {
-      pc.bAttributeList = false;
-    }
-    pc.bAttributeListValue = false;
-
-  } else {
-
-    auto it = objectFactoryMap.find(sKey);
-    if (it != objectFactoryMap.end()) {
-
-      if (pc.bTerminal) {
-        pc.parsedData.emplace_back(elementTerminal, false, "");
-        pc.bToken = false;
-        pc.bTerminal = false;
+    // tokenize the markup string
+    for (auto ch : markup) {
+      switch (ch) {
+      case '<':
+        if (pc.sText.size() != 0) {
+          pc.parsedData.emplace_back(textData, false, pc.sText);
+          pc.sText = "";
+        }
         pc.bAttributeList = false;
         pc.bAttributeListValue = false;
-
-      } else {
-        // store lambda for the element factory
-        pc.parsedData.emplace_back(element, false, it->second);
-        pc.bToken = true;
-        pc.bAttributeList = true;
-        pc.bAttributeListValue = false;
+        pc.bSignal = true;
+        pc.bSkip = true;
+        break;
+      case ' ':
+        if (pc.bSignal && (!pc.bToken || pc.bAttributeList)) {
+          pc.bQuery = true;
+          pc.bSkip = true;
+        }
+        break;
+      case '=':
+        if (pc.bAttributeList) {
+          pc.bQuery = true;
+          pc.bSkip = true;
+        }
+        break;
+      case '>':
+        if (pc.bSignal) {
+          pc.bSignal = false;
+          pc.bToken = false;
+          pc.bSkip = true;
+          pc.bQuery = true;
+        }
+        break;
+      case '/':
+        if (pc.bSignal) {
+          pc.bTerminal = true;
+          pc.bSkip = true;
+        }
+        break;
       }
 
+      // the query flag is on when a item has been tokenized after a signal
+      // has been found.
+      if (pc.bQuery)
+        processParseContext(pc);
+
+      if (!pc.bSkip)
+        if (pc.bSignal)
+          pc.sCapture += ch;
+        else
+          pc.sText += ch;
+
+      pc.bSkip = false;
+    }
+
+    // if text exists, add as a textdata element.
+    if (pc.sText.size() != 0) {
+      pc.parsedData.emplace_back(textData, false, pc.sText);
+      pc.sText = "";
+    }
+
+    // second phase, iterate over the parsed context and develop the elements,
+    // color text nodes, and set attributes for the items on the stack. once
+    // items are processed, they are removed from the stack using the delete
+    // range operator, For a complete tag to exist, the end tab must also
+    // exist.
+    auto item = pc.parsedData.begin();
+    while (item != pc.parsedData.end()) {
+
+      // if the item is processed
+      if (get<1>(*item))
+        continue;
+
+      switch (get<0>(*item)) {
+      case element: {
+        Element &e = get<factoryLambda>(get<2>(*item))({});
+        pc.elementStack.back().get().appendChild(e);
+        pc.elementStack.push_back(e);
+        get<1>(*item) = true;
+      } break;
+
+      case elementTerminal: {
+        pc.elementStack.pop_back();
+        // mark as processed
+        get<1>(*item) = true;
+      } break;
+
+      // the attribute and value are handled here together
+      case attribute: {
+        auto itAttributeValue = std::next(item, 1);
+        if (itAttributeValue != pc.parsedData.end() &&
+            get<0>(*itAttributeValue) == attributeValue) {
+          get<attributeLambda>(get<2>(*item))(
+              pc.elementStack.back(), get<string>(get<2>(*itAttributeValue)));
+          get<1>(*itAttributeValue) = true;
+          // mark as processed
+          get<1>(*item) = true;
+          item++;
+        }
+
+      } break;
+
+      case attributeSimple: {
+        get<attributeLambda>(get<2>(*item))(pc.elementStack.back(), "");
+        // mark as processed
+        get<1>(*item) = true;
+      } break;
+
+      case color: {
+        auto &e = pc.elementStack.back().get().appendChild<textNode>(
+            textColor{get<colorNF>(get<2>(*item))});
+        pc.elementStack.push_back(e);
+        get<1>(*item) = true;
+      } break;
+
+      case textData: {
+        pc.elementStack.back().get().data().push_back(
+            get<string>(get<2>(*item)));
+        get<1>(*item) = true;
+        break;
+      }
+      }
+
+      // goto next item
+      item++;
+    }
+
+    // if all items have been terminated, and only one element is on the stack
+    // it should be the node, so pop it off.
+    if (pc.elementStack.size() == 1) {
+      Element &eRet = pc.elementStack.back().get();
+      if (eRet.m_self == node.m_self)
+        pc.elementStack.pop_back();
+    }
+
+    // erase processed items when marked,
+    pc.parsedData.erase(std::remove_if(pc.parsedData.begin(),
+                                       pc.parsedData.end(),
+                                       [](auto &n) { return get<1>(n); }),
+                        pc.parsedData.end());
+
+    return node;
+  }
+
+  /**
+  \internal
+  \brief The function processes one query of a parse context.
+  \details The first process of the function is to transform the
+  input to lowr case to ensure case insensitive comparisons. The
+  pc parserContext structure operates on a stream basis. Therefore
+  the logic within this function provides the pass through and control
+  break logic to implement the functionality. An intersting effect
+  is that at times a token must be completely found before it may be
+  processed. For example the ID of a element should be sent within one
+  context.
+
+  */
+  void viewManager::Element::processParseContext(
+      viewManager::Element::parserContext & pc) {
+
+    string sKey = pc.sCapture;
+    std::transform(sKey.begin(), sKey.end(), sKey.begin(),
+                   [](unsigned char c) { return std::tolower(c); });
+
+    if (pc.bAttributeList && !pc.bAttributeListValue) {
+
+      // store iterator to the function
+      auto it = attributeFactory.find(sKey);
+      if (it != attributeFactory.end())
+
+        // if the attribute is a series of two tokens
+        if (get<0>(it->second)) {
+          pc.parsedData.emplace_back(attribute, false, get<1>(it->second));
+          pc.bAttributeListValue = true; // value is expected to follow.
+
+        } else {
+          pc.parsedData.emplace_back(attributeSimple, false,
+                                     get<1>(it->second));
+          pc.bAttributeListValue = false;
+        }
+      pc.sCapture = "";
+      pc.bQuery = false;
+      if (!pc.bSignal)
+        pc.bToken = false;
+
+    } else if (pc.bAttributeList && pc.bAttributeListValue) {
+      pc.parsedData.emplace_back(attributeValue, false, pc.sCapture);
       pc.sCapture = "";
       pc.bQuery = false;
 
-    } else {
-      // store the color object within the parser payload
-      auto it = colorNF::colorIndex(sKey);
-      if (it != colorNF::colorFactory.end()) {
-        pc.parsedData.emplace_back(color, false, colorNF(it));
+      if (!pc.bSignal) {
+        pc.bAttributeList = false;
       }
+      pc.bAttributeListValue = false;
 
-      // illegal match found, pipe contents into ?
-      pc.bQuery = false;
+    } else {
+
+      auto it = objectFactoryMap.find(sKey);
+      if (it != objectFactoryMap.end()) {
+
+        if (pc.bTerminal) {
+          pc.parsedData.emplace_back(elementTerminal, false, "");
+          pc.bToken = false;
+          pc.bTerminal = false;
+          pc.bAttributeList = false;
+          pc.bAttributeListValue = false;
+
+        } else {
+          // store lambda for the element factory
+          pc.parsedData.emplace_back(element, false, it->second);
+          pc.bToken = true;
+          pc.bAttributeList = true;
+          pc.bAttributeListValue = false;
+        }
+
+        pc.sCapture = "";
+        pc.bQuery = false;
+
+      } else {
+        // store the color object within the parser payload
+        auto it = colorNF::colorIndex(sKey);
+        if (it != colorNF::colorFactory.end()) {
+          pc.parsedData.emplace_back(color, false, colorNF(it));
+        }
+
+        // illegal match found, pipe contents into ?
+        pc.bQuery = false;
+      }
     }
   }
-}

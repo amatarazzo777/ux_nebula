@@ -29,6 +29,8 @@
 
 #pragma once
 
+#include "../../base/generic_os.h"
+
 #include <sys/ipc.h>
 #include <sys/shm.h>
 
@@ -57,7 +59,6 @@ namespace viewManager {
 
 typedef xcb_generic_event_t *os_message_t;
 
-
 /**
  * @internal
  * @class os_xcb_linux_t
@@ -69,22 +70,13 @@ typedef xcb_generic_event_t *os_message_t;
  * function attach_surface().
  */
 
-class os_xcb_linux_t : generic_os_interface_t {
-public:
-  using generic_os_interface_t::generic_os_interface_t;
+struct os_xcb_linux_t : generic_os_interface_t {
 
   os_xcb_linux_t();
-  virtual ~os_xcb_linux_t();
-
-  /// @brief move, assignment constructors, operators implementation
-  os_xcb_linux_t(const os_xcb_linux_t &other);
-  os_xcb_linux_t(os_xcb_linux_t &&other) noexcept;
-  os_xcb_linux_t &operator=(const os_xcb_linux_t &other);
-  os_xcb_linux_t &operator=(os_xcb_linux_t &&other) noexcept;
 
   void fn_initialize(void);
   void fn_terminate(void);
-  
+
   /// @brief os specific implementation functions.
   void fn_open_window(void);
   void fn_close_window(void);
@@ -105,10 +97,8 @@ public:
   /// @brief window attributes
   void fn_set_title(const std::string &s);
 
-
   void fn_library_open();
 
-private:
   Display *xdisplay = {};
   xcb_connection_t *connection = {};
   xcb_screen_t *screen = {};
@@ -121,10 +111,9 @@ private:
   xcb_intern_atom_reply_t *reply = {};
   xcb_intern_atom_cookie_t cookie2 = {};
   xcb_intern_atom_reply_t *reply2 = {};
-
 };
 
 /// @brief type alias to generalize other parts of the code if necessary.
 using os_interface_manager_t = os_xcb_linux_t;
 
-} // namespace uxdevice
+} // namespace viewManager

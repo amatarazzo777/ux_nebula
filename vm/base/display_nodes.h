@@ -1,7 +1,6 @@
-
 namespace viewManager {
 /*
-@brief The base class for all display nodes. The 
+@brief The base class for all display nodes. The
 class ensures that all display objects have an emit function.
 The emit function is used during render and after layout calculation.
 */
@@ -9,8 +8,11 @@ struct display_node_t {
   virtual void emit(canvas_t *c) = 0;
 };
 
+typedef std::vector<display_node_t> display_list_t;
+
+
 /*
-@brief The structure provides a move operator that can be relative or 
+@brief The structure provides a move operator that can be relative or
 absolute within the coordinate space.
 */
 struct coordinate_t : display_node_t {
@@ -21,7 +23,7 @@ struct coordinate_t : display_node_t {
 };
 
 /*
-@brief Draw a rectangle with the give bounds. 
+@brief Draw a rectangle with the give bounds.
 */
 struct rectangle_t : display_node_t {
 
@@ -51,12 +53,12 @@ struct arc_t : display_node_t {
 @brief closes the current path
 */
 struct hit_test_begin_t : display_node_t {
-  unsigned uint_t id;
-  void emit(canvas_t *c) { };
+  uint32_t id;
+  void emit(canvas_t *c){};
 };
 
 struct hit_test_end_t : display_node_t {
-  void emit(canvas_t *c) {};
+  void emit(canvas_t *c){};
 };
 
 struct close_path_t : display_node_t {
@@ -85,9 +87,9 @@ the color of path lines and stroke color.
 struct color_t : display_node_t {};
 
 /*
-@brief The main paint object. The object is versile in its descriptive nature allowing
-developers to utilize multiple input sources and create complex text gradients. Using
-images and also patterns that are clamped and repeated.
+@brief The main paint object. The object is versile in its descriptive nature
+allowing developers to utilize multiple input sources and create complex text
+gradients. Using images and also patterns that are clamped and repeated.
 */
 struct paint_t : display_node_t {};
 
@@ -101,7 +103,7 @@ struct move_to_t : display_node_t {
 };
 
 /*
-@brief operator to draw a line 
+@brief operator to draw a line
 */
 struct line_t : display_node_t {
   float x = {};
@@ -110,7 +112,7 @@ struct line_t : display_node_t {
 };
 
 /*
-@brief operator to fill in the current path. The 
+@brief operator to fill in the current path. The
 */
 struct fill_path_t : display_node_t {
   void emit(canvas_t *c) override { c->fill(); };
@@ -168,38 +170,42 @@ struct text_normal_t : display_node_t {};
 
 /*
 @brief turns on outline rendering. Enables the use of advanced coloring of text
-using paint_t and vector line drawing operatings. Setting the join and also 
+using paint_t and vector line drawing operatings. Setting the join and also
 miter limits effect the text rendering.
 */
 struct text_outline_t : display_node_t {};
 
 /*
-@brief sets the tab stops for advancing when a tab character is 
+@brief sets the tab stops for advancing when a tab character is
 encountered within the text data.
 */
 struct text_tab_stops_t : display_node_t {};
 
 /*
-@brief the data to display. The system only accepts character data at this layer.
-Any numerical or formatting should already be applied. 
+@brief the data to display. The system only accepts character data at this
+layer. Any numerical or formatting should already be applied.
 */
 struct text_data_t : display_node_t {};
 
 /*
-@brief The ability to organically shape and color information is often under utilized
-in desktop publishing and also forms. The olds black line box, ovals that are
-perfect. The shape function generalizes it use for control library interface,
-splash windows, and also provides clipped fill textureing. The color_t and
-paint_t. Expanding the shape to size around a group of words.
+@brief The ability to organically shape and color information is often under
+utilized in desktop publishing and also forms. The olds black line box, ovals
+that are perfect. The shape function generalizes it use for control library
+interface, splash windows, and also provides clipped fill textureing. The
+color_t and paint_t. Expanding the shape to size around a group of words.
 
 finally the shape object provides a method to format text within the path, or on
-top of a swipe separator using the text_baseline vector. 
-One use is Title underscore lines that are creately made,configurable as a safe plugin.
+top of a swipe separator using the text_baseline vector.
+One use is Title underscore lines that are creately made,configurable as a safe
+plugin.
 */
 struct shape_t : display_node_t {
   typedef std::variant<coordinate_t, arc_t, close_path_t, curve_t, move_to_t,
-                       line_t, fill_path_t, stroke_path_t, color_t, paint_t, text_alignment_t,text_ellipsize_t, text_color_t, text_font_t, text_indent_t, text_line_space_t,
-    text_normal_t, text_outline_t, text_tab_stops_t, text_data_t>
+                       line_t, fill_path_t, stroke_path_t, color_t, paint_t,
+                       text_alignment_t, text_ellipsize_t, text_color_t,
+                       text_font_t, text_indent_t, text_line_space_t,
+                       text_normal_t, text_outline_t, text_tab_stops_t,
+                       text_data_t>
       draw_t;
   std::vector<draw_t> shape;
   std::vector<draw_t> interior;
@@ -233,7 +239,6 @@ struct shape_t : display_node_t {
 
   /*
   Examples of formats
-    text format
 
     cpp header format is a format that provides inclusion of the
     shape within a program's binary. A const static unsign char array
@@ -241,28 +246,20 @@ struct shape_t : display_node_t {
     is bit packed and compressed. The segments should be rather small
     but can also include raster image data.
 
-  For these types of images, a polygon based shader with polygon area pallete.
-  Palette colors may shift also delta to neighboaring polygons. By finding
-  groups of polygons with related colors, compression can occur greatly. When
-  colors shift, some delta changes can account for color changes. Perhaps store
-  delta and pallette table rendering order control, a new polygon area with some
-  new colo, while the previous color pallette developed is functional.
+    providing for externalization of image data from the data data
+    can be more functional. The image data is not outdata by resolution.
+    Part of the parameters may be the passing of image data for the
+    shape control to use. The image data could also support directory
+    based.
 
-  text format scripting engines are great. this format is for people that can
-  visualize lines and coordinates by expression their own canvas size.
-  Conversational style allowing one to draw large lines, circles, ovals,
-  elispse, rounded boxes, and specify shaind, colors, and gradiants.
-
-  curve can be best visualized from the point of view of a straight line
-  connects them. simply from this point, one would express the distance
-  perpendicular negative of positive distance. Next I would try to control the
-  flow of the curve through control points. expression of the overlaying basic
-  shapes such as a circle, over the top, the two intersecting points upon the
-  curve. Controlling the length of the arc segment. Making the curves react. The
-  rotation of the control point can introduce.
-
+  Inside the IDE the formats can be interchanged between visual editing and,
+  code tags for the shape. The format is distinct from the SVG vector, it
+  is still unusual that a text painter can out performed a hand stylus tool.
+  Or crafted editing. Therefore the use of the form as a byte oriented one
+  provides consolidation. specific options within the tool provide for
+  programming events, providing interfaces to the shape as a function.
   */
-  enum format { text, cpp_header, csv_hexidecimal, binary };
+  enum format { cpp_header, binary };
 
   void import_shape(format _form, unsigned char *buffer, unsigned int size){
 
@@ -272,11 +269,9 @@ struct shape_t : display_node_t {
   };
 
   void emit(canvas_t *c) {
-    for (auto n : curves) {
-    }
   };
 
-  surface_t render;
+  canvas_t render;
 };
 
 } // namespace viewManager

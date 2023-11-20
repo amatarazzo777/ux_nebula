@@ -55,3 +55,8 @@ using canvas_t = canvas_ity::canvas;
 
 #endif
 
+// clean up types for better usage.
+
+namespace viewManager {
+    using viewer_t = viewManager::Viewer;
+}
