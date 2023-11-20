@@ -595,19 +595,7 @@ extern const attributeStringMap attributeFactory;
  * report and hold information is elaborate.
  */
 
-#define UX_DECLARE_STREAM_INTERFACE(CLASS_NAME)                                \
-public:                                                                        \
-  template <typename T> Element &operator<<(const CLASS_NAME &data) {   \
-    stream_input(data);                                                        \
-    return *this;                                                              \
-  }                                                                            \
-  template <typename T>                                                        \
-  Element &operator<<(const std::shared_ptr<CLASS_NAME> data) {         \
-    stream_input(data);                                                        \
-    return *this;                                                              \
-  }
-
-
+  
 /**
   \class Element
   \brief This is the main Element API. All document entities have this
@@ -672,17 +660,8 @@ public:
     return *this;
   }
 
-  /**
-   * Declare interface only.  uxdevice.cpp contains implementation. These are
-   * the stream interface with a function prototype for the invoke(). The
-   * uxdevice.cpp file contains the implementation.  surface_area_t
-   * &uxdevice::surface_area_t::stream_input( const CLASS_NAME _val) is the
-   * prototype developed.
-   */
-
-  UX_DECLARE_STREAM_INTERFACE(std::string)
-  UX_DECLARE_STREAM_INTERFACE(std::stringstream)
-  UX_DECLARE_STREAM_INTERFACE(std::string_view)
+  void stream_input(const std::string &s) {}
+  void stream_input(const std::string_view &s) {}
 
   /** declares the interface and implementation for these objects when these
    * are invoked, the pipeline_memory class is also updated. When rendering
@@ -837,10 +816,20 @@ public:
 
   */
   template <typename T = std::string> auto &data(void) {
-    auto tIndex = std::type_index(typeid(std::vector<T>));
-    // if the requested data adaptor does not exist,
-    // create its position within the adaptor member vector
-    // return this to the caller.
+    // distingish from multiple types of inputs
+    if constexpr (std::is_base_of<std::string, T>::value) {
+      return m_data;
+    }
+  }
+  template <typename T = std::string> void data(const T &data) {
+    // distingish from multiple types of inputs
+    if constexpr (std::is_base_of<std::string, T>::value) {
+      m_data=data;
+    } else {
+      std::ostringstream s;
+      s << data;
+      m_data=s;
+    }
   }
 
   /**
@@ -876,6 +865,7 @@ private:
   Element *m_nextSibling;
   Element *m_previousSibling;
   std::size_t m_childCount;
+  std::string m_data;
 
   // interface access points for the tree traversal functions
 public:
