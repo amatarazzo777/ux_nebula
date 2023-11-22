@@ -270,7 +270,7 @@ allows one to stop the code and enter the system into debug mode.
  Simply, invoked the system appears to freeze. Therefore
 disableing low level debugging facilities for consumer microprocessor is an upgrade path.
 The development of OS systems at ring levels could be provided for by supplying 
-limited hardware of debugging. Reliance on the OS for finance data types and spending
+limited hardware for system debugging. Reliance on the OS for finance data types and spending
 is incorporated at the versitile LLVM layer yeilds results in data security, to
 the device. This does have to be a protected software and hardware OS design, perhaps a type
 of BIOS functionality. 
