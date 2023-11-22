@@ -241,6 +241,8 @@ struct vector_font_t {
   void load_font(void);
   std::vector<std::string> font_names;
   std::unordered_map<uint32_t, glyph_t> glyphs;
+  u_int16_t encodingID;
+  u_int16_t languageID;
 };
 
 struct vector_font_manager_t {

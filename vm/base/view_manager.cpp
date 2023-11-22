@@ -574,8 +574,6 @@ viewManager::doubleNF::doubleNF(const string &sOption) {
 
   // default to auto calculate
   option = numericFormat::autoCalculate;
-  std::regex r("[\\s,_]+");
-  std::string sTmp = std::regex_replace(sOption, r, "");
 
   u_int8_t opt;
   tie(value, opt) = strToNumericAndEnum("doubleNF", annotationMap, sOption);
@@ -631,20 +629,13 @@ time, that is the short hand versions of coordinates, margin and padding
 */
 tuple<doubleNF, doubleNF, doubleNF, doubleNF>
 viewManager::parseQuadCoordinates(const string _sOptions) {
-  regex re("^[\\s]*[\\{\\(]?([\\+\\-]?[\\d]+[.,]?[\\d]*[\\%]?[\\w]{0,7})"
-           "(?:[\\s]*[,]?[\\s]*)([\\+\\-]?[\\d]+[.,]?[\\d]*[\\%]?[\\w]{0,7})"
-           "(?:[\\s]*[,]?[\\s]*)([\\+\\-]?[\\d]+[.,]?[\\d]*[\\%]?[\\w]{0,7})"
-           "(?:[\\s]*[,]?[\\s]*)([\\+\\-]?[\\d]+[.,]?[\\d]*[\\%]?[\\w]{0,7})"
-           "(?:[\\s]*[,]?[\\s]*)[\\s]*[\\}\\)]?");
-  smatch coords;
+  std::string sOption1, sOption2, sOption3, sOption4;
 
-  if (regex_search(_sOptions, coords, re)) {
-    if (coords.size() == 5) {
-      auto ret =
-          std::make_tuple(doubleNF(coords.str(1)), doubleNF(coords.str(2)),
-                          doubleNF(coords.str(3)), doubleNF(coords.str(4)));
-      return ret;
-    }
+  // parse string
+    auto ret =
+        std::make_tuple(sOption1), doubleNF(sOption2),
+                        doubleNF(sOption3), doubleNF(sOption4));
+    return ret;
   }
 
   std::string info = "Could not parse attribute string option : ";
@@ -662,8 +653,7 @@ viewManager::parseQuadCoordinates(const string _sOptions) {
  the colorMap.
 */
 colorMap::const_iterator colorNF::colorIndex(const std::string &_colorName) {
-  std::regex r("\\s+");
-  std::string sKey = std::regex_replace(_colorName, r, "");
+  std::string sKey = _colorName;
   std::transform(sKey.begin(), sKey.end(), sKey.begin(),
                  [](unsigned char c) { return std::tolower(c); });
   auto it = colorNF::colorFactory.find(sKey);
@@ -782,8 +772,7 @@ uint8_t viewManager::strToEnum(const string_view &sListName,
                                const string &_sOption) {
   uint8_t ret = 0;
 
-  std::regex r("\\s+");
-  std::string sTmpKey = std::regex_replace(_sOption, r, "");
+  std::string sTmpKey = _sOption;
   std::transform(sTmpKey.begin(), sTmpKey.end(), sTmpKey.begin(),
                  [](unsigned char c) { return std::tolower(c); });
   auto it = optionMap.find(sTmpKey);
@@ -817,8 +806,6 @@ tuple<double, u_int8_t> viewManager::strToNumericAndEnum(
     const string_view &sListName,
     const unordered_map<string, uint8_t> &optionMap, const string &_sOption) {
 
-  std::regex r("[\\s,_]+");
-  std::string sTmp = std::regex_replace(_sOption, r, "");
   std::transform(sTmp.begin(), sTmp.end(), sTmp.begin(),
                  [](unsigned char c) { return std::tolower(c); });
 
@@ -939,8 +926,8 @@ viewManager::Viewer::Viewer(const vector<any> &attrs)
   documentState st;
   st.focusField = this;
   setAttribute<documentState>(st);
-  m_os = std::make_unqiue<os_interface_manager_t>();
-  m_os->initialize();
+  m_os = std::make_unique<os_interface_manager_t>();
+  m_os->fn_initialize();
 }
 
 /**
@@ -949,7 +936,7 @@ viewManager::Viewer::Viewer(const vector<any> &attrs)
 \brief deconstructor for the view manager object.
 */
 viewManager::Viewer::~Viewer() {
-  m_os->terminate();
+  m_os->fn_terminate();
   m_os.release();
 }
 
@@ -978,14 +965,18 @@ the recursive process.
 void viewManager::Viewer::render(void) {
   computeLayout(*this);
 
-  canvas_ity::canvas raster(this->getAttribute<objectWidth>(),
-                            this->getAttribute<objectHeight>());
+  canvas_ity::canvas raster(getAttribute<objectWidth>(), 
+          getAttribute<objectHeight>());
 
   /* the display list is a sorted entity providing a searchable list
   for the beginning and ending of a viewport clipping region. */
-  for (auto n : m_displayList) {
-    n->ptr->render(&raster);
+  for (auto n : m_displaylist) {
+    n.emit(raster);
   }
+  
+  fn_copy_canvas(canvas);
+
+}
 
   /*
   \internal
@@ -1000,7 +991,7 @@ void viewManager::Viewer::render(void) {
   routines. The main thing to remember is that the information is
   processed from a queue and using a background thread.
   */
-  void viewManager::Viewer::dispatchEvent(const event &evt) {
+  void viewManager::Viewer::dispatchEvent(const event_t &evt) {
     switch (evt.evtType) {
     case eventType::paint:
       m_device->clear();
@@ -1034,20 +1025,12 @@ void viewManager::Viewer::render(void) {
     case eventType::mousedown:
       break;
     case eventType::mouseup:
-      if (evt.mouseButton == 1)
-        m_device->fontScale++;
-      else
-        m_device->fontScale--;
-      dispatchEvent(event{eventType::paint});
       break;
     case eventType::wheel:
-      if (evt.wheelDistance > 0)
-        m_device->fontScale += 1;
-      else
-        m_device->fontScale -= 1;
-      dispatchEvent(event{eventType::paint});
       break;
     }
+
+
 /* these events do not come from the platform. However,
 they are spawned from conditions based upon the platform events.
 */
@@ -1080,9 +1063,10 @@ eventType::mouseleave
         ev, getAttribute<objectWidth>().value,
         getAttribute<objectHeight>().value);
 
-    m_device->openWindow(getAttribute<windowTitle>().value);
+    m_os->openWindow(getAttribute<windowTitle>().value);
 
-    m_device->messageLoop();
+  std::thread()
+    m_os->messageLoop();
   }
 
   /**

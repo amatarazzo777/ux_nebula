@@ -1720,7 +1720,7 @@ public:
   Viewer &operator=(Viewer &&other) noexcept {return *this;} // move assignment
   void render();
   void processEvents(void);
-  void dispatchEvent(const event &e);
+  void dispatchEvent(const event_t &e);
 
 private:
   std::unique_ptr<os_interface_manager_t> m_os;

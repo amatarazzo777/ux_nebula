@@ -19,7 +19,7 @@ struct coordinate_t : display_node_t {
   float x = {};
   float y = {};
   bool bRelative = false;
-  void emit(canvas_t *c) override { c->move_to(x, y); };
+  void emit(canvas_t *c) { c->move_to(x, y); };
 };
 
 /*
@@ -75,7 +75,7 @@ struct curve_t : display_node_t {
   float y2 = {};
   float x3 = {};
   float y3 = {};
-  void emit(canvas_t *c) override {
+  void emit(canvas_t *c)  {
     c->bezier_curve_to(x1, y1, x2, y2, x3, y3);
   };
 };
@@ -99,7 +99,7 @@ struct paint_t : display_node_t {};
 struct move_to_t : display_node_t {
   float x = {};
   float y = {};
-  void emit(canvas_t *c) override { c->move_to(x, y); };
+  void emit(canvas_t *c) { c->move_to(x, y); };
 };
 
 /*
@@ -108,21 +108,21 @@ struct move_to_t : display_node_t {
 struct line_t : display_node_t {
   float x = {};
   float y = {};
-  void emit(canvas_t *c) override { c->line_to(x, y); };
+  void emit(canvas_t *c) { c->line_to(x, y); };
 };
 
 /*
 @brief operator to fill in the current path. The
 */
 struct fill_path_t : display_node_t {
-  void emit(canvas_t *c) override { c->fill(); };
+  void emit(canvas_t *c) { c->fill(); };
 };
 
 /*
 @brief traces the vector lines with the with and line drawing parameters.
 */
 struct stroke_path_t : display_node_t {
-  void emit(canvas_t *c) override { c->stroke(); };
+  void emit(canvas_t *c) { c->stroke(); };
 };
 
 /*

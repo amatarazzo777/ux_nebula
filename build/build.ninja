@@ -55,6 +55,24 @@ build CMakeFiles/test0.dir/main.cpp.o: CXX_COMPILER__test0_Debug /home/anthonym/
   OBJECT_DIR = CMakeFiles/test0.dir
   OBJECT_FILE_DIR = CMakeFiles/test0.dir
 
+build CMakeFiles/test0.dir/vm/base/vector_font.cpp.o: CXX_COMPILER__test0_Debug /home/anthonym/eclipse-workspace/ux_nebula/vm/base/vector_font.cpp || cmake_object_order_depends_target_test0
+  DEP_FILE = CMakeFiles/test0.dir/vm/base/vector_font.cpp.o.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/test0.dir
+  OBJECT_FILE_DIR = CMakeFiles/test0.dir/vm/base
+
+build CMakeFiles/test0.dir/vm/base/view_manager.cpp.o: CXX_COMPILER__test0_Debug /home/anthonym/eclipse-workspace/ux_nebula/vm/base/view_manager.cpp || cmake_object_order_depends_target_test0
+  DEP_FILE = CMakeFiles/test0.dir/vm/base/view_manager.cpp.o.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/test0.dir
+  OBJECT_FILE_DIR = CMakeFiles/test0.dir/vm/base
+
+build CMakeFiles/test0.dir/vm/os/linux_xcb/os_interface.cpp.o: CXX_COMPILER__test0_Debug /home/anthonym/eclipse-workspace/ux_nebula/vm/os/linux_xcb/os_interface.cpp || cmake_object_order_depends_target_test0
+  DEP_FILE = CMakeFiles/test0.dir/vm/os/linux_xcb/os_interface.cpp.o.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/test0.dir
+  OBJECT_FILE_DIR = CMakeFiles/test0.dir/vm/os/linux_xcb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target test0
@@ -63,7 +81,7 @@ build CMakeFiles/test0.dir/main.cpp.o: CXX_COMPILER__test0_Debug /home/anthonym/
 #############################################
 # Link the executable test0
 
-build test0: CXX_EXECUTABLE_LINKER__test0_Debug CMakeFiles/test0.dir/main.cpp.o
+build test0: CXX_EXECUTABLE_LINKER__test0_Debug CMakeFiles/test0.dir/main.cpp.o CMakeFiles/test0.dir/vm/base/vector_font.cpp.o CMakeFiles/test0.dir/vm/base/view_manager.cpp.o CMakeFiles/test0.dir/vm/os/linux_xcb/os_interface.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/test0.dir
   POST_BUILD = :

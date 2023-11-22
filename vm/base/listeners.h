@@ -94,10 +94,10 @@ class listener_t {
 public:
   listener_t() = delete;
   listener_t(event_handler_t _dispatch)
-    : ti(std::type_index(typeid(T))), dispatch_event(_dispatch) {}
+    : alias(std::type_index(typeid(T))), dispatch_event(_dispatch) {}
 
 
-  std::type_index ti;
+  std::type_index alias;
   event_handler_t dispatch_event;
 };
 

@@ -29,6 +29,7 @@
 
 #pragma once
 
+#include "../../base/std_base.h"
 #include "../../base/generic_os.h"
 
 #include <sys/ipc.h>
@@ -111,6 +112,8 @@ struct os_xcb_linux_t : generic_os_interface_t {
   xcb_intern_atom_reply_t *reply = {};
   xcb_intern_atom_cookie_t cookie2 = {};
   xcb_intern_atom_reply_t *reply2 = {};
+
+  std::vector<u_int32_t> m_offscreenBuffer;
 };
 
 /// @brief type alias to generalize other parts of the code if necessary.

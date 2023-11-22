@@ -3,7 +3,7 @@ project(test0)               # Create project "simple_example"
 set(CMAKE_CXX_STANDARD 17)            # Enable c++14 standard
 
 # Add main.cpp file of the project root directory as a source file
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp vm/base/vector_font.cpp vm/base/view_manager.cpp vm/os/linux_xcb/os_interface.cpp)
 file(GLOB SOURCES "vm/base/*.cpp")
 file(GLOB SOURCES "vm/os/linux_xcb/*.cpp")
 

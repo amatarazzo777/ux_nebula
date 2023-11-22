@@ -3,5 +3,20 @@
   "directory": "/home/anthonym/eclipse-workspace/ux_nebula/build",
   "command": "/usr/bin/g++ -g -o CMakeFiles/test0.dir/main.cpp.o -c /home/anthonym/eclipse-workspace/ux_nebula/main.cpp",
   "file": "/home/anthonym/eclipse-workspace/ux_nebula/main.cpp"
+},
+{
+  "directory": "/home/anthonym/eclipse-workspace/ux_nebula/build",
+  "command": "/usr/bin/g++ -g -o CMakeFiles/test0.dir/vm/base/vector_font.cpp.o -c /home/anthonym/eclipse-workspace/ux_nebula/vm/base/vector_font.cpp",
+  "file": "/home/anthonym/eclipse-workspace/ux_nebula/vm/base/vector_font.cpp"
+},
+{
+  "directory": "/home/anthonym/eclipse-workspace/ux_nebula/build",
+  "command": "/usr/bin/g++ -g -o CMakeFiles/test0.dir/vm/base/view_manager.cpp.o -c /home/anthonym/eclipse-workspace/ux_nebula/vm/base/view_manager.cpp",
+  "file": "/home/anthonym/eclipse-workspace/ux_nebula/vm/base/view_manager.cpp"
+},
+{
+  "directory": "/home/anthonym/eclipse-workspace/ux_nebula/build",
+  "command": "/usr/bin/g++ -g -o CMakeFiles/test0.dir/vm/os/linux_xcb/os_interface.cpp.o -c /home/anthonym/eclipse-workspace/ux_nebula/vm/os/linux_xcb/os_interface.cpp",
+  "file": "/home/anthonym/eclipse-workspace/ux_nebula/vm/os/linux_xcb/os_interface.cpp"
 }
 ]

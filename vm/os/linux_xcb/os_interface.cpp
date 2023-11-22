@@ -260,20 +260,21 @@ void VM::os_xcb_linux_t::fn_complete_message(xcb_generic_event_t *xcb) {
  * associated with os compile target. It is defined as a static so only one
  * exists in all versions of the window object.
  */
-void viewManager::os_xcb_linux_t::fn_visit_dispatch(xcb_generic_event_t *xcb) {
+void viewManager::os_xcb_linux_t::fn_visit_dispatch(os_message_t xcb) {
 
   /**
    * @internal
    * @brief handles mouse move events.
    * @param motion_notify_xcb_t xcb
    */
-  switch (xcb) {
+   event_t e;
+  switch (xcb->response_type & ~0x80) {
   case XCB_KEY_PRESS: {
     // get key symbol
-    sym = xcb_key_press_lookup_keysym(syms, xcb.get(), 0);
+    e.sym = xcb_key_press_lookup_keysym(syms, xcb, 0);
 
     // in range of keys?
-    if (sym < 0x99) {
+    if (e.sym < 0x99) {
 
       // use xwindows to lookup the string
       XKeyEvent keyEvent;
@@ -287,10 +288,10 @@ void viewManager::os_xcb_linux_t::fn_visit_dispatch(xcb_generic_event_t *xcb) {
 
       // filter as a keypress event
       if (XLookupString(&keyEvent, c.data(), c.size(), nullptr, nullptr)) {
-        alias = std::type_index{typeid(listen_keypress_t)};
+        e.alias = std::type_index{typeid(listen_keypress_t)};
       } else {
         // send a keydown event
-        alias = std::type_index{typeid(listen_keydown_t)};
+        e.alias = std::type_index{typeid(listen_keydown_t)};
       }
     }
   } break;
@@ -301,14 +302,14 @@ void viewManager::os_xcb_linux_t::fn_visit_dispatch(xcb_generic_event_t *xcb) {
    * @param xcb_configure_notify_event_t *xcb
    */
   case XCB_KEY_RELEASE: {
-    sym = xcb_key_press_lookup_keysym(syms, xcb.get(), 0);
-    alias = std::type_index{typeid(listen_keyup_t)};
+    e.sym = xcb_key_press_lookup_keysym(syms, xcb, 0);
+    e.alias = std::type_index{typeid(listen_keyup_t)};
   } break;
 
   case XCB_MOTION_NOTIFY: {
-    x = xcb->event_x;
-    y = xcb->event_y;
-    alias = std::type_index{typeid(listen_mousemove_t)};
+    e.x = xcb->event_x;
+    e.y = xcb->event_y;
+    e.alias = std::type_index{typeid(listen_mousemove_t)};
   } break;
 
   /**
@@ -320,17 +321,17 @@ void viewManager::os_xcb_linux_t::fn_visit_dispatch(xcb_generic_event_t *xcb) {
   case XCB_BUTTON_PRESS:
     // pluck relative items from the xcb event and place into
     // interface.
-    x = xcb->event_x;
-    y = xcb->event_y;
+    e.x = xcb->event_x;
+    e.y = xcb->event_y;
 
     /** @brief interpret these values as up and down wheel.*/
     if (xcb->detail == XCB_BUTTON_INDEX_4 ||
         xcb->detail == XCB_BUTTON_INDEX_5) {
-      d = xcb->detail == XCB_BUTTON_INDEX_4 ? 1 : -1;
-      alias = std::type_index{typeid(listen_wheel_t)};
+      e.d = xcb->detail == XCB_BUTTON_INDEX_4 ? 1 : -1;
+      e.alias = std::type_index{typeid(listen_wheel_t)};
     } else {
-      d = xcb->detail;
-      alias = std::type_index{typeid(listen_mousedown_t)};
+      e.d = xcb->detail;
+      e.alias = std::type_index{typeid(listen_mousedown_t)};
     }
   }
   break;
@@ -343,9 +344,9 @@ void viewManager::os_xcb_linux_t::fn_visit_dispatch(xcb_generic_event_t *xcb) {
 case XCB_BUTTON_RELEASE: {
   // ignore button 4 and 5 which are wheel events.
   if (xcb->detail != XCB_BUTTON_INDEX_4 && xcb->detail != XCB_BUTTON_INDEX_5)
-    alias = std::type_index{typeid(listen_mouseup_t)};
+    e.ti = std::type_index{typeid(listen_mouseup_t)};
   else
-    alias = std::type_index{typeid(mouse_device_xcb_t)};
+    e.alias = std::type_index{typeid(mouse_device_xcb_t)};
 } break;
 
 /**
@@ -354,11 +355,11 @@ case XCB_BUTTON_RELEASE: {
  * @param surface_expose_xcb_t xcb
  */
 case XCB_EXPOSE: {
-  x = xcb->x;
-  y = xcb->y;
-  w = xcb->width;
-  h = xcb->height;
-  alias = std::type_index{typeid(listen_paint_t)};
+  e.x = xcb->x;
+  e.y = xcb->y;
+  e.w = xcb->width;
+  e.h = xcb->height;
+  e.alias = std::type_index{typeid(listen_paint_t)};
 } break;
 
 /**
@@ -370,11 +371,11 @@ case XCB_CONFIGURE_NOTIFY: {
   if (xcb->window == window_manager->window &&
       ((short)xcb->width != window_manager->window_width ||
        (short)xcb->height != window_manager->window_height)) {
-    w = xcb->width;
-    h = xcb->height;
+    e.w = xcb->width;
+    e.h = xcb->height;
 
     bvideo_output = true;
-    alias = std::type_index{typeid(listen_resize_t)};
+    e.alias = std::type_index{typeid(listen_resize_t)};
   }
 } break;
 
@@ -386,7 +387,7 @@ case XCB_CONFIGURE_NOTIFY: {
 case XCB_CLIENT_MESSAGE: {
   // filter subset for this... original from stack over flow
   if (xcb->data.data32[0] == window_manager->reply2->atom) {
-    alias = std::type_index{typeid(listen_close_window_t)};
+    e.alias = std::type_index{typeid(listen_close_window_t)};
   }
 } break;
 }
