@@ -262,14 +262,36 @@ of financial theft very thin, other than one taking the device.
 
 The field of hacking at the machine layer is the view of object code, machine code 
 using various dissassembly techniques, many of the public ones are not extensive.
+ That is the finance and back software are protected. Yet ones ability to see illegal 
+ data mainly comes from one instruction currently in the Low Level community -;, 
+ providers of sandboxes. Committed to hiding because who can compile the OS? Typically 
+consumer models of all available cpus have this instruction turned on. Int 3 on intell for example
+allows one to stop the code and enter the system into debug mode.
+ Simply, invoked the system appears to freeze. Therefore
+disableing low level debugging facilities for consumer microprocessor is an upgrade path.
+The development of OS systems at ring levels could be provided for by supplying 
+limited hardware of debugging. Reliance on the OS for finance data types and spending
+is incorporated at the versitile LLVM layer yeilds results in data security, to
+the device. This does have to be a protected software and hardware OS design, perhaps a type
+of BIOS functionality. 
+
 Reduction in assembly in in forms of data type as well. Meaning that the decoder model of the 
 CPU circuit design is antiquated, such that design for data types and data type recognition
 for numerical, string, integer, floating, are conceived as communicated through language
 as a program and reintroduced with a few mixups of previous legacy ALU. As well,
 typically a program will have knowledge of the types it uses, even functional 
 code memory pointers. Integration for cpu register usage and even name types are
-misrepresented by the hardened memnonic style. The advancement is found perhaps
-in two types of advancements simple and more far reaching. In the simple abstractions,
+misrepresented by the hardened memnonic style. All logic instruction sets of the CPU
+have to accept a variable redefined register set for the CPU context. This context
+can be changed inline. This redefines the bottleneck of this type of memory access
+to be identified through one indirection context per instruction. And finally one 
+mov instruction will be capible of the entire register bank, to one location. Removing
+the bottleneck of current memory access to the entire cpu pipeline of < 4k perhaps. Smaller 
+floating point sizes, that round up. This changes the throughput of the entire
+risc instruction set. The instruction set advances on the bit level.
+
+The advancement is found perhaps in two types of advancements simple and more 
+far reaching. In the simple abstractions,
 a methodology does exist for signel calling of routines, accessing the namespace
 BIOS. These set of routines as a microprocessor composition aligns itself
 ans an unused work of GUI design work, or native nvme work. The purpose for the 
@@ -302,7 +324,20 @@ or memory address pattern within the instruction set. Usage of the instruction a
 application layer or low level per executing instruction schema change instruction
 provides a delicate way for more formation of routines. Perhaps a new pathway of cacheing 
 will have to exist for these schema bit patterns. Yet an exciting surprise is SOC designs
-integrating as a part of the layered instruction set is register to finance device. 
+integrating as a part of the layered instruction set is register to finance device. These
+instruction set operations can be modeled in software. The dynamic format for parrelle
+maths have their use in both integer and floating point. Typically the CISC instructionset
+advances in speed due to register inclusion at the operation layer. At that, what was being 
+called for and then fashioned was speed. The ability to incorporate this transformation 
+allows a necessary memory access to be loaded into the operating field of the cpu, and gpu.
+
+Adoption of context change for instruction set size, limits the instruction set to per 
+processing context, with an allowed known number of calls. Simply the decoder might
+batch dispatch to the service table pin connector before instruction execution. The process 
+at the hardware layer, provides faster execution capabilities. The adopting of hinting
+per CPU cache size, and historical instruction flow as per instruction site, can be tagged 
+as a specialized instruction. 
+
 
 The more far reaching advancements, as mentioned earlier, are in print and SOC designs.
  However by minimizing 
@@ -314,19 +349,6 @@ set per instruction code context. To simply know how multiple processes work
 running on one machine was the technology path that led the current implementation.
 
 
-
-. That is the finance
-and back software are protected. Yet ones ability to see illegal data mainly comes
-from one instruction currently in the Low Level community, providers of sandboxes. Typically 
-consumer models of all available cpus have this instruction turned on. Int 3 on intell for example
-allows one to stop the code and enter the system into debug mode.
- Simply, invoked the system appears to freeze. Therefore
-disableing low level debugging facilities for consumer microprocessor is an upgrade path.
-The development of OS systems at ring levels could be provided for by supplying 
-limited hardware of debugging. Reliance on the OS for finance data types and spending
-is incorporated at the versitile LLVM layer yeilds results in data security, to
-the device. This does have to be a protected software and hardware OS design, perhaps a type
-of BIOS functionality. 
 
 */
   u_int32_t fn_load_object(std:string);
