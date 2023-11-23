@@ -123,10 +123,13 @@ struct generic_os_interface_t {
    capability. The object promotes communication to native
    parsers of languages. Allowing for easy component and syntax
    yeilds. The YACC interface, is such a procedural method
-   for doing this. As well BISON. The temptation to start a 
+   for doing this. As well BISON. A one system runs all approach
+   to language as a implementation is the llvm approach.
+   
+    The temptation to start a 
    program utility to functionally accept language definitions
    and also provide easy adoption of languages, but reworking
-   for interface GUI connectivity.
+   for interface GUI connectivity. 
 
    Another very pertient work is providing for the plethora of
    change over as research continues, after providing the module.
@@ -165,7 +168,6 @@ struct generic_os_interface_t {
    in a type of search are very keane problems to solve. The ability to also know
    that most can even reside in memory or partially by todays standards.
 
- 
    Hard press databases exist such as requires actual long term storage size vs
    memory size. Banking databases are this size in account record keeping. The 
    the intricate problem solved using a massive storage size reference perhaps.
@@ -173,7 +175,9 @@ struct generic_os_interface_t {
    as programming natures have, recursion notes that code is reduced. In this, data
    storage complexity can be reduced for the unit. That is for banking, each customer has 
    their own database. The problems of system integrity are majorly reduced, considering
-   the amount of customers a global company would have.
+   the amount of customers a global company would have. Each customer can even have their
+   own native access object, for down to block byte location hard coded. Transactions 
+   rarely change, and with electronic money will not.
 
    So the ability to functionally plan information systems, is primarily entered around 
    indexing, editing, and program visual interface. Solving these systems to
@@ -182,20 +186,71 @@ struct generic_os_interface_t {
    to design database of this nature can be rooted in size requirements 
    and storage location. As a running process service, database engines require
    many types of facilities far reaching to a user editing process actually requires.
-   That is to say, parsers, indexers, and record level locking. Many times today's
-   memory, even providing a size of a two gigabyte database, for storage is allowable
-   for memory. This number upgrades quickly over time. Therefore, merely the reference
-   to big data codec objects such as textures, graphics, programs, can also be operative
+   That is to say, parsers, indexers, and record level locking. 
+   
+   Many times today's available system memory provides an easy size gap for a two 
+   gigabyte database. In text, numerical data, structures and pointers, that is a
+   hugh vast array of data. For a corporate business perspective, data models of 
+   CRM systems,  store sales, catalog, health systems, insurance company clients,
+   grocery store product listing, super mall areas, car part catalog. Many of these 
+   database informations are naturally geared for human sized listings. It is the detailed 
+   views that primarily affect cache and memory balancing performat as blob loading.
+   
+    
+   This memory number upgrades quickly over time, and has, but the amount of 
+   human readible, numerical, data has slightly increased, most likely a 
+   function of population, databases are filled. Therefore, merely the reference
+   to big data codec objects (BLOBs) such as textures, graphics, programs, can also be operative
    as the next generation storage mechanic. To supply this data, as a operative stream
    hidden, is also knowning of its large nature size. BLOB is typically what it is 
-   reffered to as. Therefore reference generation is a type of facility. A select
-   post loading that can run as part of the data access, while engaging the 2GBsize
-   for effective query times. Types of cache limiting algorithms may provide unlinking
-   of storage data to remove it and its siblings from memory, without as diagrammingad or write
-   but simply refer to to as a symlink to NVME storage.
+   reffered to as. Therefore reference generation is a type of facility, operating a streaming layer from
+   orginal disk data. A select post loading that can run as part of the data access, 
+   while engaging the 2GBsize for effective query times. Types of cache limiting algorithms 
+   may provide unlinking of storage data to remove it and its siblings from memory, 
+   without as diagrammingad or write but simply refer to to as a symlink to NVME storage.
+   The engagement of the pointer and node target as a defined function of storage is important.
+   For the storage of them a relocation to offset within the database strcture to redevelop
+   the pointer is needed. Yet one argues that the entire 2gb of database in memory is
+   ineffective for multiple computers. There are methods to utilize interface linking
+   with BC code to form linking and database operations. 
+
+   One of the most pertient yet untied through multiple corporations existing 
+   in many areas of the world, in their own country, is storage of
+   common  worldly things and their signifigance as a number, money amount, 
+   name, address, measurements, as a database extra storage that requires definition
+   in editing, display, and should be linked to the database field if editing.
+   Other  attributes that signify relations may not become the experience 
+   in other countries. For example, one may wish to open the "World Data and Entry Book reader"
+   interface they have with "ohm". Some aspects of their new OS experience for world 
+   culture integration should include world image contexts, font vector code page, 
+   computer properties, and content age already compiled on the right start menu. 
+   Can you envision the beloved Arabic
+   fade ins and soft sound of "Ohm". Perhaps from the black state to the orginal screen
+   before close, with a precise image operation that caused it to spiral and blue. 
+   It is somewhat recognizable, and "Ohm", appears for three seconds, the unspiral and open 
+   can be a object nately compiled as a lid_event_t object for example. The text letters ever
+   enveloped in goodness, with the delicate fade and sound. The sound may fad and echo two
+   more times. A gamer may have tactile feedback in the joystick or mouse, system features
+   provide soft communication to the new buterfly device. Perhaps with operating tts voice models
+   a guru voice model can enliven a short interlude of music, and the desktop and prior
+   work fade in. Butterflys round the curves to show where it was you left off in writing.
+  Or Fireworks. of a select detail with ultimate control in new almost formed experimental
+  sparsely lit words, limited to five letters at a time. The letters do not line up all the time,
+  and are sparkling at various life rates. The letters on the screen show reaction as objects by shadow
+  direction and also coloring of face and bevels. Inner trinkets of the UI also remark. 
+  Some prefer many other introductions.
+
+    The c++ OS with llvm and 
+   BISON language import. Forget about security in version 1, compile easy precise
+   languages with amazing interfaces, and languages existing. then developers
+   will lock users out. Only users write viruses and malware. I am glad I do not.
+
 
    The most effective compression algorithms are often on language, or high level object data
-   such diagramming, where language, shape selection and language operate. The data storage
+   such diagramming, where language, shape selection and language operate. For language,
+   types of strategic indexes for partial before and after on words, and also inner words exist.
+   The indexing of the parts of strategic word and paragraph
+    The data storage
    type, and record format type is a requirement of storage already, hence providing
    logic for compression is by data type. The memory, and also storage process, should
    provide a type of versitile storage where it is effective at choosing the size
@@ -348,10 +403,128 @@ complete system, and do not function as a part of the running instruction
 set per instruction code context. To simply know how multiple processes work
 running on one machine was the technology path that led the current implementation.
 
+Solving the problem in currnet form was being able to boot in a staged process
+for versitility. Yet more appropiate is relocatable streaming footprints. The order
+is changed to functionally show the before the lid close quicker. So for example,
+a new install is already considered. The install is a web server app or could start 
+as a installer that takes a long time. Gentoo for example, can take up to five days
+for people. Automating the buld process, and image writing to boot sector. As an
+onboard image to pass through UEFI, just requires accepting third party keys, GPT
+the new set and providing direct to the boot.  
+
+The inclusion of object should entail complex entities such as foundation level GUI
+stream binary models, retrieved from the network stack or file, memory and 
+added for projection, vbrush data files, and database objects. Adding remote resources, 
+network, xml, image formats, html, html translators to display objects, with events attached,
+game network worlds, office documents in headless integrated storage stream editor, enhanced PDF
+through integrated book reading viewer. XSL, XML, and XSLT are powerful existing
+formats that can be applied. JSON has specific properties that introduce data
+translation from a network source and other program data. The jdbc library provides
+an interface that may be established. CSV, data, gui element, or reformated. ODBC,
+postgress, mysql, and other common database implemententations have an implementation
+that may function better as an LLVM enabled technology. Typically many types of databases
+of these categories can be tied together. The credentials of logging in is typical of 
+network. The applicable formats are plentiful, and as a server, network technology,
+many offer advanced data types and programming language support. But I feel that my fifty 
+thousand record data limit, is fine. As a reflection of growth pattern, the indexing and start
+of the database to in memory tollerances.
+
+The ability to control adaptively these database sources to utilize the vector storage of data
+is present. Yet often the communication of the buffer bin binary form is better. The engine supports
+a high level description through STL, and provides data and data schema creation and storage
+stream operations from the c++ perspective. The secondary issue to dynamic growth is
+the standard methods of push_back();
+
+Or rather the database should contain  the schema walk definition through type alias 
+deduced at compile time. The best model could contain a c++ stream input. The type
+input gathered and does not provide structure and data misalignment with the 
+internal vector. The additional method of fetch is important in context of having 
+data requested in a stream manner. For example, if there are fifty thousand
+matches, perhaps only the first hundred records are given in the network 
+or even file model. A tollerance setting that is difficult to control without 
+contextual information.
+
+The database implementation should allow display and edit of formula, artifical
+intelligence data, sensor data, data to be read by high frequency. Voice models,
+artifical brains of select knowledge base, and character rendering. Course information
+and presentation.
+
+Types of data interfaces are needed at the blob layer.
+To propose a standard would be unlikely to be coherent for long. The ever 
+conversion from string and implement not leaving the c++ syntax standard.
+The easiest forms of object usage tieing language input, provides an optimum design
+layer. If the program can adaptively learn languages, and apply contexts that shine
+at ring layers with integrated tailored easy GUI, dom and object ui. A focus on tailored
+approaches often applies the context of how string data is utilized, and internal 
+memory representation available to systems typically designed on the exterior.
+By adaptive integrating the features and language compiling together, expert
+runtime performances can be attained. Whereby currently multiple transposed systems of
+operation are boxed for portability. To approach current language implementations
+requires definite input to the number languages. The BISON and YACC system supports the most 
+advanced and complete forms of modern language.
+
+examples that are scientific, allowed to be used with the license. And expect residues
+later for the company companionship of corporate funds. That is most scientific defintions
+are handshake (c), and therefore later can apply foundation funds for software payment 
+platform usage.
+
+Python, a very popular technique in computer programming that is said to require emensive
+code to support. But as you will see, the grammer file, of a BISON parser is specialized, 
+like a magic tool. 
+
+https://docs.python.org/3/reference/grammar.html
+
+For data processing and layout, the mixing of the data layout mechanisms of template oriented
+dialects like xslt, xml and css to the native system of layout is adaptive. Limiting the amount 
+of actual elements and also simplifing the usage to c++ data structures when necessary, That is
+the ability to use a data transform, via text input on a vector data type, containing a tuple,
+is effective for transform and textual language description. Transfering some knowledge of the 
+system of language to a complete binary implementation for multiple languages to address and 
+use allows optomization in the memory organization. Typically the modern method relys on a
+component that is refined at catching errors, or not being compromised. These systems
+make be designed much more effectively using centralized compiling techniques and in 
+memory linking. 
+
+XML, XSLT are forms of data and interface separation that are direct. Often a type
+of record for or iterator approach and also database scale offer better implementations
+as an analyzed language input. With LLVM utilizing the XSLT and a object code producer
+that creates a C++ Document object model, formatting it as so the template desires.
+Luckily the best features of language are often obscured by the used new back tick quote,
+the one under the tilde. I guess it was a last resort to go ahead an incorporate it.
+Yet the modern c++ allows a dangerious input of raw binary or text data into
+its buffer. As a literal string, inside a editor, it provides a nice comprimise to
+alternate language inclusion when short types of languages are needed as input.
+And then also external file input, translated as a unit inside the binary as a formed
+unit. 
+
+https://en.wikipedia.org/wiki/BASIC
+basic is a generalized computing language that many can read and flow
+through to close the gap. The inclusion of centralized systems of visualization
+and also database, and object usage at the memory layer is important. 
+
+https://en.wikipedia.org/wiki/Go_(programming_language)
+
+https://en.wikipedia.org/wiki/R_(programming_language)
+
+https://github.com/twitter-forks/mysql/blob/master/sql/sql_yacc.yy
+
+
+
+The functional aspects of Java and also C# remark of a processing type. The provisions
+of language and base features are often find in the base feature arena. They offer
+remarked and standard formats. Yet as a base system for UI, these two will need updating.
+Yet these languages need updating and wer invented as a battle arrangement. Often they
+do have great ideas, but leave out some other liked traits.
+
+UI elevations to streamline the use of nativ ecomponent and a versitle interface description
+was a design root of java. It survives as a generalized computing language. 
+Yet the interface is often triggered as a pixel render, when the DOM advancements can achieve
+greater native platform usage. So mixign the new forms of native rendering, with advanced 
+format input.
 
 
 */
-  u_int32_t fn_load_object(std:string);
+  u_int32_t fn_open_object(std:string);
   
 
 
