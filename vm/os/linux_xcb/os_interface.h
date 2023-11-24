@@ -1,7 +1,7 @@
 /*
- * This file is part of the ux_gui_stream distribution
- * (https://github.com/amatarazzo777/ux_gui_stream).
- * Copyright (c) 2020 Anthony Matarazzo.
+ * This file is part of the ux_nebula distribution
+ * (https://github.com/amatarazzo777/ux_nebula).
+ * Copyright (c) 2023 Anthony Matarazzo.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+
 
 /**
  * @author Anthony Matarazzo
