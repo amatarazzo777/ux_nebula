@@ -57,7 +57,8 @@ For a database link, it is a information part that can be easily updated. It als
 server addresses, will develop the connectivity for legacy formats, or` other file database formats.
 odbc, jdbc. The database link here is also used for access to image data that was gather from news 
 feeds for example. Video links. and provide a display format for the cached new xml feed.
-Google XML search cache results from a data mining bot app running locally. 
+Google XML search cache results from a data mining bot app running locally. Typically the file
+system has multi user locking already built in. 
 
 The database format can also be used for the desktop, and user application storage. The format works
 better than many database competitiors. The update process from version to version is realitively 
@@ -65,6 +66,27 @@ quick when a programmer changes the data storage format or types of data. Import
 or when needed. Most times done once is fine. Well planned applications update not as often. The
 contact and email list. The listing of programs installed on the computer will use this data
 base storage. 
+
+as a system database, used by the operating system, perhaps networking will not be built in
+to the library, the great dreams of SQL, and syncing left for the application
+style database that inheirits this model. 
+
+The database may be adopted for the object name database, and internal system usage. Therefore
+making the usage, for structure storage, objects and also searching, function visitation 
+can reduce code on usage and also specialize systems to invoke streams of this nature. That 
+is as a remapping data target, from storage to memory, document object models can be saved
+in the format. Providing for a streaming service.
+
+The desktop can use this facility for memory of programs, desktop settings, visual rendering settings,
+known wifi signals, etc. So the tempation is to create a system that is larger. Perhaps minimizing
+the usage to templates provides the most effective storage means. Error free when the 
+database engine can perform single user works. In memory. mutex can offer record locking for multiple
+processes.
+
+The facilities available as an inline algorithm in various languages can be a wonderful task.
+Making the data storage contain only data, while indicies are stored in another area. 
+
+
 */
 
 template <typename T>

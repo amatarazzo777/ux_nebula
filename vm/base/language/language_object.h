@@ -62,12 +62,116 @@ in system processes of thread pools can even tie two together before proceeding 
 
  Languages can also use the AST and BISON facilities along with this to make languages inside their 
  language. That is writing a bison for a language advancement, and use the AST builder, llvm generated
- assembly tokenizer, with a single visit routine in the language implementation.
+ assembly tokenizer, with a single visit routine in the language implementation. To minimize
+ language and provide filling out requirrements typical, of building user defined types 
+ that operate with objects or api inside the language. The facilities, once
+ installed are available as a temporary resource, or as a system language. Perhaps security
+ is of one concern and language dissemination. Installing it as a base language, may be improper.
 
+ Often languages do not get developed because they are for a small pertinent purpose. Requireing
+ specific focus in a field, such as described. Yet as necessary, the ability to automate the 
+ process from one form, provide language building constructs to include, and establish also
+ linking to the visitation. This consolidates functions and real time language creation narrows 
+ the field. Perhaps it is not a function used all of the time without planning. Often
+ groups start that proceed development with specifics of advancements. Coverage of a general
+ purpose programming language can be tedious. The recursive node structure of the AST
+ and LLVM context provide for a visitation format. The consideral arguments are language 
+ specification, and also elemental types. 
+
+ Choice of variable constructs, object calling and inheiritance routes. Defining
+ inline algorithms specific to known data type, reducing structure walk through,
+ and also cross conversion with formatting. The provisions of solving a
+ type of user defined type and its capabilities for container, indexing, and also
+ formatting as an inlined resource yet drawn from definition sources is exciting
+ in performance gains. There are many reasons this has not been done in the past
+ primarily due to the ease of LLVM and register accountability. 
+
+ Languages define often a structure for memory protectiond, or other relationships 
+ that guard against syntax. The proclaimination is not necessary often in binary
+ machine code. Simply the logic produce from the assembly does not contain the 
+ regarded operations as sought by describing in the computer language. So the 
+ construct of the running program can operate witout error checking of this sort.
+ Global variables are the mainstay. The reduction in stack and heap space
+ are often refferenced in garbage collection. An effective logical 
+ path coverage through the program can progressing find variables that are 
+ inline to be utilized many times, or have multiple states in a stack. 
+
+
+
+ A very important concept of performance settlement at the level, is data and 
+display transformation, data formatting, and creation of linked document object model.
+Using the XSLT and XML methodology for a starting point, the formatting and display
+of data, interface objects, and events have to be infused with the data. As a known
+of editing, or display, formatting, with shape draing, shading, image processing,
+communicated to the pipeline. Templates do provide the unraveling of the object.
+Notible Element, and types of behaviour associated with it. As a structure, class,
+creating it within the language as LLVM developed structure, could mean usaing 
+several select methods. The necessity of developing a lower level, interface
+for the display and rendering to be written in c++ using only structs, and readible
+known formats. The element structure has node access using raw pointers. Most
+structures such as style and attribute, can also be inscribed. As a facility,
+the calls to specific types of rendering technology through native ABI and raw memory
+is compatible with BC coding. Therefore, integration of a system to document trees
+and language implementation can be selective and also high performance. This adds to 
+the design, but strengthens some code bases such as the base document object model from
+c++. It utilizes its own interface layer to native language integrate to the new 
+raw memory compunent for language filling. 
+
+When the tri compund of multiple types of algorithms working together, often knowing the 
+bounds of search provides efficiency. For example string searching using regular expression
+is a known method. It is sometime tedious to develop large matching patterns. In this way
+bison is more advanced. The ability to develop a parsing engine that is efficient and 
+will link to inheirited and described language features using the BISON format provides
+efficiency of LLVM. The parser made for memory buffer only.
+
+The ability for operators and statements to be communicative with the inline algorithm
+production facilities provides a means to companion emittances of the operations. A production
+facility is also to deviate from the prescribed calling conventions internally such that 
+protocol endeavours may be made possible. The design should allow for during emittance,
+the operator for the algorithm, adjusted for parameter usage, data type, will also include 
+added types. For example, the amount of calls for data and time, as a numerical representation,
+can be verily reduced as an inline advanced data type. Distributed in all systems even storage.
+As a base date/time numeric with a designed output format integrated, inline compileded using 
+recursion for set formats. Ingregal information qualities extrapolated, and bit wise manulipated.
+Outformat also has length stay with the Local setting. 
+
+Number formating and advanced rounding storage types, integrated with the assembler. Formatting
+routines with sizes and DOM node compatibility for styled inheirited display, target built.These 
+things never change in the display necessity. If one writes the code to change over also,
+in the language, then that genetic code path will contain the genetic type. Merely providing
+the facility provides the fastest build up method for select.
+
+Every boolean in the entire land, changed to a bit could be a target for program. Although
+memory contention could arise from several threads a program would create and expect memory. 
+Too bad.
+
+
+The compiled programs are going to be attached to a document object model, already made
+where epilogue and prolog code interact with the device or operating system. Simply
+the structure now is one c++ box, with the systems embedded in one project. If everything
+links down to the base_function_call stack, the API for applications as a direct
+memory structure that is read only, one would want to design the base
+platform as such. Most of the provisions of the applications should be 
+alloted for types of protected access. There is a handful of useful
+API, and many subsequent systems embark upon creating summarizations
+aut automations of these. In this, base systems have a root to be named well.
+
+
+
+The database system, precludes all storage formats of structure system wide.
+No more text user settings, network settings, or text driver programs except
+language. The file system, and database system are perhaps types that 
+are genetically transcribed to run within a checked context. Yet at this level,
+still using the opened file handles that are native to linux can be functional.
+Yet opening and closing the file associated with a restriction on application layers.
+For system use, perhaps it may be performed at a low level. Device driver
+implementations for better throughput. 
+
+ 
 */
 
 namespace viewManager {
-  enum_algorithm_t {
+  enum_algorithm_t {creating 
     string,
     date,
     time,
@@ -82,8 +186,8 @@ namespace viewManager {
     sort_with_compare,
     thread,
     filesystem,
+    database_storage,
     numericFormat,
-
     base_function_call
   };
 
@@ -95,11 +199,12 @@ class computer_language_abstract_t {
   // ast nodes with inline genetic algorithm
   void emit_algorithm_inline(ASTNode *node, enum_algorithm_t a);
   void emit_document_object_inline(ASTNode *node);
+  void emit_document_object_inline(ASTNode *node, const std::string &markup);
   std::size_t emit_create_memory(unsigned char *b, std::size_t size, bool bmutex);
   std::size_t emit_create_object(unsigned char *b, std::size_t size, bool bmutex);
   void emit_free_memory(size_t id);
 
-  
+
   // generates an llvm component for the BISON language, 
   // can be a cached object of machine code for parser. 
   void gencode_grammer_tokenizer(void);
