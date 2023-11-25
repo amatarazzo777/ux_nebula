@@ -60,6 +60,10 @@ continuing looping and then wait until there is no work being requested in the q
 in system processes of thread pools can even tie two together before proceeding to the next.
  Logic processing is a described, modeled and then generalized.
 
+ Languages can also use the AST and BISON facilities along with this to make languages inside their 
+ language. That is writing a bison for a language advancement, and use the AST builder, llvm generated
+ assembly tokenizer, with a single visit routine in the language implementation.
+
 */
 
 namespace viewManager {
@@ -94,6 +98,11 @@ class computer_language_abstract_t {
   std::size_t emit_create_memory(unsigned char *b, std::size_t size, bool bmutex);
   std::size_t emit_create_object(unsigned char *b, std::size_t size, bool bmutex);
   void emit_free_memory(size_t id);
+
+  
+  // generates an llvm component for the BISON language, 
+  // can be a cached object of machine code for parser. 
+  void gencode_grammer_tokenizer(void);
 
   /*
   This function is filled out in the language defintiion, One long
