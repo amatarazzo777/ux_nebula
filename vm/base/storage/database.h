@@ -52,6 +52,19 @@ Simply placing a marker file, and uploading this file to a server program will a
 Security is a concept not made here, typically user security. Or over encryption.
 
 
+
+For a database link, it is a information part that can be easily updated. It also contains links to 
+server addresses, will develop the connectivity for legacy formats, or` other file database formats.
+odbc, jdbc. The database link here is also used for access to image data that was gather from news 
+feeds for example. Video links. and provide a display format for the cached new xml feed.
+Google XML search cache results from a data mining bot app running locally. 
+
+The database format can also be used for the desktop, and user application storage. The format works
+better than many database competitiors. The update process from version to version is realitively 
+quick when a programmer changes the data storage format or types of data. Importing can be done once,
+or when needed. Most times done once is fine. Well planned applications update not as often. The
+contact and email list. The listing of programs installed on the computer will use this data
+base storage. 
 */
 
 template <typename T>
