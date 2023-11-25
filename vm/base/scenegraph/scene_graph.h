@@ -15,6 +15,6 @@ necessary to transmit from the vfont text system. Beveling data, and
 lighting data. The system can use the same timeing data nd animation 
 system as the 2d vector. Rate and time changes with events.
 
-
-
+The system of drawing commands can be translated to ship the vector drawing
+to the video cards. Although most drawing is done by software filling. Textures
 */
