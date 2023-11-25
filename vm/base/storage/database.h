@@ -43,6 +43,15 @@ use this and operate on a parrelle fasion. Adding advanced node storage is versi
 however providing for a stream and easy location system for syntax is also nice.
 Being able to store vectors of structures. 
 
+
+Template parampack parameters <...> can be used in conjunction with type to for types of 
+record scemea, as is the type of conception format. The storage of nodes, and variable amodes
+of children. Some problems to solve, but should be a fun project.
+
+Simply placing a marker file, and uploading this file to a server program will allow format reading.
+Security is a concept not made here, typically user security. Or over encryption.
+
+
 */
 
 template <typename T>
