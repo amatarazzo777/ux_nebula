@@ -27,4 +27,6 @@ pointers that hold context while an outer shell can be manulipated to expose spe
 of work loads, parameters, or functions. For example, an object code such as the main image top level,
 nodes inside the main image provide linkages to codecs that read it. Partially, fully, decoding.
 The main image codec may have five interfaces. The design of codecs, are buffered oriented at times.
+
+
 */

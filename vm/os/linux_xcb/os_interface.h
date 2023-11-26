@@ -72,7 +72,7 @@ typedef xcb_generic_event_t *os_message_t;
  * function attach_surface().
  */
 
-struct os_xcb_linux_t : generic_os_interface_t {
+struct os_xcb_linux_t {
 
   os_xcb_linux_t();
 

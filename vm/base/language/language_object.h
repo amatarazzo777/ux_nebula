@@ -166,29 +166,13 @@ still using the opened file handles that are native to linux can be functional.
 Yet opening and closing the file associated with a restriction on application layers.
 For system use, perhaps it may be performed at a low level. Device driver
 implementations for better throughput. 
-
- 
 */
 
 namespace viewManager {
-  enum_algorithm_t {creating 
-    string,
-    date,
-    time,
-    vector_array,
-    list_array,
-    queue,
-    mutex,
-    unordered_map,
-    ordered_map,
-    partial_map,
-    sort,
-    sort_with_compare,
-    thread,
-    filesystem,
-    database_storage,
-    numericFormat,
-    base_function_call
+  enum_algorithm_t {
+    data_type,
+    inline_data_type,
+    api_call,
   };
 
 class computer_language_abstract_t {
@@ -196,8 +180,20 @@ class computer_language_abstract_t {
   ASTNodes *node;
   std::vector<std::string> grammer;
 
-  // ast nodes with inline genetic algorithm
-  void emit_algorithm_inline(ASTNode *node, enum_algorithm_t a);
+  // ast nodes with inline genetic algorithm for variables,
+  // handling vector, list, unordered map, ordered map, nad partial search map
+  void emit_object_type(ASTNode *node, enum_datatype_t a);
+  void emit_object_type_inline(ASTNode *node, enum_datatype_t a);
+
+  // api call to c++ base.
+  void emit_api_call(ASTNode *node);
+
+  // an inline system kernel call headers found i nthe <sys> directory.
+  // the includes, advanced features of the file system, process,
+  // thread, mmap mapfing a file to memory, shared memory,
+  // scatter gatter io, and socket communication and pipes.
+  void emit_inline_posix_call(ASTNode *node);
+
   void emit_document_object_inline(ASTNode *node);
   void emit_document_object_inline(ASTNode *node, const std::string &markup);
   std::size_t emit_create_memory(unsigned char *b, std::size_t size, bool bmutex);

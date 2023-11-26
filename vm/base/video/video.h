@@ -32,4 +32,20 @@ can be employed to scale to function interface size, provide color convolusion f
 to change various aspects of the image quality.
 
 Most formats are published.
+The ability to create a new video format for raw buffer input so that the effects of time and audio
+playback can be syncronized together.
+
+There is a need for better and smarter compression due to macroblock size of the hd video pixel space.
+Perhaps a dynamic one that fans out until a color tollerance in the coverage areas has been met.
+How to mark the group to relate.There is a bounds. An area, a number of macro block pixels. They
+have direction relative to each other. Together they comprise a percentage of the video. Together
+they comprise a distance relative to the center.  
+
+
+libvlc
+https://code.videolan.org/videolan/libvlcpp/-/blob/master/examples/helloworld/main.cpp?ref_type=heads
+
+ffmpeg
+
+
 */
