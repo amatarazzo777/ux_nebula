@@ -816,3 +816,77 @@ Yet the interface is often triggered as a pixel render, when the DOM advancement
 greater native platform usage. So mixign the new forms of native rendering, with advanced 
 format input.
 
+Including Machine Learning techniques for writing, during writing as an edit control. 
+Providing spell checker without a network connection. Advanced grammer writing
+and analysis. Perhaps in the future, the space bar will start writing more sentences.
+The tokenized style seem in list patterns of selection, perhaps even two picture icons for narrow
+or broad. The Artifical writing system to include scannin and engine contexts of loaded 
+membranes from a web server search context. Perhaps the reader and writer are unified in 
+types of results and query related subjects. The ability to utilize inference and parameters
+in parameterization of information sense by the user requesting that the contents be online.
+Within a gramatical context and naming systems of the context of multiple contexts involved.
+By providing specific names of theroems, numerical properties, polynomial process solving,
+quadratic equasions solving for various unknowns using sets. 
+
+Using object shape recognition and trained libraries is difficult. The libraries are very large.
+Yet the project used to be named, Google Lens. I am unsure of the local system requirements
+or the amount of advancements. The ability for it to read text in images was very nice, 
+many types of text from photographs. As a find, how to integrate this into a system
+usable, maybe it does not have to require network connections even. Most often
+the process, on a cell phone is suited because of the camera. Yet to start functionally
+with a computer and a camera, tripod, or multiple cameras to provide real time measurements
+of newly generated and made up instruments. The text is read. Perhaps a type of stylus
+and device can even be though. Yet the practice of just using cardboard with OSR
+technology, while incorporating other objects that are toys. A sliding knob, a slider made
+of a lego, xy controller inside a box labeled chrous_extra made of the red brick.
+Obviously the ability to assemble them in software is done in many ways. Playing
+music is a type of tight timing physical action. The capability to build velocity
+sensing integrated into physical world building blocks as a type of lego button
+can be very simplified with an array of touch buttons, that have a type of 
+musical keyboard variance. Typically this is accomplished simply using a series of 
+magnets, and a reading of the proximity and time provides a simple variance of 
+five to ten meanings. The ability to place the most useful seems that the actual key
+be surrounded, underneath the new input. The ability to ulilize very inexpensive
+acoupriments using OSR and OCR provide that LLVM provides the context for 
+what can be recognized. Types of patterns provide building block for digital sound.
+These will be encased in presets perhaps, or new types of summary from those to write
+as the button goes, Simply tap on the nice emblem track editor quick list as just as 
+side panel drawn, or has a QR code. 
+
+From these building blocks, it is even possible to design and engage market creators
+to manufacture the idea of operation to a physical keyboard to include
+a composite of the operations and sound engine. As a set functional play time
+keyboard, with even an HDMI output. Two of them for the projector. A projector
+that incorporates art and visual art production of the keyboard instruments,
+using the state of the OSC and real time DSP for parameters of 3d rendering.
+Providing this inline is necessary, a two CPU task perhaps, and a three sample 
+input. Systems of audio visuals have been very magestic in the past, there are 
+some interesting plugins available for a player named Clementine. 
+More parameters can control drawings and designs such as these as a nice complex
+artistic graph that could be more related to the effects playing. The frequency
+sweep is interesting to hear, with elaborate echos at specific ranges is considered
+hypnotic. Yet providing graphics for them is not present. The relationship of the 
+audio, varying at a lerp rate of a base form to higher frequencies, stopping 
+or even skipping to next octave, known as glide time could be animated
+within the scenegraph. With some guidance, types of forms may be loaded
+as a pattern objective part for a data stream.
+
+
+Describing this set as a relationship
+to order the unknowns as a relationship, to consider varied problem solving. Often in geometry
+these properties are computed from knows such as verticies. Yet the field of mathematics applies
+these basic math truths to all fields of measured science. The variables change to mean other
+types of natural or known scientific measurements. Such as electron spin, bonding principles,
+atomic elements, and the myrad of composites have defined reasonships and interactions. Machine
+learning is instuted by the measurement process, automated and considering statiscal information.
+The known methods of measurement and research productive field depends on it.
+
+If a specific computer language could be modeled to utilize an instrument while applying 
+system tools, many attributes would be founded to be gathered and accomplished quicker 
+using these methods of language and system design. The basis of machine learning, and making
+it be utilized as a government or corporate intution depends on the creating participants
+to provide simplification. Adaptive approaches whereby languages can be fashioned 
+to utilize domain specific relationships established statiscally through varied fields
+of dicipline. The mathe and modeling of doctors, the fluid viscoscity, blood cells, bones,
+compared to other varied jobs is compelling. Yet providing for Nasa functional applications,
+or partical physics modeling. House building to specific codes. 

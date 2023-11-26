@@ -77,7 +77,58 @@ chunk audio. Live verses real time.
 Text to speech engines are prized. I gather investments is in more dynamic modeling
 of the voice and pronouncements. Most, even great sounding, seem in effective. Yet often
 when providing such obsecurities to voice, it may make them un intelligellible because of the amount
-of variance. The capability to be enticed is better.
+of variance. The capability to be enticed is better, as a game media machine, voice model
+data is often within the first layer of text described. The utterance. Currently some data,
+or in the past has been included which is basic audio of a voice. Rules ar formed for 
+building of the sound and how to choose the correct proceeding, previous etterance as well as
+control rate. These basic principles offer approximations combined with sophicated
+audio blending. Yet often the process, as an object oriented one, that includes
+more input from the dsp  to create signals can provite more control over production. Yet often
+more parameters over tonal control production with a basic signal is possible to control
+the sub elements of it as a time function. essentially the parameters of the speaking context
+is passed through as a data stream. By using the current array of utterance selection and
+rule base, using perhaps a type of voxel model to produce envelopes within the utterance using
+HD stretch and pitch alterations may increase the approximated system and provide more 
+emotional controls per sample set. Ultimately the concepts are difficult without advanced 
+knowledge. Systems that use machine learning perhaps are utilizing a set where fragments
+of known language spoken bits are had. Where utterance appear within the text being read, 
+the type of word and the brush of humaness at that point in reading aloud to the micrphone.
+
+Providing models and pitch attenuation with audio additions that mingle with types of 
+speach patterns can ring moods. Creature speech is much easer with this type of flexibility
+in speech production. The engine research is important, yet there are easier methods 
+for content creation using team work. If voices are place, providing a type of character
+in game, a person can be the voice talent chosen and functionally train the model
+for situation as a voice actor. Perhaps a type of professional camera and microphone 
+integrated could solve the input mechanism. Providing appropiate light and color saturated
+dies to the lips for shape recognition make it easier, very reactive and a simple technology
+to implement. Imagine how fast and found some specifications are for in game
+dialog control. As a focus, organic content is a separation from qualities. 
+
+Providing types of work in this nature is dynamic, programmers yell for different reasons
+other than meeting the giant fifteen foot tentical monster. To see the captive moments 
+and that type of dynamic spice to what people would be doing in a FOV, stumbling,
+surprise and per frame as independent actors their voice models meeting requirements
+of the moment. That last bit, when the tentical sweeps around and the tts engine inspects
+"eeuh, get ahuuh the key<done>" and then the creature eats the character. Each tenticle with
+eyes and an organic weapon, such as acid thorns. 
+
+The true sense of voice identified on a business scale has been identified. People
+enjoy knowledge of a variance. On telephony applications it gives an indication 
+as to what can happen,since you are at a prompt system, drink a sip of coffee
+before looking at the keypad on the phone. A bot system can be in place for example
+when the boss is called to hear the complaint using a differnt voice model perhaps 
+is not functionalty as an upgrade path for this type of functionalty. Yet 
+the ability to produce types of speech patterns, more approximated to emotion,
+with types of base DSP effects and mixups as a sound editing composition
+can add to models. The pitch alteration, with perhaps aftertouch effects 
+acoustically defined for a tonal mix, the extra hisses that vary, along with the 
+deep voice is a typical human interpreted concept of a type of voice. The dexterity
+of the model processing and also using sound knowledge to provides granular decision
+making to a style, can be parameterized, and often course parameters as a main controller
+are identified for use. The three tier model while the middle teir is the current
+implementation of such systems, audio data and database relational intelligence, the
+kerning of speech.
 
 The magesty of acting, and other types of forward body actions create a one line story. 
 You could have a program laugh very loud, but the movements of the mouth and bones
@@ -102,8 +153,24 @@ and control the volume. Mixing multiple audio together and stop start.
 
 Timing syncronization can occur using the same event systems used by animation.
 
-
 These classes attach to the main generic_os_t function implemention of class.
+
+The ability to utilize the 5.1 system arrangement as a music format 
+can be specific for sound field automation. Stereo has not even been
+mastered by some. Providing Video animation of computer graphics as 
+a musical art without branding video productions. 
+A type of lava lamp for music, show and play music for projection. 
+The music stream format has tag formats to support what is known as meta data,
+typically to a codec, and transfered to dispatch and timing information
+along with other parameters to the selected codec in chain. Perhaps 
+some parts would control usb devices, or blue tooth robots, lamps
+dim at scary points and brighten along with the vibration under the cusion.
+A rendering projector output of for format and software rendering control
+parameters. Models and textures may be transmitted through the format, as most 
+existing formats provide such as mp3 and also flac, 
+Audio waves.
+
+
 
 https://xiph.org/ao/
 Alsa
