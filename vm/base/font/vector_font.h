@@ -80,25 +80,25 @@ range. Here is a grab bag full of words from the wikipedia.
 and also legacy understanding of font placement. Layout and justification with
 multiple text flowing capabilities have to be known for the complete field of
 text layer to be rendered perhaps. For example, after and underneath effects,
-coloring and flow may depending upon size variations encapsolated in layout
+coloring and flow may depend upon size variations encapsulated in layout
 computation or even a transparent image. Most likely graphics such as corner
 publishments, in the center, should have an extra field or data within the file
 that names the over shadow under parts. In the digital image, a polygon path
-nameing word locking positions for justification. Marking this in a graphic
+naming word locking positions for justification. Marking this in a graphic
 asset is much easier than describing it through tag settings.
 
   Working with user space, a trinket of standard font names exist, yet naming
 beyond the few known from corporate network writing, courier, arial, roman,
-bookman, san sherif, gothic, and script. If we disect the problem from a
+bookman, san sherif, gothic, and script. If we dissect the problem from a
 harvested nature, simply the engine of vector storage supplies the rendering
 pipeline together with functions that can utilize 2d geometry, and work with
 algorithms that are scientific. With the very few routines already borrowed, it
 seems that a mountain of code is gone. Now it is time to add more.
 
   Looking through the character rendering of various Latin fonts listed on the
-google page, a program that analyzes the font files extracting the glyph
-measurements and organizing by name seems natural. An input of perhaps 1500 font
-vectors as a base for statisical study of font names. Aligning each glyph and
+google page, a program that analyzes the font files extracts the glyph
+measurements and organizes by name seems natural. An input of perhaps 1500 font
+vectors as a base for the statisical study of font names. Aligning each glyph and
 storing in a master database measurements that describe the rendering
 differences. This is one form of a database that can be stored or used to
 organize a feature set for a glyph according to language.
@@ -109,9 +109,9 @@ letter. The letters different in sans, serif. The font varies on effect of
 curls, square now, Capital letters, and some curls below the Decender line can
 be variable control. The signature explicit for each time rendering, single
 character change for a particular font to take into account a jitter movement.
-Natural variances in some texts can be fortifide in also helping focus perhaps.
+Natural variances in some texts can be fortified in also helping focus perhaps.
 
-  So disecting the characters in language from a meta perspective, one logic
+  So dissecting the characters in language from a meta-perspective, one logic
 alteration area, and rendering pipeline change. The provisions of knowing the
 segment paths where the tick forms on the capital W, a labeling system defines
 itself in addition to official terms perhaps. As a range of controlling the sub
@@ -119,9 +119,9 @@ gymph vector path can be object oriented.
 
   A system of dynamically creating fonts by name is a modern feature set in
 monochrome color. Yet fonts as a vector system, monochrome, offer the ability to
-reintroduce the font nameing convention with more pleasing user desire by
+reintroduce the font naming convention with more pleasing user desire by
 controlling the strength of twenty types of gylph settings at a various strength
-  than knowning a name that fits the criteria. The ability to craft the size and
+  than knowing a name that fits the criteria. The ability to craft the size and
 utilize a conformat convention is inviting. Color, and many other new features
 affect the name of the font.
 
@@ -132,7 +132,7 @@ connecting the emotion, desire, personal or commercial desire of a font comes
 from a range board selection of font names, perhaps types of advanced pet names.
 Users know of the massive amount of fonts, perhaps they desire less fonts when
 the font browser appears. So dynamically designing a font with normalized
-parameters accross the glymph range, characters that have a global contextual
+parameters across the glymph range, characters that have a global contextual
   knowledge of the style settings across the board, numerically set once, form
 their curve path, deformation, expansion, wire hashes, to mimic the style of
 font.
@@ -148,13 +148,13 @@ can now be transfered to other languages through their engine.
 
   The ability to utilize shapes and a type of library forming image compositing,
 communication and parameter based text, or layout configuration from the objects
-creates polished visual designs. The ideas of a baloon, or pop up window are to
-be energized with shape libraries that inheirit the text layout engine, new font
+creates polished visual designs. The ideas of a balloon, or pop up window are to
+be energized with shape libraries that inherit the text layout engine, new font
 capabilities.
 
   A good design can allow wonderful results, empowering the value of screen
 resolution to display enhanced text fonts not ever before seen. For example, one
-type of design feature that works well for versitility is domain shift operators
+type of design feature that works well for versatility is domain shift operators
 for the instruction set. These instructions do not control color but
 modification to the base form character. Example,
 
@@ -179,7 +179,7 @@ formation - first byte signature domain
 of patterns that are processed into multiple letters by strength. The multiple
 point star, with mirrored sides can alter the shape of the letter slightly.
 perhaps in the positions selected such as lower left and top right of all
-applicable letters that are capital.
+applicable letters that are capitalized.
 
   enlarge
     the enlarge command can form multiple meanings.the parameters and effect the
@@ -197,26 +197,26 @@ and another part, the operation of the command "enlarge" can change. shrink
   wave
     The wave function is powerful in that it creates miniscule patterns of wave,
 or curve pattern data with tesselation variance control. Paper torn edges
-together with erode
+together with eroded
 
   swash
   select
-    The select can mean a group of particular letters, effect only puncuation,
+    The select can mean a group of particular letters, effect only punctuation,
 or finance character. All upper case characters, or just the five characters
 that have curls below the decender line. Select is most likely the first,
-parameter that selects the entire list of english ones. Other selection modes
-could utilize 	top, bottom, left, or	right size for example. Using select to
+parameter that selects the entire list of English ones. Other selection modes
+could utilize   top, bottom, left, or right size for example. Using select to
 identify a generalized area followed by a deformation, or strength setting.
 
   ending
-    ending of all of the parts or joins. To control these areas aestically,
+    ending of all of the parts or joins. To control these areas aesthetically,
 size, and parameters. The capital T has about six areas that could be tailored.
   part
     every glyph has a natural selection known from the part, or component. The
 point on the capital a, for example, or select all of the letter tops. All
 letters with points.
 
-pixmap	domain 2 after render to lumenence mixing values, some systems have
+pixmap  domain 2 after render to luminance mixing values, some systems have
 specialized antialias noise film grain, can vary per render of character
 
 
@@ -227,12 +227,12 @@ bevel
 shading
   appearances of text with selective surface shaders. The rendering system
   provides the ability to place smooth bump stripes, Styling with, wavy, organic
-patterns, symetrical yet partically instructed patterns,  emblem artifacts known
+patterns, symmetrical yet partially instructed patterns, and emblem artifacts known
 to aid in quality. This occurs without downloading image data, the textures are
 generated.
 
 There are fifteen, a bitstream after compacting. Perhaps the pixmap context
-change will contain image processing that adds luminence effects to the pixel.
+change will contain image processing that adds luminance effects to the pixel.
 Film grain, noises, edge deterioration, inner brightness contrasts. pattern
 embossing, varying tiny decals inside painting. controlling the bevel also.
 
@@ -241,12 +241,12 @@ When this system of byte codes are compressed down to a bit stream, new commands
 within the domain, occupy the same bit sequence as the previous. But the new
 context gives those positions newer meaning.
 
-To capture the reading sized text for screend and large HD screen print,
+To capture the reading sized text for screen and large HD screen print,
 television prints, smart tv rendering and new rendering technologies as a vector
 system means that its font system is compiled for the video card, and the screen
 technology.
 
-Consumer tv with glitter, greatness and readibility in print, menu systems, and
+Consumer TV with glitter, greatness and readability in print, menu systems, and
 animated painting sprites can elevate the mood.
 
 
