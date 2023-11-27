@@ -38,4 +38,10 @@ can be interalized allows sub components of the buffer to be translated.
 Most likely a system summary and even short language would allow permutation of it as routines.
 Imageing the RGB, 256 color, and BGR, being able to be translated with much easier array
 access, looping. 
+
+
+image controls that work with video buffers are likely integer based. Often the video 
+need balancing to liven color. Constrast. Many systems in the past have been fashioned
+to balance in live. Some easy controls on the base output may be useful. For video
+and image.
 */
