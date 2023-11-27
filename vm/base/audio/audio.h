@@ -225,7 +225,7 @@ public:
   class parameter_t {
   public:
     uint16_t id;
-    uint16_t setting;
+    std::variant<uint16_t, std::string, float> setting;
   };
 
   class time_t : daw_node_t {
@@ -237,9 +237,10 @@ public:
   public:
     time_t ts;
     time_t te;
-    uint8_t id;   // the id of the parameter to modify over time.
+    uint8_t id;       // the id of the parameter to modify over time.
     uint8_t function; // the function to use lerp on between ts and te
-    uint8_t val;    // value setting - 255 is a good range for input devices. Many keyboard only have just 7,
+    uint8_t val; // value setting - 255 is a good range for input devices. Many
+                 // keyboard only have just 7,
   };
 
   class automation_curve_t : daw_node_t {
@@ -259,20 +260,51 @@ public:
     time_t te;
   };
 
-  class audio_effect_t : daw_node_t {
+  class audio_effect_t : public daw_node_t {
   public:
     std::list<parameter_t> p;
     std::function<void> *fn_pointer(void);
     automation_curve_t curve;
-    impose(PCM_t data);
+    virtual impose(PCM_t data);
   };
 
-  class instrument_t : daw_node_t {
+  class eq_t : public audio_effect_t {};
+  class compressor_t : public audio_effect_t {};
+  class crossover_t : public audio_effect_t {};
+  class gate_t : public audio_effect_t {};
+  class limiter_t : public audio_effect_t {};
+  class chorus_t : public audio_effect_t {};
+  class reverb_t : public audio_effect_t {};
+  class flanger_t : public audio_effect_t {};
+  class phaser_t : public audio_effect_t {};
+  class distortion_t : public audio_effect_t {};
+  class bit_t : public audio_effect_t {};
+  class tube_t : public audio_effect_t {};
+  class rotary_t : public audio_effect_t {};
+  class delay_t : public audio_effect_t {};
+  class stereo_t : public audio_effect_t {};
+  class transient_t : public audio_effect_t {};
+  class filter_t : public audio_effect_t {};
+  class comb_t : public audio_effect_t {};
+  class DeEsser_t : public audio_effect_t {};
+  class pitch_t : public audio_effect_t {};
+  class tremolo_t : public audio_effect_t {};
+
+  class effect_chain_t : public daw_node_t {
+    std::list<audio_effect_t> n;
+  };
+
+  class instrument_t : public daw_node_t {
   public:
+    std::string name;
+    std::size_t instrument_id;
     std::list<parameter_t> p;
     std::function<void> *fn_pointer(void);
-    automation_curve_t curve;
     play_note(const note_t &n);
+  };
+
+  class synthezier_t : public daw_node_t {
+    std::list<instrument_t> presets;
   };
 
   class sample_t : daw_node_t {
@@ -280,7 +312,7 @@ public:
     PCM_t data;
   };
 
-  class sampler_t :public instrument_t, public sample_t, public daw_node_t {
+  class sampler_t : public instrument_t, public sample_t, public daw_node_t {
   public:
   };
 
@@ -293,7 +325,6 @@ public:
 
     time_t length;
   };
-
 
   class track_t : daw_node_t {
   public:
@@ -313,6 +344,10 @@ public:
   void record();
   time_t start;
   time_t end;
+  float tempo;
+  float measure;
+  float swing;
+  float clock;
 };
 
 class audio_t {
