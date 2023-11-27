@@ -86,6 +86,12 @@ processes.
 The facilities available as an inline algorithm in various languages can be a wonderful task.
 Making the data storage contain only data, while indicies are stored in another area. 
 
+An interesting aspect of the linux system is that it keeps track of sparse data, and 
+using this effect along with directory structure is interesting for database. The utilities
+that exist such as tar, gzip, and directory compression algorithms can provide
+remarkable compression for data structures, and information systems in text files. zip and 
+store as a token block along with index. 
+
 
 */
 

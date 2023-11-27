@@ -47,5 +47,15 @@ https://code.videolan.org/videolan/libvlcpp/-/blob/master/examples/helloworld/ma
 
 ffmpeg
 
+https://en.wikipedia.org/wiki/Libavcodec
+
+the use of the libav codecs is most likely the suited based code. for video and audio.
+the processing most likely in another system ring.
+
+the facilities and temptation to write code
+code processing and activating sound buffering is likely handled by the ffmpeg library.
+At times the interface is so generalized, or there are multiple routines.
+ Simply, to inform the decoder of where the memory buffer is and the size
+ is the output.
 
 */

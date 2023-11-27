@@ -188,6 +188,11 @@ may edit multiple lines of text.
 \details The multiline edit control provides editing of multiple lines of
 text. The information is set using the data attribute.
 
+There are so many ways this compunent needs to be coded appropiately. Syntax,
+ide status, writing tools, emails, grammer, font file selection, tool boxes,
+editor word processor in box, diagramming, emdedded externals, macros,
+column, table, grids, sorting, line numbers, buffering large files using mmap.
+
 Example
 -------
 \snippet examples.cpp ux_multiline

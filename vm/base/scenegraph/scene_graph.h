@@ -88,7 +88,10 @@ holes attached, if game play suggests that one can traverse the world
 as a functional concept. Object storage provides the effect of minimal exposure of the 
 details.
 
-
+Scenegraph can be argued as a system component because of its nature with the 
+video card. The capability to abstract a calling mechanism to clients
+and provide a data format compatible with system hardware is the goal.
+Clients are made aware using visitor pattern of actor.
 
 
 */
