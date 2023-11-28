@@ -68,4 +68,13 @@ dreampt up not available on other kernels. pointers are random access to files, 
 
 some aspects can increase, sound card. pathways to device drivers.
 
+
+an important function is partially reading the file as a random access object. 
+For example, how to load one codec at a time with a dependency graph. Provide
+language providisons for modules, of this sort, to compile and relocate the code.
+Dynamically load other codecs and link with existing dependencies and loading
+others and relocating them. Unloading components of the graph, decreasing and managing 
+the share count. Reorganzing blocks on program data memory after
+types of fragmentation exists.
+
 */

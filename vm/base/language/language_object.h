@@ -166,6 +166,13 @@ still using the opened file handles that are native to linux can be functional.
 Yet opening and closing the file associated with a restriction on application layers.
 For system use, perhaps it may be performed at a low level. Device driver
 implementations for better throughput. 
+
+A genetic template language for algorithm description that can be utilized
+with llvm is necessary. Otherwise the stack of calls to embed calls to other systems, 
+in sequence for a process becomes tedious. Algorithm description and data
+types. The language will have no display or network capabilities, formatting of 
+string, numerics, floating points, time, date, and also c++ dom all toegether
+in one format, and template for creating inline data types.
 */
 
 namespace viewManager {

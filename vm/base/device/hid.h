@@ -116,13 +116,13 @@ capturing the attack as a depth time curve. And providing a range of start and
 stop measurement within the complete hinge sensor design. As a miniture distance
 of varying ranges, small spaces coule use a laser per key, with optical data encoded 
 on the mini hammers. Expecting to read a position measurement only. An important
-design function is scan rate will not have to be at the range for lazers.
+design function is scan rate will not have to be at the range for lasers.
 As a switch and physical key device, many types of functional designs can
 operate. One type of problem is that this keyboard plays differently than
 a typical midi keyboard. Soft is soft and hard is hard. With a combination,
 and the new amount of variance, often controlling the sensitivity for 
 sound output volume. The ability to model intention can be elevated with better
-input switches that even cheap keyboard can have, lazer optical. Continious scanning left and right
+input switches that even cheap keyboard can have, laser optical. Continious scanning left and right
 along the hinge. The hinge is encoded with data, and position is read from the microswitch.
 Yet the mouse laser offers a dpi, the amount of space of the hinge movement. A center 
 rod holding all keys in place with air spring. Bouncy air balloon on near oppsing side
@@ -159,7 +159,7 @@ is purely mechanical is optinum, This enables the readings to be focused
 on the domain of quality. One problem however is the laptop is only 
 so wide. Connecting all 32 keys should be wireless. The compounding efforts of the 
 physical hinge reading offers no quality of keyboard. Built like those hinged plastic
-peices on the paper out tray of lazer printers. Two pegs pop it into place. Back and white keys.
+peices on the paper out tray of laser printers. Two pegs pop it into place. Back and white keys.
 under the space bar, and near the hammer of the wire frame keyboard, are vertical
 hammer sensors. 
 
