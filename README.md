@@ -255,3 +255,42 @@ From these building blocks, it is even possible to design and engage market crea
 Describing this set as a relationship to order the unknowns as a relationship, to consider varied problem solving. Often in geometry these properties are computed from knows such as verticies. Yet the field of mathematics applies these basic math truths to all fields of measured science. The variables change to mean other types of natural or known scientific measurements. Such as electron spin, bonding principles, atomic elements, and the myriad of composites have defined relationships and interactions. Machine learning is instituted by the measurement process, automated and considering statistical information. The known methods of measurement and research productive field depends on it.
 
 If a specific computer language could be modeled to utilize an instrument while applying system tools, many attributes would be founded to be gathered and accomplished quicker using these methods of language and system design. The basis of machine learning, and making it be utilized as a government or corporate institution depends on the creating participants to provide simplification. Adaptive approaches whereby languages can be fashioned to utilize domain specific relationships established statistically through varied fields of discipline. The mathe and modeling of doctors, the fluid viscosity, blood cells, bones, compared to other varied jobs is compelling. Yet providing for Nasa functional applications, or partical physics modeling. House building to specific codes.
+
+In C++ and LLVM, combination of linux, dynamic binary languages, and device driver
+dependency graphs offser a better construction kit for device drivers. Many
+of their designs a a mashup of code. Requireing a restructure or patch for each new device supported,
+version functionality. And each program checking and reconditioning themselves with typically
+pointer interface indirection. Yet multiple systems and teir heirarchy control along with device
+driver templates, a system feature, provides a more deticated and dynamic interface. Often drivers
+are not updated compared to application features. NVIDIA, Intel and Qualcomm would benefit from such
+technology. Performance of embedded systems, while supporting these features as 
+a capability of base, working perfectectly, provides many reusable functionalities.
+
+The software market, can produce more deticated devices, while allowing energies in market
+competition to yeild in the feel of quality. Running on a smooth system, makes great use
+of the technology platform. Focusing on those ideas learned, and offering customers their
+very own way to reinvent a desktop for their industry. Base technologies such as this,
+especially with language, and an updated lower level interface are great starting
+tools for many projects. 
+
+In conclusion, the market value is scope of implementation. The capability to establish
+funcational designs, increase the capability to produce applications, or systemare.
+Template device driver languages, and other requirements can be next phase. The system
+can be built as a functional process to include multiple ideas mentioned here. The 
+inclusion of template language for LLVM multiple language, cross language
+and dynamic language creation should be an initial requirement. Designing base systems
+for interface and object systems, polymorphic structures working with multiple languages
+as a template class provides very good rapid language production. The template
+language is simular to the capabilities of c++, and includes facilities of 
+a localized use of algorithms, limiting perhaps some types of library access.
+Some aspects, and customer requirements actually require reduction in some areas,
+not needing the colorful fonts, but requireing the same mechanisms of interface 
+distribution. Consumer devices, can be made much smaller. Very thin laptops,
+and flexible rubber tablets. Waterproof and very water resistant. Also making very 
+powerful use of currently technology where software already made has 
+been utilized. Object systems, mutex languages, mutex algorithms, shared memory, 
+system database, visualization, 3d video games, sound, bison, language, llvm, and 
+c++ base. Program ring security. 
+
+
+
