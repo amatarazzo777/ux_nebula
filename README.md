@@ -6,7 +6,7 @@ Currently, the macOS, iOS, and Android NDK library needs research. The template 
 precisely with the standard library without adding new data types. It supports rapid development and 
 incorporates a small set of memorable names within its model. It is a templated oriented 
 implementation for higher performance and integrated syntax. It offers the document 
-object model integrated with C++ language as a natural syntax that appears like HTML because of the use of <>.
+object model integrated with C++ language as a natural syntax that appears like HTML because of the use of &lt;&gt;.
 The following development platforms and rendering technologies are capable of use for development and distribution.
 
 Research into method of invocation of newer font systems that do not utilize external sources. Better projection,
@@ -205,7 +205,7 @@ While the code is built based upon nomenclature HTML basic tags, to invoke. Modi
 yeild placement into a raw pointer node tree can be useful. The task of pointer management of this kind has 
 been solved manytimes before, problems do come again. As an enhancement, moving away from small token within
 the function namespace to a well spell out method tends to offer programming companionship. Such as 
-instead of createElement<H1> to using more of a c++ street legal academic terminology, to 
+instead of createElement< H1 > to using more of a c++ street legal academic terminology, to 
 createElement<H1_t>({}), or createElement<heading_t<1>>({}). Moving away from some condensed forms to more structure.
 These questions should be prized.
 
@@ -406,10 +406,10 @@ forms of gradient definition within the color tag. Color should also support
    query usage. 
 
 ======
-	The paragraph here is index for names, <h1>,<h2>,<h3>, <b>, <i>, <c=greenLatern.vbrush,size=title/2,index=YSA332> HTML tags</c>. Women
+	The paragraph here is index for names, &lt;h1&gt;,&lt;h2&gt;,&lt;h3&gt;, &lt;b&gt;, &lt;i&gt;, &lt;c=greenLatern.vbrush,size=title/2,index=YSA332&gt; HTML tags&lt;/c&gt;. Women
 	with the first name Heather, Christina, Monica, Julie, Toni, and Saphire drive girl 
 	styled automobiles. Their in dash GPS and functional Voice attendant are made from products
-	using this system, selectable names	Mikey, Mark, Steve, Chris, <c[YSA332]>Tony</c> or PrivateZ. If Julie selects Mark, and Saphire selects PrivateZ, fill select based on nearest phonetic in sorted ascending order by modulus set and distance in relations. How many of them pick Tony, Better styled Italian with a very slight accent, say good  spaghetti, meat balls in the text to speech.
+	using this system, selectable names	Mikey, Mark, Steve, Chris, &lt;c[YSA332]&lt;Tony&lt;/c&gt; or PrivateZ. If Julie selects Mark, and Saphire selects PrivateZ, fill select based on nearest phonetic in sorted ascending order by modulus set and distance in relations. How many of them pick Tony, Better styled Italian with a very slight accent, say good  spaghetti, meat balls in the text to speech.
 
 ======
 
