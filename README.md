@@ -131,7 +131,8 @@ These functions can be added to provide like STD syntax. Review and simplify if 
 One may also simply provide call through template classes named like the STD. Does it make the code more readable?
 Downfalls?  Here is an example.
 
-  auto e=vm.push_back<h1>({});
+
+      auto e=vm.push_back<h1>({});
 
 
 Evaluate system design complexity. Less code and more elegant algorithms. How much data should the system be able 
