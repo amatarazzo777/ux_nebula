@@ -63,6 +63,6 @@ At times the interface is so generalized, or there are multiple routines.
  audio require audio equiptment. The range of audio effects is often simple of types of movies.
  Limiter. A system that uses the event and call back mechanism of the base system, file mapping
  memory can simplify the buffering system that syncronizes the audio and video image together.
- Most of these systems are built into the stream, that is the stream is already balanced.
+Most of these systems are built into the stream, that is the stream is already balanced.
 
 */

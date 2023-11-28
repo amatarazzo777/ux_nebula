@@ -40,6 +40,15 @@ too much complexity exists. Because it is a complete application.
 It has to provide support for many formats. Using
 LLVM in conjunction with language and UI can be advanced.
 
+The limited screen use of bitwig lends itself to be one of the best legacy one screen.
+A newer model for organization can be tailored to work as a type of text,
+and UI in a document object that can be scrolled. Areas may be set aside and reserence.
+Easier control over drum patterns and compositing tracks. Offering in searches for 
+type of completition. Songs of this sort, can become even a program to power the 
+daw base system functionality. It seems the function of naming and track ordering
+is secondary. Yet to may some parts as a textual based console with a component ui.
+Block building songs.
+
 Sound production in digital form is simply a series of numbers, integer even.
 16bit audio is a 16bit integer with a range beteen -32767 and +32767. This
 integer is expects to vary over time to create wave patterns. This number
