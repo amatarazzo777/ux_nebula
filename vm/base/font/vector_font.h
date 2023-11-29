@@ -259,10 +259,7 @@ How many ways to decorate and change the letter is a property of shape, first re
 as a non basic one, but one that decomposes and can a specific type of control, or 
 area for decoration. G and g. Notice the hang on lower case g. y, j, q, p. All of the 
 names about that hang and how it should curl, stretch and behave like a funny animal
-tail are built into the word. Court cases are waiting to happen perhaps because of 
-vfont style sheets and email. Yet planning for the removing of parity and adding age
-content for font systems is necessary. This is not accomplished in modern day.
-
+tail are built into the word.
 
 
    */
