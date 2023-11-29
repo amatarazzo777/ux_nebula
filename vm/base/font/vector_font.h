@@ -249,6 +249,19 @@ technology.
 Consumer TV with glitter, greatness and readability in print, menu systems, and
 animated painting sprites can elevate the mood.
 
+As times, the true type froms does have a format that may be encapsolated, fonts
+would the pop stack instructions for example, like fira mono. Or just provide
+a database file format using the database_t methods for interface discovery. Each
+character has many more properties that can be modified on an individual basis. Each
+character, as a routine, has this format. Not external to the operating system, but
+reutilized as a base font, for all display. The letter A,a E,e I, i and consider F, f.
+How many ways to decorate and change the letter is a property of shape, first recognized
+as a non basic one, but one that decomposes and can a specific type of control, or 
+area for decoration. G and g. Notice the hang on lower case g. y, j, q, p. All of the 
+names about that hang and how it should curl, stretch and behave like a funny animal
+tail are built into the word. Court cases are waiting to happen perhaps because of 
+vfont style sheets and email. Yet planning for the removing of parity and adding age
+content for font systems is necessary. This is not accomplished in modern day.
 
 
 

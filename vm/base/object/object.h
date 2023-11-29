@@ -175,6 +175,65 @@ map
 queue
 stack
 
+the ability of two or multiple subscripts, often elude. Simple multiplication provides
+the amount. Often, if lists are not completely filled, but the output needs to be stored by
+irregular or sparsh index numerics. floating point is also a binary format. The distinct 
+process of numerical hashing to create a searching list. A most suited solution, is always
+a generalized hash or data larger than the cpu register, or even registers if appropiate.
+The unordered list is a search for the hash of the input against the token storage, those that 
+are in the map. The ability to sort large numerics, and move them is efficient. Often these
+numerics provide a pointer type that also contains a comparrison function. A sort algorithm
+can be an out standing and complex if scope is not limited. One of the primary functions
+of a sort, such as the quick sort, recursive quick sort, shell sort, or bubble sort
+if to order the elements by compare. An efficient sort is the quick sort, which
+is trickey and you must look at again. 
+
+Yet it moves less data. In larger lists, other types of effective uses of multi processing can 
+speed these types of sorting processes. Permutation sorting, as mentioned in go faster,
+applies also an interesting approach to grid data and indexing. Yet as a means of sorting
+using the partition index with divides a list into parts for sorting. Two threads two lists, etc.
+When the list is traversed the iterator could skip the number of blocks to the next list. Many
+more chunks can be sorted at the same time, or indexed. Typically indexing on databases are slow.
+These types of in memory to database file is a type of recursive tree. As a dataset, indexing,
+and join conditions with other tables can be transcribed and invoked in small amounts of code,
+
+Data structures within the file must first indicate their group doamin. Each binary tag, could 
+have an extender, When FF in a byte is reached, the next two or three bytes are used, wasting
+one byte. To plan the first byte in combination of structure is key to the longevity.
+A database format that is encoded with a byte prefix for header definitions, and then
+the reader can be functional. As a code unit, providing stream and memory allocations for 
+node building, loading types of different models and data, to match the index files. Or files
+that contain many types of sub components, indexes as an individual file.
+a new data record and index blocks added to the end. For example, often
+when index data is created, it contains the orginal key. Thereby creating a duplicate 
+of it. To point to the original data as an index often is not accomplished. As a 
+data warehouse operation, strategy is to develop a sense of durable longevity in data storage.
+Therefore, a record can also point to its data. data stored within a sorted list, typically in memory,
+partially. Files, or segment index files, can provide balanced index management on disk. Allowing 
+records added, to be merged within a merge table. Multiples of these may exist. As a file
+operation block moving is time consuming on any device. That is, to manually move an
+entire block down just to sort for index is not typical for large database structures.
+
+Providing capabilities of index searching while the strucuture remains partially
+on disk is more effective. Indexing at this point is provided in a specific pattern
+for effeciency. An index header of provides the range an index block has within it.
+Based on the query, the block may be loaded, or another one traversed to. Ultimately how
+many blocks, or directly identifying the first few blocks quicker to skip can be a great
+time saver. Cacheing index headers in memory and then reading the block, that 
+points to the data is typical.
+
+Often a type of time saver sought in data retreval and editing
+is only utilizing the necessary bandwidth for data movement.
+To and from disk. As a table that contains column and row information,
+each cell or tuple as an indirection to storage, means that the row
+is only scanned for the offets. A small code example would read separately
+each column within the row, and gather the data from the tuple storage area.
+The tuple storage area is actually data within the index, if found will .
+be in memory.
+
+
+ indexes, provides a summary
+
 as well, one basic one performs well for most of them. list, works well for the map, queue
 and stack. Vector is a requirement of memory being a chunk. map is the one where a hash key can be 
 calculated for the key. Multiple types of hashes for the data often used the base
@@ -182,6 +241,33 @@ numeric hashes to form a union of the data. Data can be added together using the
 or any type of math operator. Some hashes make careful planning to find the most effective way
 for the hash to be non colliding. 
 
+As a .soo file, the system database file format and storage mechanism should be apt to store
+the c++ object, and the prototype to the language. The clang interface uses the os method.
+By also placing publishing information and prototypes to the function interfaces, providing
+memory attachements for the tunneling of stack, heap, shared, or data structure. 
+The data .soo file can contain arbitray files using an array of codecs or parsers.
+Dependecy data must include links for these attributes. A process where now, a website
+is parsed, and then pictures start to appear. As a unit chunk, the .soo file can be very versitile
+as containing a book, or several books. A new language definition, and multiple types of parsers.
+The object system provides linkup with IDE, and documentation, syntax, linter, markup parsers for 
+pre and post step compile. A portion of the .soo file could be a document object model, a css type 
+rule stype, and an instrument pcm with parameters.  A read only database using the fast store,
+fast read method. 
+
+As a component, defining usually its dependencies as a table is established. The ability
+to concisely load other facets related to the object from other libraries names, or 
+hopefully utilize system memory linkages. In a protected application user system, way away from 
+these components, this is a select resource with operations not to malfunction.
+
+Requireing publisher status, or any rules made up for the software environement. 
+if the user no longer links with the c++ standard library, yet the templates
+are for the modern platform. The base c++ compiler does support templates. When I 
+view the current implementations of STL, they are coded very lightly. As well,
+seem to have way too much code, for the likely functional implementations. AS well,
+many have had problems serializing them. The constructs of the string library,
+from basic string, are routines. While regex does provide searching, more
+is always needed such as bison. Bison can solve both small and large. The 
+llvm of lexer of parser can be much more functional. 
 
 
 As an object to work for multiple languages in a way that is useful, has a step process
@@ -291,7 +377,77 @@ to facilitate caching to speed up the busy bus slow down. You will notice that t
 and storage device run a select speeds that are different. nvme is much slower than
 ddr memory for example. So a waiting for data occurs, and also a type of transfer to the device.
 
+As a system database format the database_t memory and file cache data, template
+and type indexed. Supporting multiple objects within the system. And being
+capible of translation to other database systems, as a balanced provider. That 
+is syncronizations at miniscule intelligent block layer, for changed conditions.
+As well, lists within the database and structure can be block layered according 
+to directory entry. 
 
+Imagine if the software object is a production of a hugh server data, and translated
+for the memory api linkage version availble as version network connection. Thereby
+centralizing software manufacture, discrete network connection, and a handling of 
+application publishing. The conditions of market offerings merely produces a
+applause with all features working perfectly. Less code, and evalution of POSIX
+kernel implementation. Typically a host of offerings in the API, the main facets
+of only nailed in disk systems using onboard laptop controller, and less abstraction
+in redirection between types of cacheing. Most often knowledge built into drivers are 
+very helpful and are specific. Yet at times object oriented interfaces, with
+a protocol method can increase driver context abilities. Compiling a specific type of 
+interface that is channeled for a select group of functions. As well, multiprocessor
+drivers to increase memory throughput to slower devices through on board caching. 
+
+For example, a video driver for a laptop will contain one routine that applies
+setting it to the max resolution, creating the linkages between scan pixel memory,
+publishing the format. A routine for the onboard 3d graphics unit, identified,
+and a database of object code that abstracts the usage to OS provider,
+and also. Aspect of driver design that it is very cumbersome is allowing 
+a dynamic model for interface provisions. The device driver should provide
+a registration of its hardware identification. Later internally assemble
+the codepathway for requested interfaces. Having an object interface
+of the binary nature has its set number of permutations. As a device driver
+provider, interfaces can be known to be locked or unlocked. As well
+devices have states that are read in various way. The system provides fail safes
+to over calling some devices to often, timer. time, etc. As driver knowledge 
+to produce bleretter interfaces, specific to the device, the system layer
+must be harnised to provide specific object compiler options for c, and c++
+for a select type device. For example, imagine onboard the device is simply
+the description of its interface structure. The format placed ready only
+object at assembly. For video hardware, this is very appropiate. This 
+is an imprint of the object design and buffer formats with a symbolic id
+attached, for each permutation of one. The MOV instruction is polymorphic 
+in this way. Making device identification discovery, is typically how this is 
+accomplished now, and hence the drivers have the be static. Typically
+devices may as co processors accept types of instructions, and lists of data.
+
+A device driver compiler, or providing the encoder asm fixup for a system clang,
+or g++, etc. If a device accepts cache data, ften there are varied formats. The 
+production to an object format, to the object layer, enables more complex hardware
+systems to be manufactured. Typically this is provided through the format 
+of state calls, and set values that are shifted and ored together for each function
+call. buffer reading and writing to and from user memory is often overlapped
+with too many protected mutex layers. If the system provides the list and vector
+management, the programs can operate at the user software layer through 
+shared memory. The communication protocol much more effective,
+while allowing actual device usage to be integrated within
+the capabilities of driver interface. Software will have to be updated to
+handle new published formats perhaps. Or ultimately, a separate token 
+for interface and function id. More function IDs, where some interfaces are reutilized
+as a base feature hardware knowledge design. Many functions can operate
+on a known bandwidth of data payload, translating the api to a more 
+specific format for scenegraph usage.
+
+
+Another example is applying a database file format to an internal storage device,
+as a usage by a database engine, entire volume at the driver layer. In reality,
+if the database object is also applied, a better file system approach can be applied
+per device. The ability to have decomposed locations, and random access tailered for 
+nvme, with a system internally adapting to product design. Using chaining more 
+efficiently. Value of header token formats can be applied dynamically and selectively
+associating indexes and code associatvity. that provides the file format. Files
+that have selective and dynamic properties, attributes. Yet the existing working codebase
+does seem enticing, using the POSIX read, and write, and scatter write methods. Later, if used
+the system stack for device layer can be evaluated.
 
 
 */
