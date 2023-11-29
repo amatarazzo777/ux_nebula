@@ -29,6 +29,27 @@ http://www.ideasonboard.org/uvc/
 
 v4l
 
+Most likely a vector camera than may provide only edging information.
+The pixels are converted to a shape_t object from camera. Through
+a map editing software, produce a hotspot configuration. for each of 
+the labeled areas. A text searching algorithm matches words to known
+actions. icons of the daw, or mapped macro functions. User libraries.
+once they have twenty five typed cards, height of the slot in made up
+device. labeled perhaps where a pro midi knob is. Cards are easy to make.
+A rolodex of presets but much better for than the old punch cards. Audio
+formats and samples can also be encoded on paper. In someones made up game
+machine, a stack of music idol to give bionic song mixes with bubble gum.
+Types of collectors items, rarities to be preserved. Perhaps make them out of
+plastic that does not decegrate in the sun. 
+
+No download, media optical. Optical lasers are used in spinning plastic
+discs are much more dense. Yet operate of them is a whirl. A better device would be a lamp
+style, where both camera and multiple types of lasers are used to read it simotainiously,
+yet spin much slower. The ability to place newer wave lengths does narrow the binary
+field. One problem with cd access of spin, is eye focus. The most simple methods are used,
+reflected or non reflected from the micro groove. The surface itself coated to focus on
+specific wave lengths. 
+
 
 */
 

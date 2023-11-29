@@ -16,6 +16,24 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
  
+ /*
+USB and driver software support are a promise usefulness. Luckily the format of usb
+and the types are friendly. Linux supports many types of usb and block
+level device formats already. 
+
+
+Data marches for high bandwidth devices, need externalization. The expansion of USB speeds
+are very wonderful. Yet in reality the design is still cumbersome. A way to place a oblong
+shape that holds data into a cradle, and have it slide into the device for reading and 
+also power is more modern. The dreamers of the cd/ dvd and dlue ray use this method.
+For a data device, perhaps it could be a measure of how many the device can hold within a tray,
+inside the laptop or computer. I think this makes it more user friendly than a plug,
+or carrying it in another location.
+
+
+
+ 
+ */
 namespace viewManager {
 class usb_t {
 
