@@ -165,6 +165,24 @@ linux system api for time. Using the linux system api, can be faster for the OS
 parts of the few requirements for applications. Reformating and display
 is the 
 
+The basic algorithms for the c++ standard are simple for the most part. For example,
+the following container methods, all provide iteration and storage.
+Geometric memory allocation for dynamic allocations smoothes some applications.
+
+vector
+list
+map
+queue
+stack
+
+as well, one basic one performs well for most of them. list, works well for the map, queue
+and stack. Vector is a requirement of memory being a chunk. map is the one where a hash key can be 
+calculated for the key. Multiple types of hashes for the data often used the base
+numeric hashes to form a union of the data. Data can be added together using the or operator,
+or any type of math operator. Some hashes make careful planning to find the most effective way
+for the hash to be non colliding. 
+
+
 
 As an object to work for multiple languages in a way that is useful, has a step process
 that can be requested to be non automatic as some languages must have, and also
