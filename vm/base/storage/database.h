@@ -25,7 +25,8 @@ building, partial index building. Record block saving.
 SQL, and tasDA. SQL processing. Remote. Already written materials.
 Transfer local database to remove, leave file, keep cache.
 Integrate with loarger database of different type.
-Later sync. Every x sync.
+Later sync. Every x sync. The format can transfer to these database
+formats.
 
 Used and adapts to size. Memory databases to scale remote and local.
 
@@ -45,7 +46,7 @@ Being able to store vectors of structures.
 
 
 Template parampack parameters <...> can be used in conjunction with type to for types of 
-record scemea, as is the type of conception format. The storage of nodes, and variable amodes
+record scemea, as is the type of conception format. The storage of nodes, and variable nodes
 of children. Some problems to solve, but should be a fun project.
 
 Simply placing a marker file, and uploading this file to a server program will allow format reading.
@@ -84,13 +85,30 @@ database engine can perform single user works. In memory. mutex can offer record
 processes.
 
 The facilities available as an inline algorithm in various languages can be a wonderful task.
-Making the data storage contain only data, while indicies are stored in another area. 
+Making the data storage contain only data, while indicies are stored in another area is fashionable.
+
 
 An interesting aspect of the linux system is that it keeps track of sparse data, and 
 using this effect along with directory structure is interesting for database. The utilities
 that exist such as tar, gzip, and directory compression algorithms can provide
 remarkable compression for data structures, and information systems in text files. zip and 
 store as a token block along with index. 
+
+
+Using the database system at the device driver layer for even file system,
+can be effective for some types of base usage. Yet more likely a
+system that some of the techniques for data storage, and chaining. 
+Using more storage space for dynamic file types of 
+user and program ownership. As a node inheirited facility.
+Enabling better index storage, and compression by knowning storage format,
+and having system codecs related to the blob. For example, specific
+databse formats that encase knowledge may be large, and types of index searching
+built for node traversals based upon a floating point. Or a series of 
+other branched statistics. Perhaps initially designed as a file,
+yet programming intelligience for a specific operation such as local image 
+OSR for users at their desk. Voice recognition for their user. These components
+produced for their system by a server software can offer better performance.
+
 
 
 */

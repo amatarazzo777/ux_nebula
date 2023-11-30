@@ -46,12 +46,15 @@ and UI in a document object that can be scrolled. Areas may be set aside and res
 Easier control over drum patterns and compositing tracks. Offering in searches for 
 type of completition. Songs of this sort, can become even a program to power the 
 daw base system functionality. It seems the function of naming and track ordering
-is secondary. Yet to may some parts as a textual based console with a component ui.
-Block building songs.
+is secondary. Yet providing some parts as a textual based console with a component ui.
+Block building songs. UI tends to play text, secondary. Text describes sound, and 
+also can be used as object building. Allowing for reference. 
+
+Other useful types of patterns can be adopted and mixed.
 
 Sound production in digital form is simply a series of numbers, integer even.
 16bit audio is a 16bit integer with a range beteen -32767 and +32767. This
-integer is expects to vary over time to create wave patterns. This number
+integer is expected to vary over time to create wave patterns. This number
 directly changes the position of the woofer. example, the square wave is simply
 both range numbers repeated a certain number of times.Since the information is
 consumed at a particular rate, it must be continually produced to change.
@@ -87,20 +90,20 @@ wave form producing language with algorithic editing of chunk audio. Live verses
 real time.
 
 
-Text to speech engines are prized. I gather investments is in more dynamic
-modeling of the voice and pronouncements. Most, even great sounding, seem in
+Text to speech engines are prized. I gather investments are in more dynamic
+modeling of the voice and pronunciation. Most, even great sounding, seem in
 effective. Yet often when providing such obsecurities to voice, it may make them
 un intelligellible because of the amount of variance. The capability to be
 enticed is better, as a game media machine, voice model data is often within the
 first layer of text described. The utterance. Currently some data, or in the
-past has been included which is basic audio of a voice. Rules ar formed for
+past has been included which is basic audio of a voice. Rules are formed for
 building of the sound and how to choose the correct proceeding, previous
-etterance as well as control rate. These basic principles offer approximations
+utterance as well as control rate. These basic principles offer approximations
 combined with sophicated audio blending. Yet often the process, as an object
 oriented one, that includes more input from the dsp  to create signals can
-provite more control over production. Yet often more parameters over tonal
+provide more control over production. Offering more parameters over tonal
 control production with a basic signal is possible to control the sub elements
-of it as a time function. essentially the parameters of the speaking context is
+of it as a time function. essentially the parameters of the speaking context are
 passed through as a data stream. By using the current array of utterance
 selection and rule base, using perhaps a type of voxel model to produce
 envelopes within the utterance using HD stretch and pitch alterations may
@@ -114,8 +117,8 @@ micrphone.
 Providing models and pitch attenuation with audio additions that mingle with
 types of speach patterns can ring moods. Creature speech is much easer with this
 type of flexibility in speech production. The engine research is important, yet
-there are easier methods for content creation using team work. If voices are
-place, providing a type of character in game, a person can be the voice talent
+there are easier methods for content creation using team work. If voices are to be
+placed, providing a type of character in game, a person can be the voice talent
 chosen and functionally train the model for situation as a voice actor. Perhaps
 a type of professional camera and microphone integrated could solve the input
 mechanism. Providing appropiate light and color saturated dies to the lips for

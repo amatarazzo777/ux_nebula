@@ -65,4 +65,24 @@ At times the interface is so generalized, or there are multiple routines.
  memory can simplify the buffering system that syncronizes the audio and video image together.
 Most of these systems are built into the stream, that is the stream is already balanced.
 
+An aspect of image and image at the raw layer is that they are 
+very simular. Over the period of video, the system and subsequent 
+productions of video, on screen animations, transistions,
+are solved using the integrated vector, and image transisition.
+
+KDEEnlive has transisition and effect libraries, can they be coded 
+or transferred. Applying a minimal format, for accurarcy, yet 
+versitile in object spread, the system integrates all compositie
+for real time video production. Videos that may or may not 
+depend on a timeline. The multiple format of compressed image data,
+3d models, 2d vector drawings, syncronized between formats on screen,
+even some parts of video from codec, decoded into the outer edges, 
+as texture and polygon are clipped at specific view ports of 
+types of windows. GL, or software. 
+
+The connectivity of the font system, utilizing memory effectively,
+scenegraph, and also limiting the types of supported software.
+to balance both current system and neutral system behaviour. The 
+ability to provide this real time enables system experiences 
+in the visual realm to be tailored from the GUI position. 
 */

@@ -61,7 +61,11 @@ in system processes of thread pools can even tie two together before proceeding 
  Logic processing is a described, modeled and then generalized.
 
  Languages can also use the AST and BISON facilities along with this to make languages inside their 
- language. That is writing a bison for a language advancement, and use the AST builder, llvm generated
+ language. There is another parser, that is written java, named ANTLR4 than also produces
+ parsers. So it seems that perhaps a specific implementation that utilizes the knownledge
+ of parser generation, and increases the performance.
+ 
+ That is writing a bison for a language advancement, and use the AST builder, llvm generated
  assembly tokenizer, with a single visit routine in the language implementation. To minimize
  language and provide filling out requirrements typical, of building user defined types 
  that operate with objects or api inside the language. The facilities, once
@@ -212,6 +216,10 @@ class computer_language_abstract_t {
   // can be a cached object of machine code for parser. 
   void gencode_grammer_tokenizer(void);
 
+  void generate_parser(void);
+  void generate_build_system(void);
+  void generate_source_indexer(void);
+  
   /*
   This function is filled out in the language defintiion, One long
   switch statment that emits the tree node. It is called 

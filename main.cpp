@@ -8,14 +8,8 @@ void testview(viewer_t &vm);
 
 /****************************************************************************************************
 ***************************************************************************************************/
-#if defined(__linux__)
 int main(int argc, char **argv) {
   // handle command line here...
-#elif defined(_WIN64)
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
-                   LPSTR lpCmdLine, int /* nCmdShow */) {
-  // command line
-#endif
 
   // create the main window area. This may this is called a Viewer object.
   // The main browsing window. It is an element as well.
@@ -27,6 +21,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE /* hPrevInstance */,
       paddingLeft{5_pt}, paddingBottom{5_pt}, paddingRight{5_pt},
       marginTop{5_pt}, marginLeft{5_pt}, marginBottom{5_pt}, marginRight{5_pt});
 
+  // a test of the font system in the scenegraph object.
+  auto &gldiv = createElement<scenegraph_t>(objectWidth{45_pct}, objectHeight{60_pct});
+  gldiv << "<color=green,20pt,2,airbrush.canvas.vbrush>Three D text</color>"
+  gldiv << createElement<bar_chart_t>("Test bar Chart", std::vector<uint8_t>{10,4,55,32,4,65});
   testview(vm);
 
   vm.processEvents();

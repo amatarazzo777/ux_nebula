@@ -20,6 +20,13 @@ namespace viewManager {
 @brief The base class for all display nodes. The
 class ensures that all display objects have an emit function.
 The emit function is used during render and after layout calculation.
+
+The canvas object, as a wonderful include base to start from, forms
+the block of how the object will be used. As a transfer to the 3d pipeline
+using the opengl linux formats, a select type of canvas to wrok with in
+that not completely 3d as addressing as a screen display technology,
+some aspects of the generations can allow all applications to run in open gl mode
+or not. 
 */
 struct display_node_t {
   virtual void emit(canvas_t *c) = 0;
