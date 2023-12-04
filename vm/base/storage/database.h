@@ -24,12 +24,11 @@ building, partial index building. Record block saving.
 
 SQL, and tasDA. SQL processing. Remote. Already written materials.
 Transfer local database to remove, leave file, keep cache.
-Integrate with loarger database of different type.
+Integrate with larger databases of different type.
 Later sync. Every x sync. The format can transfer to these database
 formats.
 
 Used and adapts to size. Memory databases to scale remote and local.
-
 
 A person writing one would consider that the visitation of node map
 of the trees, as a unit stored on disk and the edit commands are 
@@ -110,6 +109,65 @@ OSR for users at their desk. Voice recognition for their user. These components
 produced for their system by a server software can offer better performance.
 
 
+The database system is versitile, yet as a template class, providing a delicate way
+for multiple types of data to be stored in a file. Later loaded and represented as the 
+same memory structure. The ability to reutilize the functions, as a memory, or partial memory
+system can be within the design. The ability to store directory information, and also access 
+index information in one file format. The database_t object is a small yet functional 
+part of the system. The system_database_t is a local file dataobject. Databases
+can also be representative of multiple formats of data such as image, text, scripts, movie frames,
+3d models. While not stored in a streaming format can be applied to balance
+several field record types of image, etc. to a local databae across the network. 
+
+The database can store the scene graph object. A file loaded to produce a snapshot of the 
+3d context. The video format.
+
+
+Some uses of PC component technology as a node cluster for receiving data at speeds of the 
+front side bus, acting as node storage device recording the ID and sample data. Quantum
+sensorsn plasma engine designs, require more discovery. Many fiends of science have to rely
+on older methods of computer software development. Python is luckily running on large super 
+networks. Yet all depend on the console. 
+
+Yet the ability for a high end intel server to receive a max of 60 gigs of data, write
+it to a high speed drive, or raid array. Perform node database clustor work as well. Analysis
+on data. The ability to functionally load a scientific datacenter operation with scalinging 
+storage and analysis. May not be suitable for some types of work. 
+
+Types of database mechanisms can be more self discovery aware on disk and also apply an 
+very beneficial use of object technology. More advanced than just data storage. Imagine 
+the same database mechanism working cross language, multi user for system tasks. 
+Perhaps a database will be queried for items such as hardware.
+
+The ability to have multiple databases, yet not relating them together would also
+be ineffective. For example, object systems of specific domains, such as text edit,
+and also calendar. Both controls so apply them to the control registry - or database_t
+system file. Yet the process of adding multiple other types of objects becomes
+difficult to address as one name. Simply dividing the object types into various
+databases. Yet as a complete system being able to capture each database,
+in a type of search, or query for how it relates to system functionality.
+And combine the information into another location. Applying a link to this data.
+
+A system where system preferences, object operations, desktop defintitions,
+ and user data are captured. The format open, versitile, can be updated and 
+ also tranferred. It has to be transfered to a software base that 
+ will understand what the settings and structures mean. Often requesting
+ that a parser be in place, does not solve software usage.
+
+ When databases are created, a bitmap numeric locates the database to a specific system type.
+ In systems, these types can be summarized, and also analyzed. The database system also 
+ supplies bucket processing in its api desgn, to enable selection, while also providing
+ a weighted means to choose the best quality fit for an object. This may be useful when two
+ objects ocupy the same namespace, yet the calle is expecting a specific object.
+
+ One type being a user type, for allocation to the user domain. 
+ A system type can be registered for planning as a centralized data storage registry for
+ groups of objects. Types of controls, or editing controls. Proviging a heirarchy, and 
+ inheirtance for objects. 
+ 
+ So as a central registry, all controls on the system can be inspected. Each
+ contained within their database. Central object registry is not needed for all databases perhaps.
+ File and directory scanning can locate data.  
 
 */
 
@@ -143,12 +201,105 @@ class data_node_t {
 };
 
 
-class database_file_t {
+
+class database_t {
+  public:
+
+  /*
+   a specific index.  location by varying index operator. 
+   objects into the system  can be hashed together to find any 
+   type of index. Providing a remappable node list for any type 
+   of indexes. As a format it can be a high level format for 
+   types of standard template library. As well, encompassing 
+   dynamic indexing, and searching, related nodes.
+
+  */
+  template typename<T, ...> operator[]::(T, ...) {
+
+  };
+
+  template operator<< {
+
+  };
+
+  template operator>> {
+
+  };
+ 
+};
+
+
+/*
+@brief When databases are stored on the disk, or network in a file,
+these are the types of blocks the datastream can have.
+The header is the first block in the file. The header
+also points to the directory entri table. Where possibly
+multiple objects exists. When data, index, directory, or
+tuple space runs out because of editing, the chain block is used to
+point to new informaiton written in freespace.*/
+static class enum db_block_type {
+  db_block_header,
+  db_block_index,
+  db_block_data,
+  db_block_tuple,
+  db_block_directory,
+  db_block_chain
+};
+
+/*
+The type of system database file. This information is in the database header.
+The database file format replaces the application modules and also program
+type from the standard linux api. The system functions start_process, and 
+also fork, are wrapped with the database reader. The program reader
+applies the same methods as the system api. Eventually the format readers 
+should be included as part of the OS.
+
+The db_object provides a non mangling namespace to identify prototypes
+and interfaces by integer reference. Objects within the newer format 
+can be applied to multiple languages and also container types. Essentually
+the object operators, hashing mechanism, and a few other routines are utilized.
+
+The language object provides a standard mechanism for using compilers on the system. 
+Languaes can be dynamically built. The object file format encapsolates the 
+cache and also other parts of the programming language. The object is 
+tailored to work with an IDE, or multiple IDEs that can utilize the format, programs.
+Source code, or compacted sealed source code, can be compiled.
+
+the db_index, and db_data are for storage of object data within a node list.
+The data may be read, while the structure is preserved on file as well 
+as in memory. The formt provides an mechanism for query.
+
+*/
+static class enum system_db_type {
+  db_program,
+  db_object,
+  db_language,
+  db_index,
+  db_data,
+  db_document_tree,
+  db_document_transform,
+  db_directory,
+  db_composite,
+  db_font,
+  db_brush,
+  db_image,
+  db_audio,
+  db_scenegraph,
+  db_video,
+  db_shape,
+  db_registry,
+  db_symbolic_link
+
+};
+
+
+template<typename T> class database_file_t {
 public:
   struct header {
-    static float version = 1.1;
+    static float version = 1.0;
+    system_db_type dbtype;
     std::size_t free_storage;
-  };
+`  };
 
   class relative_chain_t {
   public:
