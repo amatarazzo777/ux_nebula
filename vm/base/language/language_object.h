@@ -118,7 +118,7 @@ in system processes of thread pools can even tie two together before proceeding 
  written in boost, that allows the description and logic of the parser to be inside a c++
  program. The mechanisms for describing the words, and matching offer simular operators when
  considering BISON. So for example, one may take a source text format, and generate a c++ program
- using the boost library. Compile it as an object. Develop the language as a target may offer that 
+ using the Boost Spirit library. Compile it as an object. Develop the language as a target may offer that 
  some types of not all parts are in existance. Yet a recognizeable "process chain" file template implementation
  provides the fill in c++ objects for implementation. Providing many advanced algorithms and 
  consolidation. Perhaps for some types of language definition there would be a separate set 
