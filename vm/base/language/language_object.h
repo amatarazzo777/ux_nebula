@@ -87,7 +87,7 @@ where some of the participants waiting for the signal are near within the curren
 By dispatching to neighbors this information, some types of searching speed can be increased. 
 This can be handled by the base database_t format, using a memory database that is shared, 
 or promoted to shared and reattached to systems as a thread enabled container and object
-operators for cross langauge, advanced designs furfilling c++ to OS object and module loading.
+operators for cross language, advanced designs furfilling c++ to OS object and module loading.
 Providing dynamic late time bindings. Using advanced POSIX OS features where the standard
 library stops. The relationship of C, to linux is provided in its API as a native. Simply
 the cstandard library reintroduces these through functions, adopted as a type of formatter.
@@ -114,8 +114,28 @@ in system processes of thread pools can even tie two together before proceeding 
 
  Languages can also use the AST and BISON facilities along with this to make languages inside their 
  language. There is another parser, that is written java, named ANTLR4 than also produces
- parsers. So it seems that perhaps a specific implementation that utilizes the knownledge
+ parsers. As well an execellent BNF parser generator that is perfect for the jobs. A library
+ written in boost, that allows the description and logic of the parser to be inside a c++
+ program. The mechanisms for describing the words, and matching offer simular operators when
+ considering BISON. So for example, one may take a source text format, and generate a c++ program
+ using the boost library. Compile it as an object. Develop the language as a target may offer that 
+ some types of not all parts are in existance. Yet a recognizeable "process chain" file template implementation
+ provides the fill in c++ objects for implementation. Providing many advanced algorithms and 
+ consolidation. Perhaps for some types of language definition there would be a separate set 
+ of file or archiecture types. Where as a simplier inheirtance based language provides. So it seems that perhaps a specific implementation that utilizes the knownledge
  of parser generation, and increases the performance.
+
+ The Source code compiler for the system dispatches the compiler to multiple layers of parsers and 
+ data segment or structure generators utilizing the clang base is a positive direction. Clang is
+ provisioned with types of expansion capabilities that make it suited. Yet offering these deviate from
+ standard. As types of advancements, some are held captive as too long lived and become old.
+ To provide directions away yet remain within the C++ design is essential. Yet neverbefore has
+ the oppurtunity existed in previous technology as a product using LLVM has. Simply by 
+ advancing upon the clang engine with minimal changes allows reintroduction of existing
+ known AST tree code that is function. It is interesting to reutilize the same 
+ API calls to populate the AST tree from parsing other languages. Therefore the ability
+ to integrate the clang compiler with other parsers that yield, is a very
+ favored task of a developer machine. 
  
  That is writing a bison for a language advancement, and use the AST builder, llvm generated
  assembly tokenizer, with a single visit routine in the language implementation. To minimize

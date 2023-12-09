@@ -258,9 +258,10 @@ The db_object provides a non mangling namespace to identify prototypes
 and interfaces by integer reference. Objects within the newer format 
 can be applied to multiple languages and also container types. Essentually
 the object operators, hashing mechanism, and a few other routines are utilized.
+The prototypes and calling interface mechanism are described. 
 
 The language object provides a standard mechanism for using compilers on the system. 
-Languaes can be dynamically built. The object file format encapsolates the 
+Languages can be dynamically built. The object file format encapsolates the 
 cache and also other parts of the programming language. The object is 
 tailored to work with an IDE, or multiple IDEs that can utilize the format, programs.
 Source code, or compacted sealed source code, can be compiled.
