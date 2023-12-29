@@ -68,7 +68,7 @@ POSIX base provides methods where booting and many system functions are
 handled.
 
 Languages such as C and C++ are losely modeled on CPU instruction sets
-providing a great order to multiple facets of know CPU instructions.
+providing a great order to multiple facets of known CPU instructions.
 The names or operators consolidated to machine code operators. STL,
 provides a higher level of low level algorithms. Yet C, or C++ does not 
 define many other aspects of output. A very basic system. Cython, the 
@@ -100,7 +100,7 @@ applies this already, doubling the work effort occuring in most c and c++ progra
 
 Mutex and multithreaded programming with memory management and UI, database etc. Thread 
 pool and interface abstraction to using this concept is easy. Thread pool manager has a 
-metric for balance, low and high. The ow number of threads is known to be available.
+metric for balance, low and high. The os number of threads is known to be available.
 The high number is limit before signal wait. Each algorithm step needing work is added
 to the queue of the thread pool manager. It has the abstract interface and within the 
 c++ class has the function filled with multitasking. Often types of objects perform
@@ -114,7 +114,7 @@ in system processes of thread pools can even tie two together before proceeding 
 
  Languages can also use the AST and BISON facilities along with this to make languages inside their 
  language. There is another parser, that is written java, named ANTLR4 than also produces
- parsers. As well an execellent BNF parser generator that is perfect for the jobs. A library
+ parsers. As well an execellent BNF parser generator that is perfect for the job. A library
  written in boost, that allows the description and logic of the parser to be inside a c++
  program. The mechanisms for describing the words, and matching offer simular operators when
  considering BISON. So for example, one may take a source text format, and generate a c++ program
@@ -122,7 +122,8 @@ in system processes of thread pools can even tie two together before proceeding 
  some types of not all parts are in existance. Yet a recognizeable "process chain" file template implementation
  provides the fill in c++ objects for implementation. Providing many advanced algorithms and 
  consolidation. Perhaps for some types of language definition there would be a separate set 
- of file or archiecture types. Where as a simplier inheirtance based language provides. So it seems that perhaps a specific implementation that utilizes the knownledge
+ of file or archiecture types. Where as a simplier inheirtance based language provides. 
+ So it seems that perhaps a specific implementation that utilizes the knownledge
  of parser generation, and increases the performance.
 
  The Source code compiler for the system dispatches the compiler to multiple layers of parsers and 
@@ -132,14 +133,14 @@ in system processes of thread pools can even tie two together before proceeding 
  To provide directions away yet remain within the C++ design is essential. Yet neverbefore has
  the oppurtunity existed in previous technology as a product using LLVM has. Simply by 
  advancing upon the clang engine with minimal changes allows reintroduction of existing
- known AST tree code that is function. It is interesting to reutilize the same 
+ known AST tree code that is functional. It is interesting to reutilize the same 
  API calls to populate the AST tree from parsing other languages. Therefore the ability
  to integrate the clang compiler with other parsers that yield, is a very
  favored task of a developer machine. 
  
  That is writing a bison for a language advancement, and use the AST builder, llvm generated
  assembly tokenizer, with a single visit routine in the language implementation. To minimize
- language and provide filling out requirrements typical, of building user defined types 
+ language and provide filling out requirements typical of building user defined types 
  that operate with objects or api inside the language. The facilities, once
  installed are available as a temporary resource, or as a system language. Perhaps security
  is of one concern and language dissemination. Installing it as a base language, may be improper.
@@ -163,7 +164,7 @@ in system processes of thread pools can even tie two together before proceeding 
  primarily due to the ease of LLVM and register accountability. 
 
  Languages define often a structure for memory protectiond, or other relationships 
- that guard against syntax. The proclaimination is not necessary often in binary
+ that guard against metphores using syntax. The proclaimination is not necessary often in binary
  machine code. Simply the logic produce from the assembly does not contain the 
  regarded operations as sought by describing in the computer language. So the 
  construct of the running program can operate witout error checking of this sort.
@@ -178,10 +179,10 @@ in system processes of thread pools can even tie two together before proceeding 
 display transformation, data formatting, and creation of linked document object model.
 Using the XSLT and XML methodology for a starting point, the formatting and display
 of data, interface objects, and events have to be infused with the data. As a known
-of editing, or display, formatting, with shape draing, shading, image processing,
+of editing, or display, formatting, with shape drawing, shading, image processing,
 communicated to the pipeline. Templates do provide the unraveling of the object.
 Notible Element, and types of behaviour associated with it. As a structure, class,
-creating it within the language as LLVM developed structure, could mean usaing 
+creating it within the language as LLVM developed structure, could mean using 
 several select methods. The necessity of developing a lower level, interface
 for the display and rendering to be written in c++ using only structs, and readible
 known formats. The element structure has node access using raw pointers. Most
@@ -195,7 +196,7 @@ raw memory compunent for language filling.
 
 When the tri compund of multiple types of algorithms working together, often knowing the 
 bounds of search provides efficiency. For example string searching using regular expression
-is a known method. It is sometime tedious to develop large matching patterns. In this way
+is a known method. It is sometimes tedious to develop large matching patterns. In this way
 bison is more advanced. The ability to develop a parsing engine that is efficient and 
 will link to inheirited and described language features using the BISON format provides
 efficiency of LLVM. The parser made for memory buffer only.

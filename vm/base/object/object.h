@@ -24,16 +24,23 @@ A base wrapper for databases, external .so, program source code to the compiled,
 for validity. As a method that requires other properties such as querying an interface 
 and performing initialization to that interface. Most object types have aliased
 pointers that hold context while an outer shell can be manulipated to expose specific types 
-of work loads, parameters, or functions. For example, an object code such as the main image top level,
-nodes inside the main image provide linkages to codecs that read it. Partially, fully, decoding.
+of work loads, parameters, or functions. For example, an object code such as the main visual image 
+top level reader, nodes inside the main image provide linkages to codecs that read it. 
+As such a haywire of codecs and formats exist. The object system provides a way to
+load as a database entity one type of code, and its internal dependicies for a concise input
+and output format. Partially, fully, decoding.
+
 Other parts of the system have other designed interfaces. Such as statistics of the image. Merely
-a few bytes preceeding the function point have state information. A new type of calling mechanism
+a few bytes preceeding the function pointer have state information. A new type of calling mechanism
 that retains encapsolation, and system security. The ability to ascertain the number of requests
 that multiple threads are requesting can be built into the interface logic of the objects. Using
-mutex pools. That is if the design requires such complexity. A mutex pool is a self serviing 
+mutex pools. That is if the design requires such complexity. A mutex pool is a self servicing 
 parameterized algorithm that ties directly into data storage for the process of only
-one read/write access at a time. Newer models are comming that will give different abilities.
-But for now, if this happens, a low level computer program crashes. So, if within a
+one read/write access at a time. Newer hardware models are comming that will give 
+different abilities. But for now, if this happens, a low level computer program crashes. 
+
+
+So, if within a
 database for example, there exists a large structure. Only sections of it need locking and 
 also reporting of changes if the algorithms is set up for so. If a document object model, inheirts
 the database_t node, it can be used as a query service for objects. Also indexing, streaming,
@@ -41,7 +48,7 @@ compression and cacheing.
 
 Some objects will not require this. The ability to use the format for saving and reading many 
 file formats will depend on the facility. Two bytes are equal to an amount of unique numerical 
-representation. If bit 1, indicates loaded and initialized, simply providing a decision bt compare
+representation. If bit 1, indicates loaded and initialized, simply providing a decision bit compare
 and a jump on the instruction for the actual quickest call. Bit as 0 means work 
 has to be performed. Indicating all other possible states of objects, such as the first step,
 loading. Another state would be polymorphic change of interface, interfaces are changing from
@@ -51,17 +58,17 @@ language was an adequate invention for system programming at a high level. Now p
 or some types of python using select modules or importants are a better design. Perhaps at 
 times, its numeric types are cascadingly too large for useful computing. 
 
-Yet there are more simplified libraries and modules to be made for the oython language.
+Yet there are more simplified libraries and modules to be made for the python language.
 The interior communication couplings are thin. With a complete context of multiple langauges in stack,
 and algorithm templates inline, a more dynamic language barrier can be found. Some languages,
 by design can load modules written in itself known as late binding, undiscovered. As a type
-of performance known, some types of languages features and pure native compilations of template 
+of performance known, some types of language features and pure native compilations of template 
 types does not produce a functional late bind. That is, if all interfaces have been resolved 
-to show. Parts of the system, if using base type of algorithm implementations such ation as vector<>, would 
-have the ability through contain and system knowledge that new types can be added. As, the second 
+to show. Parts of the system, if using base type of algorithm implementations such as vector<>, would 
+have the ability through container and system knowledge that new types can be added. As, the second 
 byte, is a signature byte that maps a function with the prototype. Or structure over memory that 
-inplements a call site. The third teir of object inner composition gives light to the closure
-methods, that makes use of a different type of memory, or saving it on the stack. Unsure of 
+implements a call site. The third teir of object inner composition gives light to the closure
+methods, that makes use of a different type of instance memory, or saving it on the stack. Unsure of 
 how actual intel binary works. Yet a better implemention can be made than c++ implements
 with genetic templates. Most would consider these template types difficult to write,
 in comparrison knowledge, a long history of computing makes this simple to understand. 
@@ -70,13 +77,62 @@ and os fixups where necessary. Yet knowledge that the system is designed for the
 linux kernel, more can be leveraged to depend on the design.
 
 For example, the template for multiple types, to include the comparrison as compiled code
-into the object reduces. example below of a template for the node class. The template
+into the object reduces codebase by applying a formal abstract collection design for use
+with base algorithms. One knows of numeric properties, various bit range properties,
+and even types of modular math. Typically most notible cpu instruction designs apply 
+conversions between formats of various sizes. Yet internally for specific types of 
+behavior to occur even wrapping the numeric to be meaningful after conversion is necessary.
+For example, many know of how twos compliments is used for both negative and positive integers
+with sign extension for signed types. As a feature of storage merely, the interpretation by 
+the ALU aligns that operations are even separate
+for these data types. So spreading within the intel domain, 8, 16, 32, 64, 80 and with floating point
+even 128 and 256 bits are used. The machine code provides programming typically 
+to the data type for instruction. Yet to actually convert a decimal format, or a bit size,
+sign to unsigned, there are specific methods and behaviours that c++ implements.
+As a find, such as the butterfly under the microscope, the intel instruction set
+also supports math in textual form, yet not typically used by any system.
+
+So runtime template production with expression evaluation is also performed 
+simularrly within the llvm namespace yet providing a higher level structure
+than direct hardware communication. Features of CPU instruction sets are 
+even more complex aside from supporting a myriad of them. Yet at time the provision
+is possible with types of protected code memory. In linux this is applied as a 
+series of system calls. Directly suppling the buffer to the LLVM, marking the 
+memory as a process memory, and applying a functional interface to
+the chunk of memory has many problems to consider. Yet inately the v8 engine
+supplies a deticated framework for the javascript language. Comparatively
+the rework of simular types of system layer work may not be
+necessary, as outcomes of operating system code should be well planned. 
+
+Yet necessaryily of dynamic type of loading can be possible. The newest 
+forms of the c++ research editions are leaning towards the modules arena.
+Yet at first glance, it seems apart from the header as a functional identity.
+Yet it seems that interface layer is a separate language for runtime linkup.
+In reality, some direct c++ technology implementations lend to existing
+compiler design, os process and format storage for modules. The coverage
+of the newer language features are not as well defined, so typically internal
+storage formats for template permutations, the genetic stream line.
+
+
+example below of a template for the node class. The template
 class language is a subset, providing only base operations, such as selective
 memory type storage. Stack, process,  or shared. Within the design, components
-or memory may be selectively trasfered and accessed by known demand. The selected
+or memory may be selectively transfered and accessed by known demand. The selected
 components are designed to operate within a node, and parent node locking mutex.
 Designing the mechanishms to transfer each item, manage it is important
-The main image codec may have five interfaces. The design of codecs, are buffered oriented at times.
+The main image codec may have five interfaces. 
+The design of codecs, are buffered oriented at times.
+
+One problem with the standard library is that it is effectively backwards compatible.
+There are many redesign implementations that can be issued with the base K&R 
+c, and the adding of c++ expressive. Yet often the language growth in a modern popular form
+provides shows oversite in mutex, shared memory and process loading. That is, specificaaly 
+types must be functionally transferred. Logically, providing a newer standard that is not
+backwards compatible gives great possibility for driving out older mistakes. Such as 
+instructing more precisely where memory can be allocated for use. Or even providing
+automatic transfer of data when necessary. So a thing to note is that the c++
+compiler and the standard library are separate. That is one may simply apply a better 
+base library. Effectively hiding the library internally for the OS layer if necessayr,
 
 Lets plan the usage of T, as an object for container support
 With these operators used as a specific use, multiple
@@ -448,6 +504,112 @@ associating indexes and code associatvity. that provides the file format. Files
 that have selective and dynamic properties, attributes. Yet the existing working codebase
 does seem enticing, using the POSIX read, and write, and scatter write methods. Later, if used
 the system stack for device layer can be evaluated.
+ 
+As a general purpose object, the mechanisms of inheirtance provide the layers necessary to
+define abstract interfaces. Ultimately, objects are simply an automated additional pointer
+that has a context. VTable monitoring has been established in legacy types of only structure
+approached to generic C programming. The Danish C++ version includes this and conceptual layers
+of utilizing the existing compiler low level approach. The recognition that problems, are bulbs 
+of focus, one could have called the mechanism Bulb for example. Therefore the term object as a 
+noun provides classification. 
+
+Classification, or the netted dictionary for a cornerstone idea, is often drafted for complex 
+systems, to achieve a organized balaance. The tendency to name objects, create, components, and 
+even have to redesign because of the concurrent development and design process are primary targets.
+People love what the benefits are from having the knowledge of creating them, with a passion
+code is tethered to feel pride and feelings of prolonged quality life. The parties that can 
+happen because of the deticated succcess. I think that Rust is misleading when C++, has its 
+serious advantages. If design were to mechanise the c++ base to change, for an applcation
+design a simular yet restricted access. Yet the unraviling of Scientists that hammered the browser
+to get a platform. 
+
+SGML, hyperlinks and images. A captive of technology is its far reaching plans. Often organization
+controls provide reclusion seeing no obvious need to defer from metaphoric change. Yet the enticement
+as a more balanced and design coherent technologist can outdate even W3C. Financial currency
+is well liked as a national resource. The necessity of nationally based FDIC communication
+to the client device must be much more private. This does entail a more deticated type of stream
+and better defined. Thank you W3C for defining all the tasks that is required for taming 
+those mis behaving computer programmers. Javascript is ok. Multiscript. Game goxes, audio devices.
+V8 engine is maintained. The design of Rust, has a complex name and fun pascal style as
+a type of design insult. Go is more likely a business projection model. the term "mut" offers
+a connection with dog terminology, while the language offers no other enticing primes. 
+Cargo, like as if baggage from pervious experiences identify with security concepts.
+The breeding of such langauges provides obsecurity. Many other identities with the male 
+knowledge are aloft as a mainstay, in the corporate arena. 
+
+Glad the ceremony has been saved
+perhaps to mention that what must be upgraded in the c++ language. The task
+of arguing name languages international laws held by people that also
+torture people. That is the terminology "concept" as a generlization of 
+audience and necessary code. American technology is a type of private
+sector that often is considered influential within US military.
+Yet people, through these acquaintances, often are not deticated to
+computer programming. If a sargent had to yell and read out each 
+compiler error, of the c++ langauge, we would develop our own
+based on c. C was an American language, now cursed with good and bad.
+A hotel in Vegas is named "D", and therefore a cultural belief 
+"C&`" seems a more hyglyphic meand of staying within the c range, 
+proceeding c++, with objects that are streaming delicately by
+system design. Utilize a formal visualization other than
+pure text. Parser at compile time for data structure to C.
+Letting go of some legacy to break compiler design at the new cap 
+version. .cpp will remain the extension name. A lofted pharse of a
+computer story name, polymorphic cross language objects, and font visualization
+as a binary organized stream interface using the newer 
+application socket model. To relinquish the orginal design idea
+of a network rendering of learning materials, books. games, software.
+
+Luckily the latest efforts of c++ 20 are to employ
+the use of module maps instad of header files. This will bring a 
+number of software componenet reuse problems, that may have been disguised,
+to be easier to functionally use. Yet with the option of a better object format,
+the ability to produce an interface from the data should be compatible with
+any language. The base format being the C++ language. Does modules rely solely 
+on all current implementations, world round? Yes, a very easy an better method.
+Cleaning the desktop of clutter. Some would say the magnifigance of change is proved
+too high a climb, yet very diligent coders may proceed with likely success. 
+Recoding a usable object format that can produce header files as an algorithmic
+query for language. This creates a better container format for modules without reliance
+on duplicating code structure line ups. 
+
+Modules and the namespace, are the exact provisions that accompany the type of 
+system necessary to be useful in C++. Such that the header file, includes 
+an api namespace mechanism. The usefulness of applying an interface that is dynamic
+is ultimately processed by allowing the client to describe what functions are needed.
+The missing terms are named mutable yet also perhaps required as in defaulted intelligently. 
+As language constructs, APIs should be suited to be universal in parameter types if 
+functionally sound. Parameter order, type used to be more confusing without modern 
+IDE designs. Yet the turnaround is still either designing the system to avoid compile type
+error by implementing genetic c++ templates. Most often permutations on type or object 
+types are neccessary to advance usage. 
+
+Late binding interfaces, or loading and relocation of .code and pointing heap to requested
+will be redesigned.
 
 
-*/
+Often software content management, and publishing are very deticated 
+multiplex systems. In modern times a database and webserver are running
+on just one computer as a web peblishing business portal. The ability to 
+consolidate what the broadcast is often relies on generation of content.
+Servers optomize many industry languages suited for clustered networking.
+The true nature of scalability and clustered computing in data storage,
+has been realized with primary storage techniques for web consumed data.
+The functional property that it is written to flat files while notifications
+to external systems are the processes of big data processing. The realization
+of only a developer centric view of the users use of the computer network
+of a pc to the webserver, using TCP/IP. 
+
+A per client encryption genetic cipher is important. Entry of information,
+with a local cache, reflection as a block through the interface. The object
+system provides the aliance of as tuple attribute specifies. A network service
+may provide that usages of field data be chunked and loaded as a resource that 
+is identified as secure within a tollerance. A network cluster system, can schedule
+also information coverage if this increases the strength. 
+
+What is known about network intrusion, is crompromised by the list of types 
+of hackers. Within the list, it seems that colors are used. Yet identity, motives,
+and rough interferences which may be held secret by the individual, 
+are often found at the advice of nuiounces at a distance with quick
+interruption unknown by master minds. 
+
+*/ 

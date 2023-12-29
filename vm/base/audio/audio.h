@@ -23,7 +23,13 @@ present in context, musical structure,  DAW capabilities and sound for stereo
 and surround has a known series of primatives in architecture. Planning
 implementation from existing linux code has its platform awareness and
 downfalls. The positives are there is a working system that can be studied.
-Audio mixing, chain loading. The sound card provisions, are not direct but
+Audio mixing, chain loading, samples and synthezier. An aspect of synthezier
+software is that many computing facilities have enough disposed cpu resources
+to produce sound. Yet at the moment midgrade and above are the most spot
+free at production. Perhaps some very low end computing devices can be 
+not as effective for complete quality at real time.
+
+ The sound card provisions, are not direct but
 catalog a mountain of cards to support. Changing thre port status, etc. The
 ability to link directly the sound card, as a function system compoent, exists
 in the same light as video. Displaying text, or even playing notes. Extensive
@@ -42,7 +48,7 @@ LLVM in conjunction with language and UI can be advanced.
 
 The limited screen use of bitwig lends itself to be one of the best legacy one screen.
 A newer model for organization can be tailored to work as a type of text,
-and UI in a document object that can be scrolled. Areas may be set aside and reserence.
+and UI in a document object that can be scrolled. Areas may be set aside and reserved.
 Easier control over drum patterns and compositing tracks. Offering in searches for 
 type of completition. Songs of this sort, can become even a program to power the 
 daw base system functionality. It seems the function of naming and track ordering
@@ -64,7 +70,7 @@ floating point representation change this except during driver communication.
 Does it change the quality, and errors?
 
 
-Connecting these objects to the generic os abstract class in desireable.
+Connecting these objects to the generic os abstract class is desireable.
 Keeping the code base with few audio codes. .flac seems good for losless, and
 mp3 higher bitrate. mp3 is a licenses form, while ogg vorbis has a public domain
 version. Perhaps go with ogg source.
@@ -76,7 +82,7 @@ useful.
 
 The sound system at the OS system layer at the OS layer should have the
 capability to mix audio in chains, provide this service to multiple clients
-perhaps, yet the effects system dsp elements, should transpire running per
+perhaps, yet the effects of system dsp elements, should transpire running per
 application process space, or on a different ring.
 
 The necessity of object oriented design for a language specific for
@@ -85,7 +91,7 @@ and output functions.Providing for UI description is a better decision at
 another software layer. while the audio object with states and memory be applied
 as a specific general purpose programming language. Function interface visitor
 prototypes for calling events. Midi vs Audio. A sampler with velocity mixture,
-ADSR. Enevelope and automation. Rates, osculators, timing functions, noises. FM,
+ADSR. Envelope and automation. Rates, osculators, timing functions, noises. FM,
 wave form producing language with algorithic editing of chunk audio. Live verses
 real time.
 
@@ -112,13 +118,13 @@ set. Ultimately the concepts are difficult without advanced knowledge. Systems
 that use machine learning perhaps are utilizing a set where fragments of known
 language spoken bits are had. Where utterance appear within the text being read,
 the type of word and the brush of humaness at that point in reading aloud to the
-micrphone.
+microphone.
 
 Providing models and pitch attenuation with audio additions that mingle with
-types of speach patterns can ring moods. Creature speech is much easer with this
+types of speech patterns can ring moods. Creature speech is much easer with this
 type of flexibility in speech production. The engine research is important, yet
 there are easier methods for content creation using team work. If voices are to be
-placed, providing a type of character in game, a person can be the voice talent
+placed, providing a type of character in game, an actual person can be the voice talent
 chosen and functionally train the model for situation as a voice actor. Perhaps
 a type of professional camera and microphone integrated could solve the input
 mechanism. Providing appropiate light and color saturated dies to the lips for
@@ -133,7 +139,11 @@ doing in a FOV, stumbling, surprise and per frame as independent actors their
 voice models meeting requirements of the moment. That last bit, when the
 tentical sweeps around and the tts engine inspects "eeuh, get ahuuh the
 key<done>" and then the creature eats the character. Each tenticle with eyes and
-an organic weapon, such as acid thorns.
+an organic weapon, such as acid thorns. A type of specific generator for these types of
+patterns can be seen. Adding types of effects that are composed from hit test data can 
+be interesting to mingle with production. Ultimately sound provides realizm and detail 
+elements syncronized with video can invoke sense filling. While obviously never completely 
+tricked, the FOV and awareness can evolve as types of objects.
 
 The true sense of voice identified on a business scale has been identified.
 People enjoy knowledge of a variance. On telephony applications it gives an
@@ -141,7 +151,7 @@ indication as to what can happen,since you are at a prompt system, drink a sip
 of coffee before looking at the keypad on the phone. A bot system can be in
 place for example when the boss is called to hear the complaint using a differnt
 voice model perhaps is not functionalty as an upgrade path for this type of
-functionalty. Yet the ability to produce types of speech patterns, more
+sound technology. Yet the ability to produce types of speech patterns, more
 approximated to emotion, with types of base DSP effects and mixups as a sound
 editing composition can add to models. The pitch alteration, with perhaps
 aftertouch effects acoustically defined for a tonal mix, the extra hisses that
@@ -168,7 +178,7 @@ tts is almost necessary.
 
 
 Some notible audio can be connected to usb. USB of multiple types and multiple
-ports. Lucikly the format is very universal for audio card, and digital
+ports. Luckily the format is very universal for audio card, and digital
 microphones.
 
 
@@ -188,7 +198,7 @@ The music stream format has tag formats to support what is known as meta data,
 typically to a codec, and transfered to dispatch and timing information
 along with other parameters to the selected codec in chain. Perhaps
 some parts would control usb devices, or blue tooth robots, lamps
-dim at scary points and brighten along with the vibration under the cusion.
+dim at scary points and brighten along with the vibration under the cushion.
 A rendering projector output of for format and software rendering control
 parameters. Models and textures may be transmitted through the format, as most
 existing formats provide such as mp3 and also flac,
@@ -205,6 +215,23 @@ libasound
 
 */
 namespace viewManager {
+
+/* a few bugs in place to find the amount of detail. Then
+encompass into a seemingly simpleton box and harnish emotionally.
+Rebuke, chastise and teach. Sample rate, and glitches, postmessage
+verses sendmessage, dual good jammies and a flat to go. 
+
+So sometimes writing bug free code requires planning. And then
+making sure that not too many extra bells and whistles are added.
+API design in essense is the basic form of all language control for
+multiple functions. With the furfillment of a complet aaplication
+W3C style, the most modern forms of advanced bug free code are available.
+The implementations of JavaScript and successful capabilities
+of applications is seen within the browser. Yet, the base os 
+and its application primatives have not been made aware within the consumer
+industry. Call outs from languages such as rust, lua.
+
+*/
 enum class sampleRate {
 
 };
