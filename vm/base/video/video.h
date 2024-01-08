@@ -18,8 +18,9 @@
 
 
 /*
-Some playing video require a context. Some video is encrypted by private licensed methods. As well, 
-the UDP vs local file can play a part in the algorithm. At times video can connect to multipel areas
+Some playing video requires a context. Some video is encrypted by private licensed methods. As well, 
+the UDP scattered arrival
+ vs local file can play a part in the algorithm. At times video can connect to multipel areas
 of the system, background of a screen. Video also should be able to be stesiled, have 
 transparency as well.
 

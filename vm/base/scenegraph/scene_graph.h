@@ -3,7 +3,7 @@
 a software attachment to the video card abstraction layer using 
 the existing components such as Vulcan and opengl. The capability
 of the software to exist as a llvm instantiated interface to an instance
-of the video card make it possible to provide a better form
+of the video card makes it possible to provide a better form
 of clipping and capabilities. The extensiveness of the scene graph 
 collection should be base functional parts of the system to incorporate
 into process animation. By placing multiple compiler requirements together,

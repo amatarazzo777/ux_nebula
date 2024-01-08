@@ -51,9 +51,9 @@ struct glyph_t {
 
   std::vector<path_t> paths;
 
-  /* a problem of developing various fonts is
-  knowledge of advanced naming conventions for various parts in the technical
-range. Here is a grab bag full of words from the wikipedia.
+  /* A problem of developing various fonts is
+  knowledge of advanced conventions for various parts in the technical
+range of a glyph. Here is a grab bag full of words from the wikipedia.
 
   Ligature
   Letter-spacing
@@ -77,52 +77,81 @@ range. Here is a grab bag full of words from the wikipedia.
   Glyph
 
   Much discussion on the meaning and impact of rendering measurements, control,
-and also legacy understanding of font placement. Layout and justification with
-multiple text flowing capabilities have to be known for the complete field of
+and also legacy understanding of font placement is necessary. The measurements, 
+layout and text alignment justification with
+multiple texts flowing together have to be known for the complete field of
 text layer to be rendered perhaps. For example, after and underneath effects,
 coloring and flow may depend upon size variations encapsulated in layout
-computation or even a transparent image. Most likely graphics such as corner
+computation.
+
+The combination layput of image and text often have additional requirements. To
+provide an abstraction graphic design technology can aleviate some layout problems
+designers current have. To encapsolate instructions or position information within the 
+graphic image or even a transparent image will provide a versitle design. 
+Most likely graphics such as corner
 publishments, in the center, should have an extra field or data within the file
 that names the over shadow under parts. In the digital image, a polygon path
-naming word locking positions for justification. Marking this in a graphic
-asset is much easier than describing it through tag settings.
+naming word locking positions for justification can be effective. 
+Marking this in a graphic asset is much easier than describing it through tag 
+settings because it is accomplished visually. In circumstances where this information
+does not exist, such as edge, or center axis information, image processing
+and analysis can supply the information algorithimically.
 
-  Working with user space, a trinket of standard font names exist, yet naming
-beyond the few known from corporate network writing, courier, arial, roman,
-bookman, san sherif, gothic, and script. If we dissect the problem from a
+  Working within user space, a trinket of standard font names exist. Yet naming
+beyond the few known from corporate network writing - courier, arial, roman,
+bookman, san sherif, gothic, and script provides an elusive list. The names and labels
+of fonts are defined as per the designer. Reflective of the nomenclature of visual font 
+adjectives, many names become obsecure. 
+
+If we dissect the visual font identification problem from a
 harvested nature, simply the engine of vector storage supplies the rendering
 pipeline together with functions that can utilize 2d geometry, and work with
-algorithms that are scientific. With the very few routines already borrowed, it
+algorithms that are scientific. That is the font files have shape vector stored
+inside. With the very few routines already borrowed, it
 seems that a mountain of code is gone. Now it is time to add more.
 
   Looking through the character rendering of various Latin fonts listed on the
-google page, a program that analyzes the font files extracts the glyph
+google page, statistical information can be gathered by 
+a program that analyzes the font files extracts the glyph
 measurements and organizes by name seems natural. An input of perhaps 1500 font
-vectors as a base for the statisical study of font names. Aligning each glyph and
-storing in a master database measurements that describe the rendering
-differences. This is one form of a database that can be stored or used to
+vectors as a base for the statisical study of font names can supply a catalog. 
+Aligning each glyph and storing in a master database measurements that describe the rendering
+differences can be used to form a system. This is one form of a database that can store or used to
 organize a feature set for a glyph according to language.
 
-  Expanding on the methods currently in use, most fonts seem to be categorized
-about specific in width, reading, Form alteration in sections particular to a
-letter. The letters different in sans, serif. The font varies on effect of
-curls, square now, Capital letters, and some curls below the Decender line can
-be variable control. The signature explicit for each time rendering, single
-character change for a particular font to take into account a jitter movement.
-Natural variances in some texts can be fortified in also helping focus perhaps.
+Expanding on the methods currently in use by designers, most fonts seem to be categorized
+specific by width, reading quality and artistic style. The font name, may or may not describe the 
+visual characteristics of the font. Usually the font name can be a domain name, related 
+to historical typesetting, or periods of time historically. So generally an interface designer
+looking for a type of font, fishes around to find a fit, or has previous knowledge
+about how the name may relate to the visual objective. Often the subtle differences are 
+not noticed but require attention for publishing satisfaction.
 
-  So dissecting the characters in language from a meta-perspective, one logic
-alteration area, and rendering pipeline change. The provisions of knowing the
+Therfore providing a way for an interface designer to describe form alteration 
+in sections particular to a letter provides a clearer and more precise to 
+intention. The letters different 
+in sans, serif for English or Latin are desipherable. That is a limited set.
+A font system that can dynamically vary on the amount of curls, squareness, 
+Capital letters, or lower case letters is more satifying for designer artistic intention.
+Additionally some rendering implementations can implement more humanistic spacing,
+or drawing artifacts using a type of jitter. The signature explicit for each instance 
+of rendering a single character change for a particular font to take into account a jitter movement.
+Natural variances in some texts can be fortified in also helping focus perhaps. 
+
+So dissecting the characters in language from a meta-perspective, one logic
+alteration area, and rendering pipeline change, includes labeling sub paths 
+(group of vectors) - the little ticks and curls. The provisions of knowing the
 segment paths where the tick forms on the capital W, a labeling system defines
 itself in addition to official terms perhaps. As a range of controlling the sub
-gymph vector path can be object oriented.
+gymph vector path can be object oriented. That is, expanding a range of characters
+that have parts of the implied name using one setting.
 
-  A system of dynamically creating fonts by name is a modern feature set in
+A system of dynamically creating fonts by name is a modern feature set in
 monochrome color. Yet fonts as a vector system, monochrome, offer the ability to
 reintroduce the font naming convention with more pleasing user desire by
 controlling the strength of twenty types of gylph settings at a various strength
   than knowing a name that fits the criteria. The ability to craft the size and
-utilize a conformat convention is inviting. Color, and many other new features
+utilize a format convention is inviting. Color, and many other new features
 affect the name of the font.
 
   To provide advanced font features will power the browser. The family of
@@ -159,7 +188,7 @@ for the instruction set. These instructions do not control color but
 modification to the base form character. Example,
 
   engine 1 byte codes, a made up example to tie user space into dynamic font
-creation. most likely another uder the cover according to shading. Pre layout,
+creation. most likely another under the cover according to shading. Pre layout,
 after layout.
 
 formation - first byte signature domain
@@ -250,7 +279,7 @@ Consumer TV with glitter, greatness and readability in print, menu systems, and
 animated painting sprites can elevate the mood.
 
 As times, the true type froms does have a format that may be encapsolated, fonts
-would the pop stack instructions for example, like fira mono. Or just provide
+would pop stack instructions for example, like fira mono. Or just provide
 a database file format using the database_t methods for interface discovery. Each
 character has many more properties that can be modified on an individual basis. Each
 character, as a routine, has this format. Not external to the operating system, but
