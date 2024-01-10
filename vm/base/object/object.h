@@ -25,9 +25,9 @@ for validity. As a method that requires other properties such as querying an int
 and performing initialization to that interface. Most object types have aliased
 pointers that hold context while an outer shell can be manulipated to expose specific types 
 of work loads, parameters, or functions. For example, an object code such as the main visual image 
-top level reader, nodes inside the main image provide linkages to codecs that read it. 
+top level reader, nodes inside the main binary code image provide linkages to codecs that read it. 
 As such a haywire of codecs and formats exist. The object system provides a way to
-load as a database entity one type of code, and its internal dependicies for a concise input
+load as a database entity one type of codec, and its internal dependicies for a concise input
 and output format. Partially, fully, decoding.
 
 Other parts of the system have other designed interfaces. Such as statistics of the image. Merely
@@ -114,14 +114,30 @@ of the newer language features are not as well defined, so typically internal
 storage formats for template permutations, the genetic stream line.
 
 
-example below of a template for the node class. The template
+The example below of a template for the node class. The template
 class language is a subset, providing only base operations, such as selective
 memory type storage. Stack, process,  or shared. Within the design, components
 or memory may be selectively transfered and accessed by known demand. The selected
 components are designed to operate within a node, and parent node locking mutex.
 Designing the mechanishms to transfer each item, manage it is important
-The main image codec may have five interfaces. 
-The design of codecs, are buffered oriented at times.
+The main image codec may have five interfaces. The design of codecs, are buffered 
+oriented at times such as interfaces may be streamed from file. Often the file mechanism
+of the OS and possible streaming mechanism of inner file contents are obsecured. 
+Yet aligning work load, sotrage and access possiblities is a focus. 
+
+Designing object systems may also incorporate security concepts such as running 
+user access rights. Therefore the publishing of nodes and the information databsse associated 
+with the properties is a descritptive form of objects. At times the transfer
+of the expansive object type can entail the documentation, descriptive, and even training methods
+of invocation in pertient languages. Objects of this sort must have a multiple faceted capability 
+of storage, yet finalizing the ubutiquous unit of a storage device existing perhaps on
+network and local. The usefulness and also adequate versitility can be dreampt to have 
+large impact on complicated design. Such as a iconic glitch of a face peering 
+outwards in metalic liquid form. Yet in reality the provisions of usefulness 
+are entailed in the footprint necessary for the use context. Most of which
+is simply development verses live user application. So the object format
+perhaps has two, or more types of releases.
+
 
 One problem with the standard library is that it is effectively backwards compatible.
 There are many redesign implementations that can be issued with the base K&R 

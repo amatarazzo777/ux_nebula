@@ -85,17 +85,32 @@ coloring and flow may depend upon size variations encapsulated in layout
 computation.
 
 The combination layput of image and text often have additional requirements. To
-provide an abstraction graphic design technology can aleviate some layout problems
-designers current have. To encapsolate instructions or position information within the 
-graphic image or even a transparent image will provide a versitle design. 
-Most likely graphics such as corner
-publishments, in the center, should have an extra field or data within the file
+provide an abstraction graphic design technology that can aleviate some layout problems
+designers current have is summarized by text shape coordinate locking. To encapsolate 
+instructions or position information within the 
+graphic image or even a transparent image will provide a versitle design. That is, images may
+instruct, hint, and utilize an array of dynamic concepts for allowing text attachments with 
+gravity towards several choice locations. Most likely graphics such as corner
+publishments or in the center splats, should have an extra field or data within the file
 that names the over shadow under parts. In the digital image, a polygon path
-naming word locking positions for justification can be effective. 
+naming word locking positions for justification can be effective. Integration of this within
+the modeling stage, and tool chain compositing for CGI, a needed state. Often 
+coloration and discoloration are parrelle to the textual concepts as a stage.
 Marking this in a graphic asset is much easier than describing it through tag 
 settings because it is accomplished visually. In circumstances where this information
 does not exist, such as edge, or center axis information, image processing
 and analysis can supply the information algorithimically.
+
+Promotionally, images and also three dimensional models may be propelled by 
+the concepts of animation. The fluid methods of cinematagrphy and information
+domain becomming adhesive to both computer generated and artist instructed. Models
+that perhaps integrate overall concepts to meansings or summary information 
+are seen as strengthing the concept. Yet precise control may be found in the selection
+of the movements, exageration and embleishments by the publisher. As  such, object oriented
+methods attaching the object to a noun and usable space provides a dynamic use 
+of concept time. Even integrated audio may be provisioned as a "skinning" multimedia
+object. Musical artifacts and DSP chains, named as UI primatives of mood and style.
+
 
   Working within user space, a trinket of standard font names exist. Yet naming
 beyond the few known from corporate network writing - courier, arial, roman,
