@@ -1,8 +1,10 @@
 # vm
 
-This project is a research API for the C++ 17 and above language to provide a document object model. The product is designed to be cross-platform.  The template dom library works precisely with the standard library without adding new data types. It supports rapid development and incorporates a small set of memorable names within its model.
+This project is a research API for the C++ 17 and above language to provide a document object model. 
+By supplying a jotted plan, with some proven methods of solving problems, academic and product planning can become a less risk plan. Simply by supplying the development and structured planning, new avenues of serious technology deployment can strategically update the technology curve.
+The visualization layer is typically instantiated by legacy models, except for the tried and true Java Model. One part of the product can be designed to be cross-platform.  The template dom library works precisely with the standard library without adding new data types. It supports rapid development and incorporates a small set of memorable names within its model. Together with a simplified yet robust layer for the OS style supports, audio, networking and the many other accouterments, a realized model of system and event design and apply to multiple kernel technologies. Yet as a primary use, the Posit kernel with the very few calls that it has, such as Linux kernel, the system design may be accelerated by utilizing the modern Linux kernel.
 
- It is a templated oriented implementation for higher performance and integrated syntax. It offers the document object model integrated with C++ language as a natural syntax that appears like HTML because of the use of &lt;&gt;. The following development platforms and rendering technologies are capable of use for development and distribution.
+It is a templated oriented implementation for higher performance and integrated syntax. It offers the document object model integrated with C++ language as a natural syntax that appears like HTML because of the use of &lt;&gt;. The following development platforms and rendering technologies are capable of use for development and distribution.
 
 Research into method of invocation of newer font systems that do not utilize external sources. Better projection,and art amazement with the coloring of vector fonts. Natural and logical soft font sizes and enhance rendering that is solved algorithmically. 
 

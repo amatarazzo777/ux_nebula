@@ -132,7 +132,7 @@ of the expansive object type can entail the documentation, descriptive, and even
 of invocation in pertient languages. Objects of this sort must have a multiple faceted capability 
 of storage, yet finalizing the ubutiquous unit of a storage device existing perhaps on
 network and local. The usefulness and also adequate versitility can be dreampt to have 
-large impact on complicated design. Such as a iconic glitch of a face peering 
+large impact on complicated design. Such as an iconic glitch of a face peering 
 outwards in metalic liquid form. Yet in reality the provisions of usefulness 
 are entailed in the footprint necessary for the use context. Most of which
 is simply development verses live user application. So the object format
@@ -364,8 +364,7 @@ where parameters are not affected. One aspect, a byte code preceeds the object p
 states of operation. Not connected, or connected for example.The byte preceeding a bitcode,
 to check to see if loading needs to occur. 
 
-Object of these strucutures combined with the usage of llvm parameter unions across the parameter 
-
+Object of these structures combined with the usage of llvm parameter unions across the parameter 
 stack, registers can provide input for merge object contexts. Objects that have threads running 
 within in them, have data storage pointers to contexts of data. If data is numeric, mutex enabled,
 after placed into registers, the mutex can be unlocked as a call site. Pointers to structures
