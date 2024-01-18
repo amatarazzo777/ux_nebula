@@ -27,7 +27,7 @@ pointers that hold context while an outer shell can be manulipated to expose spe
 of work loads, parameters, or functions. For example, an object code such as the main visual image 
 top level reader, nodes inside the main binary code image provide linkages to codecs that read it. 
 As such a haywire of codecs and formats exist. The object system provides a way to
-load as a database entity one type of codec, and its internal dependicies for a concise input
+load as a database entity one type of codec, and its internal dependecies for a concise input
 and output format. Partially, fully, decoding.
 
 Other parts of the system have other designed interfaces. Such as statistics of the image. Merely
@@ -163,7 +163,7 @@ ordered_hash
 
 internally 
 
-Key is a new that of method that summarizes functional usage and also
+Key is a new type of method that summarizes functional usage and also
 provides the ability to resolve multiple segmented searches using 
 multiple threads, if there is enough data. By segmenting data
 of an intex to be representative of a group distributed amongst the data,

@@ -48,12 +48,8 @@ using canvas_t = canvas_ity::canvas;
 // the main ingredient is that in the header file, the names are aliased to the name of the os specific
 // this is accomplished with the using c++ keyword.
 // os_keyboard_device_t, os_window_manager, 
-#if defined(__linux__)
+
 #include "os/linux_xcb/os_interface.h"
-
-#elif defined(_WIN64)
-
-#endif
 
 // clean up types for better usage.
 

@@ -214,7 +214,7 @@ struct text_data_t : display_node_t {};
 /*
 @brief The ability to organically shape and color information is often under
 utilized in desktop publishing and also forms. The olds black line box, ovals
-that are perfect. The shape function generalizes it use for control library
+that are perfect. The shape function generalizes its use for control library
 interface, splash windows, and also provides clipped fill textureing. The
 color_t and paint_t. Expanding the shape to size around a group of words.
 

@@ -40,20 +40,26 @@ produce suitable code for the actual microprocessor or GPU.
 Many existing systems have undergone extensive rework. 
 Therefore building a library of these routines, as a type of 
 template, some may be chained together to create more layered
-aspects to the transformation. The usage of the LL VM system
+aspects to the transformation, advancing shader creation. 
+
+The usage of the LLVM system
 to produce these as part of the reference in a store BC format
 form linking can produce functional and more advanced inroads
 to current usage implementation. Knowledge of shader capability
 and using the library to show leather couches with grains, beauty,
 some vinyl, textured and layered by blankets. In the light
 cast in the living room. The couch object makes sustainable
-environments for very advanced. The ability to summarize model
+environments for very advanced modeling. 
+
+The ability to summarize model
 settings should be very consolidated, as a binary representation,
 representing modes supported as base. Each base has parameter 
-and styles. Mixing two styles as a simply variable control weight
+and styles. Mixing two styles as a simple variable control weight
 to give one more weight. Then again the overall model can be controlled
-cor sly at the higher level, to design its space size within the geometric
-metric volume of the proposed environment. As separate functional
+proportionally more using less values, to design its space size within the geometric
+metric volume of the proposed environment. 
+
+As separate functional
 object programs that form the requirement, value is added, as 
 each component has multiplex features, even can be in their own languages
 as part of control. Verbose binary function calls. LOD and spacial

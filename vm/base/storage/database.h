@@ -34,18 +34,17 @@ A person writing one would consider that the visitation of node map
 of the trees, as a unit stored on disk and the edit commands are 
 also suitable for network. Using a file and types of locking a certain
 size of file can be accomidated. Supporting advanced searches
-
 along with index data gathered from blob indexing (videos, images, texts, books)
 
 The blocking mechanism provides for adjusting the components of a larger database when it
 is broken up. Simply records tell the segment starts and stops. Indexing files can
-use this and operate on a parrelle fasion. Adding advanced node storage is versitle,
+use this and operate on a parrelle fashion. Adding advanced node storage is versitle,
 however providing for a stream and easy location system for syntax is also nice.
 Being able to store vectors of structures. 
 
 
 Template parampack parameters <...> can be used in conjunction with type to for types of 
-record scemea, as is the type of conception format. The storage of nodes, and variable nodes
+record schemea, as is the type of conception format. The storage of nodes, and variable nodes
 of children. Some problems to solve, but should be a fun project.
 
 Simply placing a marker file, and uploading this file to a server program will allow format reading.
@@ -56,7 +55,7 @@ Security is a concept not made here, typically user security. Or over encryption
 For a database link, it is a information part that can be easily updated. It also contains links to 
 server addresses, will develop the connectivity for legacy formats, or` other file database formats.
 odbc, jdbc. The database link here is also used for access to image data that was gather from news 
-feeds for example. Video links. and provide a display format for the cached new xml feed.
+feeds for example. Video links. and provide a display format for the cached news xml feed.
 Google XML search cache results from a data mining bot app running locally. Typically the file
 system has multi user locking already built in. 
 
@@ -65,9 +64,7 @@ better than many database competitiors. The update process from version to versi
 quick when a programmer changes the data storage format or types of data. Importing can be done once,
 or when needed. Most times done once is fine. Well planned applications update not as often. The
 contact and email list. The listing of programs installed on the computer will use this data
-base storage. 
-
-as a system database, used by the operating system, perhaps networking will not be built in
+base storage. as a system database, used by the operating system, perhaps networking will not be built in
 to the library, the great dreams of SQL, and syncing left for the application
 style database that inheirits this model. 
 
@@ -125,7 +122,7 @@ The database can store the scene graph object. A file loaded to produce a snapsh
 
 Some uses of PC component technology as a node cluster for receiving data at speeds of the 
 front side bus, acting as node storage device recording the ID and sample data. Quantum
-sensorsn plasma engine designs, require more discovery. Many fiends of science have to rely
+sensors plasma engine designs, require more discovery. Many fiends of science have to rely
 on older methods of computer software development. Python is luckily running on large super 
 networks. Yet all depend on the console. 
 
